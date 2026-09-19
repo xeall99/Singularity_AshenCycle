@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class BattleCommandMenu : MonoBehaviour
 {
+    public event Action<int> PreviewRequested;
+    public event Action PreviewHidden;
+
     [Header("Command Buttons")]
     [SerializeField] private Button basicAttackButton;
     [SerializeField] private Button skillButton;
@@ -37,6 +40,7 @@ public class BattleCommandMenu : MonoBehaviour
 
     private Coroutine[] buttonTweens;
     private bool[] pointerInside;
+    private bool[] focusInside;
 
     private Coroutine menuSequence;
 
@@ -64,6 +68,7 @@ public class BattleCommandMenu : MonoBehaviour
 
         buttonTweens = new Coroutine[buttonCount];
         pointerInside = new bool[buttonCount];
+        focusInside = new bool[buttonCount];
 
         for (int index = 0; index < buttonCount; index++)
         {
@@ -128,13 +133,13 @@ public class BattleCommandMenu : MonoBehaviour
             AddEventTrigger(
                 currentButton.gameObject,
                 EventTriggerType.Select,
-                () => HandlePointerEnter(savedIndex)
+                () => HandleSelected(savedIndex)
             );
 
             AddEventTrigger(
                 currentButton.gameObject,
                 EventTriggerType.Deselect,
-                () => HandlePointerExit(savedIndex)
+                () => HandleDeselected(savedIndex)
             );
         }
 
@@ -198,6 +203,7 @@ public class BattleCommandMenu : MonoBehaviour
         }
 
         StopMenuSequence();
+        PreviewHidden?.Invoke();
 
         menuSequence = StartCoroutine(
             HideMenuSequence()
@@ -275,6 +281,7 @@ public class BattleCommandMenu : MonoBehaviour
             }
 
             pointerInside[index] = false;
+            focusInside[index] = false;
             canvasGroups[index].blocksRaycasts = false;
 
             Vector2 exitPosition =
@@ -301,6 +308,8 @@ public class BattleCommandMenu : MonoBehaviour
 
     private void HideMenuImmediately()
     {
+        PreviewHidden?.Invoke();
+
         for (int index = 0; index < buttons.Length; index++)
         {
             if (buttonRects[index] == null)
@@ -311,6 +320,9 @@ public class BattleCommandMenu : MonoBehaviour
             buttonRects[index].anchoredPosition =
                 restingPositions[index] +
                 Vector2.down * exitOffset;
+
+            pointerInside[index] = false;
+            focusInside[index] = false;
 
             buttonRects[index].localScale =
                 restingScales[index] * 0.8f;
@@ -331,6 +343,16 @@ public class BattleCommandMenu : MonoBehaviour
         }
 
         pointerInside[index] = true;
+        ShowHoverState(index);
+        PreviewRequested?.Invoke(index);
+    }
+
+    private void ShowHoverState(int index)
+    {
+        if (!CanAnimateButton(index))
+        {
+            return;
+        }
 
         Vector2 hoverPosition =
             restingPositions[index] +
@@ -365,7 +387,54 @@ public class BattleCommandMenu : MonoBehaviour
 
         pointerInside[index] = false;
 
-        if (menuTransitioning)
+        if (focusInside[index])
+        {
+            ShowHoverState(index);
+        }
+        else if (!menuTransitioning)
+        {
+            ShowRestingState(index);
+        }
+
+        RefreshPreviewRequest();
+    }
+
+    private void HandleSelected(int index)
+    {
+        if (!CanAnimateButton(index))
+        {
+            return;
+        }
+
+        focusInside[index] = true;
+        ShowHoverState(index);
+        PreviewRequested?.Invoke(index);
+    }
+
+    private void HandleDeselected(int index)
+    {
+        if (!IsValidButton(index))
+        {
+            return;
+        }
+
+        focusInside[index] = false;
+
+        if (pointerInside[index])
+        {
+            ShowHoverState(index);
+        }
+        else if (!menuTransitioning)
+        {
+            ShowRestingState(index);
+        }
+
+        RefreshPreviewRequest();
+    }
+
+    private void ShowRestingState(int index)
+    {
+        if (!IsValidButton(index))
         {
             return;
         }
@@ -386,6 +455,8 @@ public class BattleCommandMenu : MonoBehaviour
         {
             return;
         }
+
+        PreviewHidden?.Invoke();
 
         float tiltDirection = index - 1f;
 
@@ -422,6 +493,29 @@ public class BattleCommandMenu : MonoBehaviour
         {
             HandlePointerExit(index);
         }
+    }
+
+    private void RefreshPreviewRequest()
+    {
+        for (int index = 0; index < buttons.Length; index++)
+        {
+            if (pointerInside[index] && CanAnimateButton(index))
+            {
+                PreviewRequested?.Invoke(index);
+                return;
+            }
+        }
+
+        for (int index = 0; index < buttons.Length; index++)
+        {
+            if (focusInside[index] && CanAnimateButton(index))
+            {
+                PreviewRequested?.Invoke(index);
+                return;
+            }
+        }
+
+        PreviewHidden?.Invoke();
     }
 
     private bool IsMenuInteractable()
@@ -606,5 +700,41 @@ public class BattleCommandMenu : MonoBehaviour
 
         StopCoroutine(menuSequence);
         menuSequence = null;
+    }
+
+    private void OnDisable()
+    {
+        StopMenuSequence();
+        menuTransitioning = false;
+        wasInteractable = false;
+
+        if (buttons != null)
+        {
+            for (int index = 0; index < buttons.Length; index++)
+            {
+                if (buttonTweens[index] != null)
+                {
+                    StopCoroutine(buttonTweens[index]);
+                    buttonTweens[index] = null;
+                }
+
+                pointerInside[index] = false;
+                focusInside[index] = false;
+
+                if (buttonRects[index] == null)
+                {
+                    continue;
+                }
+
+                buttonRects[index].anchoredPosition =
+                    restingPositions[index] + Vector2.down * exitOffset;
+                buttonRects[index].localScale = restingScales[index] * 0.8f;
+                buttonRects[index].localRotation = restingRotations[index];
+                canvasGroups[index].alpha = 0f;
+                canvasGroups[index].blocksRaycasts = false;
+            }
+        }
+
+        PreviewHidden?.Invoke();
     }
 }

@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="45" result="Passed" total="45" passed="45" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-13 14:01:18Z" end-time="2026-09-13 14:01:48Z" duration="29.3049757">
+  <test-suite type="TestSuite" id="1056" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="46" result="Passed" start-time="2026-09-13 14:01:18Z" end-time="2026-09-13 14:01:48Z" duration="29.304976" total="45" passed="45" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1108" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-fddf499483094ef2a749b54bf9cb4f12/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="46" result="Passed" start-time="2026-09-13 14:01:18Z" end-time="2026-09-13 14:01:48Z" duration="29.280463" total="45" passed="45" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="23260" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1057" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="45" result="Passed" start-time="2026-09-13 14:01:18Z" end-time="2026-09-13 14:01:48Z" duration="29.277980" total="45" passed="45" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="ParameterizedMethod" id="1076" name="AnalyzeCostRoundsUp" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-09-13 14:01:18Z" end-time="2026-09-13 14:01:19Z" duration="1.254466" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1068" name="AnalyzeCostRoundsUp(1,1)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(1,1)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="1958372911" result="Passed" start-time="2026-09-13 14:01:18Z" end-time="2026-09-13 14:01:19Z" duration="0.709765" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1069" name="AnalyzeCostRoundsUp(2,2)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(2,2)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="874652867" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.101347" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1070" name="AnalyzeCostRoundsUp(3,3)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(3,3)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="1008447664" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.066913" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1071" name="AnalyzeCostRoundsUp(4,3)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(4,3)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="1662866340" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.079741" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1072" name="AnalyzeCostRoundsUp(10,8)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(10,8)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="1589825256" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.068560" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1073" name="AnalyzeCostRoundsUp(11,9)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(11,9)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="964002547" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.061243" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1074" name="AnalyzeCostRoundsUp(12,9)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(12,9)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="1729378880" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.073918" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1075" name="AnalyzeCostRoundsUp(int.MaxValue,1610612736)" fullname="BattleSnapshotTests.AnalyzeCostRoundsUp(int.MaxValue,1610612736)" methodname="AnalyzeCostRoundsUp" classname="BattleSnapshotTests" runstate="Runnable" seed="130463087" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:19Z" duration="0.074895" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-case id="1103" name="MissingSnapshotOnAnalyzeFailsClearlyWithoutCost" fullname="BattleSnapshotTests.MissingSnapshotOnAnalyzeFailsClearlyWithoutCost" methodname="MissingSnapshotOnAnalyzeFailsClearlyWithoutCost" classname="BattleSnapshotTests" runstate="Runnable" seed="313303102" result="Passed" start-time="2026-09-13 14:01:19Z" end-time="2026-09-13 14:01:20Z" duration="0.106478" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+EnemyActionPlan tidak tersedia atau tidak valid. Restart Run diperlukan.
+EnemyActionPlan tidak tersedia atau tidak valid. Restart Run diperlukan.
+]]></output>
+        </test-case>
+        <test-case id="1104" name="MissingSnapshotOnEnemyTurnNeverRebuilds" fullname="BattleSnapshotTests.MissingSnapshotOnEnemyTurnNeverRebuilds" methodname="MissingSnapshotOnEnemyTurnNeverRebuilds" classname="BattleSnapshotTests" runstate="Runnable" seed="2085027615" result="Passed" start-time="2026-09-13 14:01:20Z" end-time="2026-09-13 14:01:20Z" duration="0.095300" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+EnemyActionPlan tidak tersedia atau tidak valid. Restart Run diperlukan.
+EnemyActionPlan tidak tersedia atau tidak valid. Restart Run diperlukan.
+]]></output>
+        </test-case>
+        <test-case id="1077" name="Regression_AttackSkillAndInputLock" fullname="BattleSnapshotTests.Regression_AttackSkillAndInputLock" methodname="Regression_AttackSkillAndInputLock" classname="BattleSnapshotTests" runstate="Runnable" seed="2005486085" result="Passed" start-time="2026-09-13 14:01:20Z" end-time="2026-09-13 14:01:20Z" duration="0.420800" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1086" name="Regression_DefeatRetryAndFinalVictory" fullname="BattleSnapshotTests.Regression_DefeatRetryAndFinalVictory" methodname="Regression_DefeatRetryAndFinalVictory" classname="BattleSnapshotTests" runstate="Runnable" seed="2077035688" result="Passed" start-time="2026-09-13 14:01:20Z" end-time="2026-09-13 14:01:24Z" duration="3.831265" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+GUARD RESONANCE Tier 1 dipilih. Guard Strength +20%.
+GUARD RESONANCE Tier 1 dipilih. Guard Strength +20%.
+Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +20%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +20%
+Memulai Battle 3: Abyss Herald | HP: 85 | Damage: 17 | Reward: 30 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +20%
+Memulai Battle 3: Abyss Herald | HP: 85 | Damage: 17 | Reward: 30 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +20%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1079" name="Regression_EventHorizonMatchesPreviewAndResolvesOnce" fullname="BattleSnapshotTests.Regression_EventHorizonMatchesPreviewAndResolvesOnce" methodname="Regression_EventHorizonMatchesPreviewAndResolvesOnce" classname="BattleSnapshotTests" runstate="Runnable" seed="2014696586" result="Passed" start-time="2026-09-13 14:01:24Z" end-time="2026-09-13 14:01:24Z" duration="0.063766" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+]]></output>
+        </test-case>
+        <test-case id="1078" name="Regression_GuardReversalPreserveSnapshot" fullname="BattleSnapshotTests.Regression_GuardReversalPreserveSnapshot" methodname="Regression_GuardReversalPreserveSnapshot" classname="BattleSnapshotTests" runstate="Runnable" seed="1928329533" result="Passed" start-time="2026-09-13 14:01:24Z" end-time="2026-09-13 14:01:24Z" duration="0.262367" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: REVERSAL ORBIT | Menyiapkan serangan balasan setelah menerima serangan.
+Convergence aktif: REVERSAL ORBIT | Menyiapkan serangan balasan setelah menerima serangan.
+]]></output>
+        </test-case>
+        <test-case id="1080" name="Regression_UnstablePulseRestoresOneMana" fullname="BattleSnapshotTests.Regression_UnstablePulseRestoresOneMana" methodname="Regression_UnstablePulseRestoresOneMana" classname="BattleSnapshotTests" runstate="Runnable" seed="672142852" result="Passed" start-time="2026-09-13 14:01:24Z" end-time="2026-09-13 14:01:24Z" duration="0.073667" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+]]></output>
+        </test-case>
+        <test-case id="1085" name="RewardGenerationIsSeededDistinctAndDoesNotRerollPresentation" fullname="BattleSnapshotTests.RewardGenerationIsSeededDistinctAndDoesNotRerollPresentation" methodname="RewardGenerationIsSeededDistinctAndDoesNotRerollPresentation" classname="BattleSnapshotTests" runstate="Runnable" seed="1425905482" result="Passed" start-time="2026-09-13 14:01:24Z" end-time="2026-09-13 14:01:24Z" duration="0.069428" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1105" name="SnapshotPropertiesAreImmutableAndReferencesRemainAssigned" fullname="BattleSnapshotTests.SnapshotPropertiesAreImmutableAndReferencesRemainAssigned" methodname="SnapshotPropertiesAreImmutableAndReferencesRemainAssigned" classname="BattleSnapshotTests" runstate="Runnable" seed="196870204" result="Passed" start-time="2026-09-13 14:01:24Z" end-time="2026-09-13 14:01:24Z" duration="0.066067" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1058" name="TC_ANL_001_EightManaRevealsPreparedPlan" fullname="BattleSnapshotTests.TC_ANL_001_EightManaRevealsPreparedPlan" methodname="TC_ANL_001_EightManaRevealsPreparedPlan" classname="BattleSnapshotTests" runstate="Runnable" seed="509598835" result="Passed" start-time="2026-09-13 14:01:24Z" end-time="2026-09-13 14:01:25Z" duration="0.072195" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1059" name="TC_ANL_002_InsufficientManaLeavesStateUntouched" fullname="BattleSnapshotTests.TC_ANL_002_InsufficientManaLeavesStateUntouched" methodname="TC_ANL_002_InsufficientManaLeavesStateUntouched" classname="BattleSnapshotTests" runstate="Runnable" seed="1670496413" result="Passed" start-time="2026-09-13 14:01:25Z" end-time="2026-09-13 14:01:25Z" duration="0.060911" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1060" name="TC_ANL_003_RepeatCannotChargeOrReplacePlan" fullname="BattleSnapshotTests.TC_ANL_003_RepeatCannotChargeOrReplacePlan" methodname="TC_ANL_003_RepeatCannotChargeOrReplacePlan" classname="BattleSnapshotTests" runstate="Runnable" seed="325585820" result="Passed" start-time="2026-09-13 14:01:25Z" end-time="2026-09-13 14:01:25Z" duration="0.060583" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1061" name="TC_ANL_004_ExecutionUsesRevealedSnapshotEvenIfSourceChanges" fullname="BattleSnapshotTests.TC_ANL_004_ExecutionUsesRevealedSnapshotEvenIfSourceChanges" methodname="TC_ANL_004_ExecutionUsesRevealedSnapshotEvenIfSourceChanges" classname="BattleSnapshotTests" runstate="Runnable" seed="130866874" result="Passed" start-time="2026-09-13 14:01:25Z" end-time="2026-09-13 14:01:25Z" duration="0.408479" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1062" name="TC_ANL_005_RewardAdvancesOneNodeAndResetsAnalyze" fullname="BattleSnapshotTests.TC_ANL_005_RewardAdvancesOneNodeAndResetsAnalyze" methodname="TC_ANL_005_RewardAdvancesOneNodeAndResetsAnalyze" classname="BattleSnapshotTests" runstate="Runnable" seed="276174610" result="Passed" start-time="2026-09-13 14:01:25Z" end-time="2026-09-13 14:01:26Z" duration="1.393299" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1063" name="TC_ANL_006_TwoOrbitActionsAreUnchanged" fullname="BattleSnapshotTests.TC_ANL_006_TwoOrbitActionsAreUnchanged" methodname="TC_ANL_006_TwoOrbitActionsAreUnchanged" classname="BattleSnapshotTests" runstate="Runnable" seed="1222400768" result="Passed" start-time="2026-09-13 14:01:26Z" end-time="2026-09-13 14:01:27Z" duration="0.072297" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1064" name="TC_ANL_007_AnalyzeDoesNotScheduleEnemyAndAllowsValidCommands" fullname="BattleSnapshotTests.TC_ANL_007_AnalyzeDoesNotScheduleEnemyAndAllowsValidCommands" methodname="TC_ANL_007_AnalyzeDoesNotScheduleEnemyAndAllowsValidCommands" classname="BattleSnapshotTests" runstate="Runnable" seed="1154244099" result="Passed" start-time="2026-09-13 14:01:27Z" end-time="2026-09-13 14:01:27Z" duration="0.377571" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1065" name="TC_HVR_001_PreviewIsHiddenUntilTwoOrbitActions" fullname="BattleSnapshotTests.TC_HVR_001_PreviewIsHiddenUntilTwoOrbitActions" methodname="TC_HVR_001_PreviewIsHiddenUntilTwoOrbitActions" classname="BattleSnapshotTests" runstate="Runnable" seed="829965292" result="Passed" start-time="2026-09-13 14:01:27Z" end-time="2026-09-13 14:01:28Z" duration="0.661697" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1066" name="TC_HVR_002_EachValidCommandShowsOnlyItsOwnPreviewAboveButton" fullname="BattleSnapshotTests.TC_HVR_002_EachValidCommandShowsOnlyItsOwnPreviewAboveButton" methodname="TC_HVR_002_EachValidCommandShowsOnlyItsOwnPreviewAboveButton" classname="BattleSnapshotTests" runstate="Runnable" seed="1425983653" result="Passed" start-time="2026-09-13 14:01:28Z" end-time="2026-09-13 14:01:28Z" duration="0.660603" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1067" name="TC_HVR_003_FocusPointerOverlapAndExecutionStayConsistent" fullname="BattleSnapshotTests.TC_HVR_003_FocusPointerOverlapAndExecutionStayConsistent" methodname="TC_HVR_003_FocusPointerOverlapAndExecutionStayConsistent" classname="BattleSnapshotTests" runstate="Runnable" seed="895203790" result="Passed" start-time="2026-09-13 14:01:28Z" end-time="2026-09-13 14:01:29Z" duration="0.662790" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+]]></output>
+        </test-case>
+        <test-case id="1091" name="TC_ORB_001_OrbitSlotsFormDropdownLeftOfPlayer" fullname="BattleSnapshotTests.TC_ORB_001_OrbitSlotsFormDropdownLeftOfPlayer" methodname="TC_ORB_001_OrbitSlotsFormDropdownLeftOfPlayer" classname="BattleSnapshotTests" runstate="Runnable" seed="411809612" result="Passed" start-time="2026-09-13 14:01:29Z" end-time="2026-09-13 14:01:29Z" duration="0.059505" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1092" name="TC_ORB_002_AuthoredFrameAndActionIconsAreConfigured" fullname="BattleSnapshotTests.TC_ORB_002_AuthoredFrameAndActionIconsAreConfigured" methodname="TC_ORB_002_AuthoredFrameAndActionIconsAreConfigured" classname="BattleSnapshotTests" runstate="Runnable" seed="1934358225" result="Passed" start-time="2026-09-13 14:01:29Z" end-time="2026-09-13 14:01:29Z" duration="0.090474" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1093" name="TC_ORB_003_RuntimeButtonActionsRenderOrbitIcons" fullname="BattleSnapshotTests.TC_ORB_003_RuntimeButtonActionsRenderOrbitIcons" methodname="TC_ORB_003_RuntimeButtonActionsRenderOrbitIcons" classname="BattleSnapshotTests" runstate="Runnable" seed="2124574479" result="Passed" start-time="2026-09-13 14:01:29Z" end-time="2026-09-13 14:01:31Z" duration="1.462981" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1094" name="TC_ORB_004_StageEntranceSlidesInFromLeftAndSettles" fullname="BattleSnapshotTests.TC_ORB_004_StageEntranceSlidesInFromLeftAndSettles" methodname="TC_ORB_004_StageEntranceSlidesInFromLeftAndSettles" classname="BattleSnapshotTests" runstate="Runnable" seed="1934510238" result="Passed" start-time="2026-09-13 14:01:31Z" end-time="2026-09-13 14:01:32Z" duration="1.059015" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1087" name="TC_RES_001_OnlyNewRunInitializesResources" fullname="BattleSnapshotTests.TC_RES_001_OnlyNewRunInitializesResources" methodname="TC_RES_001_OnlyNewRunInitializesResources" classname="BattleSnapshotTests" runstate="Runnable" seed="1959384618" result="Passed" start-time="2026-09-13 14:01:32Z" end-time="2026-09-13 14:01:32Z" duration="0.060414" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1088" name="TC_RES_002_AllRewardsCarryCurrentHPAndMana" fullname="BattleSnapshotTests.TC_RES_002_AllRewardsCarryCurrentHPAndMana" methodname="TC_RES_002_AllRewardsCarryCurrentHPAndMana" classname="BattleSnapshotTests" runstate="Runnable" seed="147478839" result="Passed" start-time="2026-09-13 14:01:32Z" end-time="2026-09-13 14:01:37Z" duration="4.932694" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+GUARD RESONANCE Tier 1 dipilih. Guard Strength +20%.
+GUARD RESONANCE Tier 1 dipilih. Guard Strength +20%.
+Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +20%
+]]></output>
+        </test-case>
+        <test-case id="1089" name="TC_RES_003_VitalCoreAddsMaxAndCurrentHPAcrossTwoNodes" fullname="BattleSnapshotTests.TC_RES_003_VitalCoreAddsMaxAndCurrentHPAcrossTwoNodes" methodname="TC_RES_003_VitalCoreAddsMaxAndCurrentHPAcrossTwoNodes" classname="BattleSnapshotTests" runstate="Runnable" seed="1260520762" result="Passed" start-time="2026-09-13 14:01:37Z" end-time="2026-09-13 14:01:39Z" duration="2.712088" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 3: Abyss Herald | HP: 85 | Damage: 17 | Reward: 30 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 3: Abyss Herald | HP: 85 | Damage: 17 | Reward: 30 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1095" name="TC_RES_004_SkillVictoryKeepsCostAndConvergenceMana" fullname="BattleSnapshotTests.TC_RES_004_SkillVictoryKeepsCostAndConvergenceMana" methodname="TC_RES_004_SkillVictoryKeepsCostAndConvergenceMana" classname="BattleSnapshotTests" runstate="Runnable" seed="441406760" result="Passed" start-time="2026-09-13 14:01:39Z" end-time="2026-09-13 14:01:41Z" duration="1.558353" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1099" name="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources" fullname="BattleSnapshotTests.TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.188254" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1096" name="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources(160,15,100,10)" fullname="BattleSnapshotTests.TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources(160,15,100,10)" methodname="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources" classname="BattleSnapshotTests" runstate="Runnable" seed="1829113051" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.060901" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1097" name="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources(43,-1,43,0)" fullname="BattleSnapshotTests.TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources(43,-1,43,0)" methodname="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources" classname="BattleSnapshotTests" runstate="Runnable" seed="2018142633" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.062406" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1098" name="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources(1,0,1,0)" fullname="BattleSnapshotTests.TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources(1,0,1,0)" methodname="TC_RES_005_NodeEntryClampsOnlyOutOfRangeResources" classname="BattleSnapshotTests" runstate="Runnable" seed="125583622" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.063654" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="1102" name="TC_RES_006_RestartClampsConfiguredStartingMana" fullname="BattleSnapshotTests.TC_RES_006_RestartClampsConfiguredStartingMana" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.119124" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1100" name="TC_RES_006_RestartClampsConfiguredStartingMana(-3,0)" fullname="BattleSnapshotTests.TC_RES_006_RestartClampsConfiguredStartingMana(-3,0)" methodname="TC_RES_006_RestartClampsConfiguredStartingMana" classname="BattleSnapshotTests" runstate="Runnable" seed="1623574258" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.060877" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+          <test-case id="1101" name="TC_RES_006_RestartClampsConfiguredStartingMana(50,10)" fullname="BattleSnapshotTests.TC_RES_006_RestartClampsConfiguredStartingMana(50,10)" methodname="TC_RES_006_RestartClampsConfiguredStartingMana" classname="BattleSnapshotTests" runstate="Runnable" seed="1382677155" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.057191" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-case id="1090" name="TC_RUN_001_RunModifierCollectionAggregatesAndResets" fullname="BattleSnapshotTests.TC_RUN_001_RunModifierCollectionAggregatesAndResets" methodname="TC_RUN_001_RunModifierCollectionAggregatesAndResets" classname="BattleSnapshotTests" runstate="Runnable" seed="616497646" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:41Z" duration="0.077723" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+]]></output>
+        </test-case>
+        <test-case id="1081" name="TC_RWD_001_NonFinalVictoryOpensModalAutomatically" fullname="BattleSnapshotTests.TC_RWD_001_NonFinalVictoryOpensModalAutomatically" methodname="TC_RWD_001_NonFinalVictoryOpensModalAutomatically" classname="BattleSnapshotTests" runstate="Runnable" seed="913148663" result="Passed" start-time="2026-09-13 14:01:41Z" end-time="2026-09-13 14:01:42Z" duration="0.865213" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1082" name="TC_RWD_002_PortraitCardsEnterAndSupportPointerAndFocus" fullname="BattleSnapshotTests.TC_RWD_002_PortraitCardsEnterAndSupportPointerAndFocus" methodname="TC_RWD_002_PortraitCardsEnterAndSupportPointerAndFocus" classname="BattleSnapshotTests" runstate="Runnable" seed="104221351" result="Passed" start-time="2026-09-13 14:01:42Z" end-time="2026-09-13 14:01:45Z" duration="2.590066" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1083" name="TC_RWD_003_RapidSelectionAppliesOnceAndAdvancesOneNode" fullname="BattleSnapshotTests.TC_RWD_003_RapidSelectionAppliesOnceAndAdvancesOneNode" methodname="TC_RWD_003_RapidSelectionAppliesOnceAndAdvancesOneNode" classname="BattleSnapshotTests" runstate="Runnable" seed="1648953345" result="Passed" start-time="2026-09-13 14:01:45Z" end-time="2026-09-13 14:01:47Z" duration="2.747323" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai Battle 2: Veil Knight | HP: 65 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1084" name="TC_RWD_005_Tier10EligibilityStartsAtDepth1001" fullname="BattleSnapshotTests.TC_RWD_005_Tier10EligibilityStartsAtDepth1001" methodname="TC_RWD_005_Tier10EligibilityStartsAtDepth1001" classname="BattleSnapshotTests" runstate="Runnable" seed="332079815" result="Passed" start-time="2026-09-13 14:01:47Z" end-time="2026-09-13 14:01:48Z" duration="0.060473" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 50 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Temporary Run Stats telah direset.
+Temporary Run Stats telah direset.
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai Battle 1: Ashen Wretch | HP: 50 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-fddf499483094ef2a749b54bf9cb4f12/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-fddf499483094ef2a749b54bf9cb4f12/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

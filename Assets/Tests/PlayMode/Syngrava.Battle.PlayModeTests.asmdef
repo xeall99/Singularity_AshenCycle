@@ -1,0 +1,5 @@
+{
+    "name": "Syngrava.Battle.PlayModeTests",
+    "references": ["Unity.ugui", "Unity.TextMeshPro"],
+    "optionalUnityReferences": ["TestAssemblies"]
+}
