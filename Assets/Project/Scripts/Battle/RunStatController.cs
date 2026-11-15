@@ -16,6 +16,10 @@ public sealed class RunStatController
         RewardEffectType.MaxHPFlat
     );
 
+    public int MaxHPPenalty => modifiers.GetTotalFlat(
+        RewardEffectType.AnomalyBlackSun
+    );
+
     public float BasicAttackBonusPercent => modifiers.GetTotalPercent(
         RewardEffectType.AttackPercent
     );
@@ -24,7 +28,19 @@ public sealed class RunStatController
         RewardEffectType.GuardStrengthPercent
     );
 
-    public int EffectiveMaxHP => checked(BaseMaxHP + MaxHPBonus);
+    // This ruleset introduces initiative without changing the locked HP,
+    // Mana, Attack or Guard values already serialized in the Battle scene.
+    public int BaseSpeed => 10;
+    public int EffectiveSpeed => Math.Max(1, BaseSpeed - modifiers.GetTotalFlat(
+        RewardEffectType.AnomalyFrozenOrbit
+    ));
+    public float BaseCriticalChance => 0.05f;
+    public float EffectiveCriticalChance => BaseCriticalChance;
+
+    public int EffectiveMaxHP => Math.Max(
+        1,
+        checked(BaseMaxHP + MaxHPBonus - MaxHPPenalty)
+    );
 
     // No Max Mana reward exists in the v0.4 reward pool yet. Keeping the
     // effective value here lets Analyze and resource caps use one source now.

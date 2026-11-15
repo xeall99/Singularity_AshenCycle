@@ -1,0 +1,4 @@
+{
+    "Payload": "{\"Version\":1,\"Records\":[{\"RunId\":\"a50e539d82164327a4eef13151786bde\",\"FinishedUtcTicks\":639263819356733118,\"Outcome\":0,\"FinalEnemyName\":\"Abyss Herald\",\"RunSeed\":1690253357,\"NodeCount\":10,\"NodesResolved\":10,\"CurrentHP\":84,\"EffectiveMaxHP\":145,\"CurrentMana\":5,\"EffectiveMaxMana\":10,\"TotalEmbers\":89,\"EchoEarned\":124,\"BattlesWon\":5,\"DamageDealt\":250,\"DamageTaken\":158,\"ScoreModelVersion\":1,\"RulesetVersion\":\"0.4\",\"Mode\":\"STANDARD\",\"Cycle\":1,\"Score\":2650,\"BattlePoints\":300,\"EventPoints\":150,\"ElitePoints\":500,\"BossPoints\":1500,\"ConvergencePoints\":200,\"ElapsedSeconds\":729.8155517578125,\"RouteText\":\"BATTLE  ›  EVENT  ›  RELIC  ›  EVENT  ›  BATTLE  ›  BATTLE  ›  ELITE  ›  REST  ›  MERCHANT  ›  BOSS\",\"RelicsText\":\"Ember Locket\",\"AnomaliesText\":\"Frozen Orbit\",\"ModifiersText\":\"Max HP +45\"}]}",
+    "Sha256": "c12616539e18f0a3b619f14861bb25cc9a6620b6064af3a96dd68dfe78049cf4"
+}

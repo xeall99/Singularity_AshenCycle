@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Passed" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-25 18:31:08Z" end-time="2026-09-25 18:31:12Z" duration="4.4606312">
+  <test-suite type="TestSuite" id="1145" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="133" result="Passed" start-time="2026-09-25 18:31:08Z" end-time="2026-09-25 18:31:12Z" duration="4.460631" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1286" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-24614d6bb72d420abb53a24f266bf102/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="133" result="Passed" start-time="2026-09-25 18:31:08Z" end-time="2026-09-25 18:31:12Z" duration="4.447738" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="23104" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1146" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="133" result="Passed" start-time="2026-09-25 18:31:08Z" end-time="2026-09-25 18:31:12Z" duration="4.444102" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1154" name="TC_MENU_001_MainMenuActionsAndIdentityFitBothResolutions" fullname="BattleSnapshotTests.TC_MENU_001_MainMenuActionsAndIdentityFitBothResolutions" methodname="TC_MENU_001_MainMenuActionsAndIdentityFitBothResolutions" classname="BattleSnapshotTests" runstate="Runnable" seed="942825508" result="Passed" start-time="2026-09-25 18:31:08Z" end-time="2026-09-25 18:31:10Z" duration="1.722841" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1155" name="TC_MENU_002_ActiveCheckpointEnablesContinueAndProtectsNewRun" fullname="BattleSnapshotTests.TC_MENU_002_ActiveCheckpointEnablesContinueAndProtectsNewRun" methodname="TC_MENU_002_ActiveCheckpointEnablesContinueAndProtectsNewRun" classname="BattleSnapshotTests" runstate="Runnable" seed="1243257434" result="Passed" start-time="2026-09-25 18:31:10Z" end-time="2026-09-25 18:31:10Z" duration="0.343442" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1156" name="TC_MENU_003_NewExpeditionShowsLoadingAndEntersBattle" fullname="BattleSnapshotTests.TC_MENU_003_NewExpeditionShowsLoadingAndEntersBattle" methodname="TC_MENU_003_NewExpeditionShowsLoadingAndEntersBattle" classname="BattleSnapshotTests" runstate="Runnable" seed="862323658" result="Passed" start-time="2026-09-25 18:31:10Z" end-time="2026-09-25 18:31:11Z" duration="1.057580" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+]]></output>
+        </test-case>
+        <test-case id="1157" name="TC_MENU_004_SettingsButtonOpensTheExistingSettingsPanel" fullname="BattleSnapshotTests.TC_MENU_004_SettingsButtonOpensTheExistingSettingsPanel" methodname="TC_MENU_004_SettingsButtonOpensTheExistingSettingsPanel" classname="BattleSnapshotTests" runstate="Runnable" seed="325981622" result="Passed" start-time="2026-09-25 18:31:11Z" end-time="2026-09-25 18:31:11Z" duration="0.237590" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1158" name="TC_MENU_005_ContinueLoadsTheSavedRunWithoutReplacingItsCheckpoint" fullname="BattleSnapshotTests.TC_MENU_005_ContinueLoadsTheSavedRunWithoutReplacingItsCheckpoint" methodname="TC_MENU_005_ContinueLoadsTheSavedRunWithoutReplacingItsCheckpoint" classname="BattleSnapshotTests" runstate="Runnable" seed="26806335" result="Passed" start-time="2026-09-25 18:31:11Z" end-time="2026-09-25 18:31:12Z" duration="1.039746" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-24614d6bb72d420abb53a24f266bf102/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-24614d6bb72d420abb53a24f266bf102/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

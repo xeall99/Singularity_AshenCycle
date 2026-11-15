@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7eeecceef445a3b18b3f9409342e56, type: 3}
+  m_Name: StandardRunMapVisualAssets
+  m_EditorClassIdentifier: 
+  backdrop: {fileID: 21300000, guid: 78a9a6e0a9317ec44b3a3af088476f10, type: 3}
+  outerFrame: {fileID: 21300000, guid: d6e7780afc771924b96880c52630e812, type: 3}
+  detailFrame: {fileID: 21300000, guid: 5ae39e551f32a1b42b497d91b12cbff3, type: 3}
+  nodePlaque: {fileID: 21300000, guid: fb77dd660af6c004fb23a954362f84af, type: 3}
+  battleIcon: {fileID: 21300000, guid: 83f9765a7c75e58428ae2ec81dfe729e, type: 3}
+  eliteIcon: {fileID: 21300000, guid: 263903c483ca7f64cb62c6cd68603b7e, type: 3}
+  eventIcon: {fileID: 21300000, guid: 8cecd7b9f34255d45847d38b30ada21b, type: 3}
+  restIcon: {fileID: 21300000, guid: a349b2483e4c93b45bfd3e47dd7291b1, type: 3}
+  merchantIcon: {fileID: 21300000, guid: 5bb0383474bf48c9adffb06f388ed00e, type: 3}
+  bossIcon: {fileID: 21300000, guid: b024185ef5ba4356b01c9df3026278bb, type: 3}
+  currentMarker: {fileID: 21300000, guid: 34cfe43913df4734a355f98da3331c39, type: 3}
+  stateRing: {fileID: 21300000, guid: 8d5b97cd950311c419c832fc41c27d9d, type: 3}
+  connectorStroke: {fileID: 21300000, guid: c6701c9336ce4f699aaf0db677fe0fe0, type: 3}
+  ornaments: {fileID: 21300000, guid: d3616bc794c764c428f42f8bb347cbe6, type: 3}

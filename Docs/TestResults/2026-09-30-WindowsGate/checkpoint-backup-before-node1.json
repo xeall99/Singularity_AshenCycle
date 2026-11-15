@@ -1,0 +1,6 @@
+{
+    "FileVersion": 1,
+    "SavedAtUtc": "2026-09-30T11:01:34.1261859Z",
+    "StateJson": "{\"SchemaVersion\":3,\"RulesetVersion\":\"0.4\",\"RunSeed\":-62488640,\"RunId\":\"e01c5e2023204d25889a83ae02e69cad\",\"RouteVersion\":1,\"Depth\":1,\"NodeCount\":10,\"CurrentHP\":100,\"CurrentMana\":5,\"TotalEmbers\":0,\"IsActive\":true,\"IsCompleted\":false,\"Modifiers\":[],\"VisitedNodeCodes\":[],\"SelectedNodeCode\":\"\",\"NodeEntered\":false,\"ElapsedSeconds\":0.0,\"BattlesWon\":0,\"DamageDealt\":0,\"DamageTaken\":0,\"HealingReceived\":0,\"CriticalHits\":0,\"ConvergencesTriggered\":0,\"ScoreableConvergences\":0,\"CurrentBattleConvergences\":0,\"ActionsTaken\":0,\"EventHorizonCount\":0,\"ReversalOrbitCount\":0,\"UnstablePulseCount\":0}",
+    "StateSha256": "C27CA27245ACE14985B37889136014877CFC751F6B4D751E4974CDCF07A0B115"
+}

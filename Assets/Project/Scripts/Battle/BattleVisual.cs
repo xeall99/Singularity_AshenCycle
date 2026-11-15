@@ -15,8 +15,20 @@ public class BattleVisuals : MonoBehaviour
     [SerializeField] private float lungeDuration = 0.12f;
     [SerializeField] private float flashDuration = 0.1f;
 
+    private BattleSettingsUI settingsUI;
+    private bool ReducedMotion
+    {
+        get
+        {
+            if (settingsUI == null)
+                settingsUI = FindAnyObjectByType<BattleSettingsUI>();
+            return settingsUI != null && !settingsUI.MotionEffectsEnabled;
+        }
+    }
+
     public void PlayPlayerAttack()
     {
+        if (ReducedMotion) return;
         StartCoroutine(
             LungeAnimation(playerVisual, Vector2.right)
         );
@@ -24,6 +36,7 @@ public class BattleVisuals : MonoBehaviour
 
     public void PlayEnemyAttack()
     {
+        if (ReducedMotion) return;
         StartCoroutine(
             LungeAnimation(enemyVisual, Vector2.left)
         );
@@ -31,16 +44,19 @@ public class BattleVisuals : MonoBehaviour
 
     public void PlayEnemyHit()
     {
+        if (ReducedMotion) return;
         StartCoroutine(FlashAnimation(enemyImage));
     }
 
     public void PlayPlayerHit()
     {
+        if (ReducedMotion) return;
         StartCoroutine(FlashAnimation(playerImage));
     }
 
     public void PlayGuard()
     {
+        if (ReducedMotion) return;
         StartCoroutine(GuardAnimation());
     }
 
@@ -140,3 +156,4 @@ public class BattleVisuals : MonoBehaviour
         playerImage.color = originalColor;
     }
 }
+

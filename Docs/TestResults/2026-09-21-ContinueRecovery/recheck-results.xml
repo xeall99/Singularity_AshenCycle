@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-21 04:53:46Z" end-time="2026-09-21 04:53:50Z" duration="3.2827905">
+  <test-suite type="TestSuite" id="1090" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="81" result="Passed" start-time="2026-09-21 04:53:46Z" end-time="2026-09-21 04:53:50Z" duration="3.282791" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1176" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-df95e9097b454905a0bbd0be60f60b05/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="81" result="Passed" start-time="2026-09-21 04:53:46Z" end-time="2026-09-21 04:53:50Z" duration="3.269702" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="12444" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1091" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="81" result="Passed" start-time="2026-09-21 04:53:46Z" end-time="2026-09-21 04:53:50Z" duration="3.265852" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1138" name="TC_RECOVERY_001_BackupRestoresPreviousBoundaryAndSurvivesRecovery" fullname="BattleSnapshotTests.TC_RECOVERY_001_BackupRestoresPreviousBoundaryAndSurvivesRecovery" methodname="TC_RECOVERY_001_BackupRestoresPreviousBoundaryAndSurvivesRecovery" classname="BattleSnapshotTests" runstate="Runnable" seed="741763688" result="Passed" start-time="2026-09-21 04:53:46Z" end-time="2026-09-21 04:53:48Z" duration="1.182301" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1139" name="TC_RECOVERY_002_ContinueRestoresAfterSceneReload" fullname="BattleSnapshotTests.TC_RECOVERY_002_ContinueRestoresAfterSceneReload" methodname="TC_RECOVERY_002_ContinueRestoresAfterSceneReload" classname="BattleSnapshotTests" runstate="Runnable" seed="564435201" result="Passed" start-time="2026-09-21 04:53:48Z" end-time="2026-09-21 04:53:48Z" duration="0.474237" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Node 2 RandomEvent diselesaikan sebagai placeholder tanpa mengubah HP, Mana, Embers, atau modifier.
+Node 2 RandomEvent diselesaikan sebagai placeholder tanpa mengubah HP, Mana, Embers, atau modifier.
+Memulai node 3 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 3 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1140" name="TC_RECOVERY_003_DamagedSaveRechecksAndDiscardStartsClean" fullname="BattleSnapshotTests.TC_RECOVERY_003_DamagedSaveRechecksAndDiscardStartsClean" methodname="TC_RECOVERY_003_DamagedSaveRechecksAndDiscardStartsClean" classname="BattleSnapshotTests" runstate="Runnable" seed="2141027150" result="Passed" start-time="2026-09-21 04:53:48Z" end-time="2026-09-21 04:53:48Z" duration="0.191490" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1141" name="TC_RECOVERY_004_RecoveryButtonPromotesBackup" fullname="BattleSnapshotTests.TC_RECOVERY_004_RecoveryButtonPromotesBackup" methodname="TC_RECOVERY_004_RecoveryButtonPromotesBackup" classname="BattleSnapshotTests" runstate="Runnable" seed="1384396514" result="Passed" start-time="2026-09-21 04:53:48Z" end-time="2026-09-21 04:53:49Z" duration="0.218760" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1142" name="TC_RECOVERY_005_StaleContinueCannotRestoreTwiceOrTrustChangedFile" fullname="BattleSnapshotTests.TC_RECOVERY_005_StaleContinueCannotRestoreTwiceOrTrustChangedFile" methodname="TC_RECOVERY_005_StaleContinueCannotRestoreTwiceOrTrustChangedFile" classname="BattleSnapshotTests" runstate="Runnable" seed="345062718" result="Passed" start-time="2026-09-21 04:53:49Z" end-time="2026-09-21 04:53:49Z" duration="0.255076" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1143" name="TC_RECOVERY_006_PromotionFailurePreservesLiveStateAndBackup" fullname="BattleSnapshotTests.TC_RECOVERY_006_PromotionFailurePreservesLiveStateAndBackup" methodname="TC_RECOVERY_006_PromotionFailurePreservesLiveStateAndBackup" classname="BattleSnapshotTests" runstate="Runnable" seed="1472724519" result="Passed" start-time="2026-09-21 04:53:49Z" end-time="2026-09-21 04:53:49Z" duration="0.180665" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+]]></output>
+        </test-case>
+        <test-case id="1144" name="TC_RECOVERY_007_ModalRendersWithinThreeAspectRatios" fullname="BattleSnapshotTests.TC_RECOVERY_007_ModalRendersWithinThreeAspectRatios" methodname="TC_RECOVERY_007_ModalRendersWithinThreeAspectRatios" classname="BattleSnapshotTests" runstate="Runnable" seed="468827701" result="Passed" start-time="2026-09-21 04:53:49Z" end-time="2026-09-21 04:53:50Z" duration="0.736558" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-df95e9097b454905a0bbd0be60f60b05/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-df95e9097b454905a0bbd0be60f60b05/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

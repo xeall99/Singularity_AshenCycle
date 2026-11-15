@@ -1,0 +1,6 @@
+{
+    "FileVersion": 1,
+    "SavedAtUtc": "2026-09-30T16:17:38.4164220Z",
+    "StateJson": "{\"SchemaVersion\":3,\"RulesetVersion\":\"0.4\",\"RunSeed\":1690253357,\"RunId\":\"a50e539d82164327a4eef13151786bde\",\"RouteVersion\":1,\"Depth\":10,\"NodeCount\":10,\"CurrentHP\":121,\"CurrentMana\":7,\"TotalEmbers\":59,\"IsActive\":true,\"IsCompleted\":false,\"Modifiers\":[{\"SourceCode\":\"ANOMALY_FROZEN_ORBIT\",\"EffectType\":9,\"FlatValue\":2,\"PercentValue\":0.0,\"StackCount\":1,\"Scope\":0},{\"SourceCode\":\"RELIC_EMBER_LOCKET\",\"EffectType\":5,\"FlatValue\":1,\"PercentValue\":0.0,\"StackCount\":1,\"Scope\":0},{\"SourceCode\":\"REWARD_VITAL_CORE\",\"EffectType\":1,\"FlatValue\":45,\"PercentValue\":0.0,\"StackCount\":3,\"Scope\":0}],\"VisitedNodeCodes\":[\"BATTLE_01\",\"RandomEvent_02_L0\",\"RELIC_03\",\"RandomEvent_04_L0\",\"NormalBattle_05_L0\",\"BATTLE_06\",\"ELITE_07\",\"REST_08\",\"MERCHANT_09\"],\"SelectedNodeCode\":\"\",\"NodeEntered\":false,\"ElapsedSeconds\":652.5001831054688,\"BattlesWon\":4,\"DamageDealt\":190,\"DamageTaken\":115,\"HealingReceived\":136,\"CriticalHits\":0,\"ConvergencesTriggered\":3,\"ScoreableConvergences\":3,\"CurrentBattleConvergences\":0,\"ActionsTaken\":12,\"EventHorizonCount\":0,\"ReversalOrbitCount\":0,\"UnstablePulseCount\":3}",
+    "StateSha256": "6A43BFD59A3FFAE6311062331C7289E539BD096836D03264914AC665D051A662"
+}

@@ -146,6 +146,84 @@ public class BattleCommandMenu : MonoBehaviour
         isInitialized = true;
     }
 
+    public void RegisterAdditionalButtons(params Button[] additionalButtons)
+    {
+        if (additionalButtons == null || additionalButtons.Length == 0) return;
+        var additions = new System.Collections.Generic.List<Button>();
+        foreach (Button button in additionalButtons)
+        {
+            if (button == null || System.Array.IndexOf(buttons, button) >= 0) continue;
+            additions.Add(button);
+        }
+        if (additions.Count == 0) return;
+
+        int originalCount = buttons.Length;
+        int nextCount = originalCount + additions.Count;
+        System.Array.Resize(ref buttons, nextCount);
+        System.Array.Resize(ref buttonRects, nextCount);
+        System.Array.Resize(ref canvasGroups, nextCount);
+        System.Array.Resize(ref restingPositions, nextCount);
+        System.Array.Resize(ref restingScales, nextCount);
+        System.Array.Resize(ref restingRotations, nextCount);
+        System.Array.Resize(ref buttonTweens, nextCount);
+        System.Array.Resize(ref pointerInside, nextCount);
+        System.Array.Resize(ref focusInside, nextCount);
+
+        for (int index = 0; index < additions.Count; index++)
+        {
+            int buttonIndex = originalCount + index;
+            Button button = additions[index];
+            buttons[buttonIndex] = button;
+            ConfigureButton(buttonIndex);
+        }
+
+        if (wasInteractable && IsMenuInteractable()) ShowMenuAnimated();
+    }
+
+    public void RefreshRestingLayout()
+    {
+        if (buttons == null) return;
+        bool shouldShow = IsMenuInteractable();
+        StopMenuSequence();
+        menuTransitioning = false;
+        for (int index = 0; index < buttons.Length; index++)
+        {
+            if (!IsValidButton(index)) continue;
+            restingPositions[index] = buttonRects[index].anchoredPosition;
+            restingScales[index] = buttonRects[index].localScale;
+            restingRotations[index] = buttonRects[index].localRotation;
+        }
+        if (shouldShow) ShowMenuAnimated();
+        else HideMenuImmediately();
+    }
+
+    private void ConfigureButton(int index)
+    {
+        Button currentButton = buttons[index];
+        if (currentButton == null) return;
+        buttonRects[index] = currentButton.GetComponent<RectTransform>();
+        canvasGroups[index] = currentButton.GetComponent<CanvasGroup>();
+        if (canvasGroups[index] == null)
+            canvasGroups[index] = currentButton.gameObject.AddComponent<CanvasGroup>();
+        restingPositions[index] = buttonRects[index].anchoredPosition;
+        restingScales[index] = buttonRects[index].localScale;
+        restingRotations[index] = buttonRects[index].localRotation;
+
+        int savedIndex = index;
+        AddEventTrigger(currentButton.gameObject, EventTriggerType.PointerEnter,
+            () => HandlePointerEnter(savedIndex));
+        AddEventTrigger(currentButton.gameObject, EventTriggerType.PointerExit,
+            () => HandlePointerExit(savedIndex));
+        AddEventTrigger(currentButton.gameObject, EventTriggerType.PointerDown,
+            () => HandlePointerDown(savedIndex));
+        AddEventTrigger(currentButton.gameObject, EventTriggerType.PointerUp,
+            () => HandlePointerUp(savedIndex));
+        AddEventTrigger(currentButton.gameObject, EventTriggerType.Select,
+            () => HandleSelected(savedIndex));
+        AddEventTrigger(currentButton.gameObject, EventTriggerType.Deselect,
+            () => HandleDeselected(savedIndex));
+    }
+
     private void Start()
     {
         wasInteractable = IsMenuInteractable();
@@ -216,7 +294,9 @@ public class BattleCommandMenu : MonoBehaviour
 
         for (int index = 0; index < buttons.Length; index++)
         {
-            if (buttonRects[index] == null)
+            if (!IsValidButton(index) ||
+                !buttons[index].gameObject.activeInHierarchy ||
+                !buttons[index].interactable)
             {
                 continue;
             }
@@ -239,7 +319,9 @@ public class BattleCommandMenu : MonoBehaviour
 
         for (int index = 0; index < buttons.Length; index++)
         {
-            if (buttonRects[index] == null)
+            if (!IsValidButton(index) ||
+                !buttons[index].gameObject.activeInHierarchy ||
+                !buttons[index].interactable)
             {
                 continue;
             }
@@ -275,7 +357,7 @@ public class BattleCommandMenu : MonoBehaviour
 
         for (int index = 0; index < buttons.Length; index++)
         {
-            if (buttonRects[index] == null)
+            if (!IsValidButton(index) || !buttons[index].gameObject.activeInHierarchy)
             {
                 continue;
             }
@@ -312,7 +394,7 @@ public class BattleCommandMenu : MonoBehaviour
 
         for (int index = 0; index < buttons.Length; index++)
         {
-            if (buttonRects[index] == null)
+            if (!IsValidButton(index) || !buttons[index].gameObject.activeInHierarchy)
             {
                 continue;
             }

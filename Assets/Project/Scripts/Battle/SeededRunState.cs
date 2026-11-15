@@ -9,12 +9,14 @@ using System.Collections.Generic;
 [Serializable]
 public sealed class SeededRunState
 {
-    public const int CurrentSchemaVersion = 2;
-    public const string CurrentRulesetVersion = "0.4";
+    public const int CurrentSchemaVersion = 4;
+    public const string CurrentRulesetVersion = "0.5";
 
     public int SchemaVersion;
     public string RulesetVersion;
     public int RunSeed;
+    public string RunId;
+    public int RouteVersion;
     public int Depth;
     public int NodeCount;
     public int CurrentHP;
@@ -23,6 +25,25 @@ public sealed class SeededRunState
     public bool IsActive;
     public bool IsCompleted;
     public SeededRunModifierState[] Modifiers;
+    public string[] VisitedNodeCodes = new string[0];
+    public string SelectedNodeCode;
+    public bool NodeEntered;
+    public float ElapsedSeconds;
+    public int BattlesWon;
+    public int DamageDealt;
+    public int DamageTaken;
+    public int HealingReceived;
+    public int CriticalHits;
+    public int ConvergencesTriggered;
+    // Absent in legacy schema-3 saves; zero means bonuses cannot be reconstructed.
+    public int ScoreModelVersion;
+    public int ScoreableConvergences;
+    public int CurrentBattleConvergences;
+    public int ActionsTaken;
+    public int EventHorizonCount;
+    public int ReversalOrbitCount;
+    public int UnstablePulseCount;
+    public string[] EquippedSkillCodes = { "SKL_SHADOW_STRIKE" };
 
     // Unity JsonUtility needs a parameterless constructor when a checkpoint is
     // deserialized. Defaults are still validated by RunManager.RestoreState.
@@ -82,6 +103,8 @@ public sealed class SeededRunState
             SchemaVersion = SchemaVersion,
             RulesetVersion = RulesetVersion,
             RunSeed = RunSeed,
+            RunId = RunId,
+            RouteVersion = RouteVersion,
             Depth = Depth,
             NodeCount = NodeCount,
             CurrentHP = CurrentHP,
@@ -89,8 +112,51 @@ public sealed class SeededRunState
             TotalEmbers = TotalEmbers,
             IsActive = IsActive,
             IsCompleted = IsCompleted,
+            VisitedNodeCodes = VisitedNodeCodes == null ? null : (string[])VisitedNodeCodes.Clone(),
+            SelectedNodeCode = SelectedNodeCode,
+            NodeEntered = NodeEntered,
+            ElapsedSeconds = ElapsedSeconds,
+            BattlesWon = BattlesWon,
+            DamageDealt = DamageDealt,
+            DamageTaken = DamageTaken,
+            HealingReceived = HealingReceived,
+            CriticalHits = CriticalHits,
+            ConvergencesTriggered = ConvergencesTriggered,
+            ScoreModelVersion = ScoreModelVersion,
+            ScoreableConvergences = ScoreableConvergences,
+            CurrentBattleConvergences = CurrentBattleConvergences,
+            ActionsTaken = ActionsTaken,
+            EventHorizonCount = EventHorizonCount,
+            ReversalOrbitCount = ReversalOrbitCount,
+            UnstablePulseCount = UnstablePulseCount,
+            EquippedSkillCodes = EquippedSkillCodes == null
+                ? null : (string[])EquippedSkillCodes.Clone(),
             Modifiers = modifierCopy
         };
+    }
+
+    internal void ValidateRoute(StandardRunNodeMap map)
+    {
+        bool bossResolved = IsCompleted && Depth == NodeCount &&
+            VisitedNodeCodes != null && VisitedNodeCodes.Length == Depth;
+        if (VisitedNodeCodes == null || VisitedNodeCodes.Length != Depth - (bossResolved ? 0 : 1))
+            throw new InvalidOperationException("Checkpoint branch history does not match depth.");
+        string previous = null;
+        foreach (string code in VisitedNodeCodes)
+        {
+            bool reachable = false;
+            foreach (StandardRunNode choice in map.GetChoices(previous))
+                if (choice.Code == code) reachable = true;
+            if (!reachable) throw new InvalidOperationException("Checkpoint contains an unreachable branch.");
+            previous = code;
+        }
+        if (NodeEntered && string.IsNullOrEmpty(SelectedNodeCode))
+            throw new InvalidOperationException("Entered checkpoint node has no identity.");
+        if (string.IsNullOrEmpty(SelectedNodeCode)) return;
+        if (bossResolved && SelectedNodeCode == previous && !NodeEntered) return;
+        foreach (StandardRunNode choice in map.GetChoices(previous))
+            if (choice.Code == SelectedNodeCode && choice.Depth == Depth && NodeEntered) return;
+        throw new InvalidOperationException("Checkpoint selection is outside the reachable branches.");
     }
 
     internal void Validate(int effectiveMaxHP, int effectiveMaxMana)
@@ -118,6 +184,16 @@ public sealed class SeededRunState
             throw new InvalidOperationException(
                 "SeededRunState wajib memiliki seed yang tidak nol."
             );
+        }
+
+        // Older schema-3 checkpoints have no RunId. Restore gives them a
+        // stable legacy identity before a permanent reward can be claimed.
+        if (!string.IsNullOrEmpty(RunId) &&
+            !Guid.TryParse(RunId, out _) &&
+            !string.Equals(RunId, $"legacy-{RunSeed}-{RouteVersion}",
+                StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException("RunId checkpoint tidak valid.");
         }
 
         if (Depth < RunManager.FirstDepth)
@@ -180,6 +256,46 @@ public sealed class SeededRunState
             );
         }
 
+        if (float.IsNaN(ElapsedSeconds) ||
+            float.IsInfinity(ElapsedSeconds) ||
+            ElapsedSeconds < 0f)
+        {
+            throw new InvalidOperationException(
+                "Elapsed time pada SeededRunState tidak valid."
+            );
+        }
+
+        if (ScoreModelVersion < 0 || ScoreModelVersion > ScoreCalculator.ModelVersion)
+            throw new InvalidOperationException("Unsupported saved score model.");
+
+        if (BattlesWon < 0 || DamageDealt < 0 || DamageTaken < 0 ||
+            HealingReceived < 0 || CriticalHits < 0 ||
+            ConvergencesTriggered < 0 || ActionsTaken < 0 ||
+            ScoreableConvergences < 0 || CurrentBattleConvergences < 0 ||
+            EventHorizonCount < 0 || ReversalOrbitCount < 0 ||
+            UnstablePulseCount < 0)
+        {
+            throw new InvalidOperationException(
+                "Statistik Run Summary tidak boleh negatif."
+            );
+        }
+
+        long convergenceTotal = (long)EventHorizonCount +
+            ReversalOrbitCount + UnstablePulseCount;
+        long scoreEligibleTotal = ScoreModelVersion == ScoreCalculator.ModelVersion
+            ? (long)EventHorizonCount + ReversalOrbitCount : convergenceTotal;
+        if (convergenceTotal != ConvergencesTriggered ||
+            CriticalHits > ActionsTaken || BattlesWon > NodeCount ||
+            CurrentBattleConvergences > 3 ||
+            (long)ScoreableConvergences + CurrentBattleConvergences >
+                scoreEligibleTotal ||
+            ScoreableConvergences > 3 * NodeCount)
+        {
+            throw new InvalidOperationException(
+                "Statistik Run Summary tidak konsisten."
+            );
+        }
+
         if (IsActive && IsCompleted)
         {
             throw new InvalidOperationException(
@@ -192,6 +308,17 @@ public sealed class SeededRunState
             throw new InvalidOperationException(
                 "SeededRunState tidak memiliki daftar modifier yang valid."
             );
+        }
+
+        if (EquippedSkillCodes == null ||
+            EquippedSkillCodes.Length != SkillProgressStore.LoadoutSlotCount)
+            throw new InvalidOperationException("Checkpoint skill loadout must contain three slots.");
+        var equipped = new HashSet<string>(StringComparer.Ordinal);
+        foreach (string skillCode in EquippedSkillCodes)
+        {
+            if (string.IsNullOrWhiteSpace(skillCode)) continue;
+            if (!SkillCatalog.TryGet(skillCode, out _) || !equipped.Add(skillCode))
+                throw new InvalidOperationException("Checkpoint has an unknown or duplicate equipped skill.");
         }
 
         var sourceCodes = new HashSet<string>(StringComparer.Ordinal);
@@ -289,6 +416,9 @@ public sealed class SeededRunModifierState
                 $"Nilai modifier {SourceCode} tidak valid."
             );
         }
+
+        RunRelicCatalog.Validate(SourceCode, EffectType, FlatValue, PercentValue, StackCount);
+        RunAnomalyCatalog.Validate(SourceCode, EffectType, FlatValue, PercentValue, StackCount);
 
         if (float.IsNaN(PercentValue) ||
             float.IsInfinity(PercentValue) ||

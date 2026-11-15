@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -51,60 +52,36 @@ public sealed class BattleSettingsUI : MonoBehaviour
 
     private static readonly string[][] SettingNames =
     {
-        new[]
-        {
-            "Confirm Actions",
-            "Battle Speed",
-            "Show Damage Numbers",
-            "Enemy Intent"
-        },
-        new[]
-        {
-            "Text Size",
-            "High Contrast",
-            "Reduce Flash"
-        },
-        new[]
-        {
-            "Display Mode",
-            "Quality Preset",
-            "Motion Effects"
-        },
-        new[]
-        {
-            "Master Volume",
-            "Music Volume",
-            "SFX Volume"
-        }
+        new[] { "Checkpoint", "Enemy Intent" },
+        new[] { "Reduce Motion" },
+        new[] { "Display Mode", "Quality Preset" },
+        new[] { "Master Volume" }
     };
 
-    private static readonly string[][] SettingValues =
-    {
-        new[] { "ON", "1x", "ON", "ANALYZE ONLY" },
-        new[] { "NORMAL", "OFF", "OFF" },
-        new[] { "WINDOWED", "HIGH", "ON" },
-        new[] { "100%", "100%", "100%" }
-    };
-
-    private static readonly bool[][] SettingIsToggle =
-    {
-        new[] { true, false, true, false },
-        new[] { false, true, true },
-        new[] { false, false, true },
-        new[] { false, false, false }
-    };
+    private const string ReduceMotionKey = "reduce_motion";
+    private const string DisplayModeKey = "display_mode";
+    private const string QualityKey = "quality_level";
+    private const string MasterVolumeKey = "master_volume";
 
     private Button settingsButton;
     private GameObject settingsPanel;
     private Button closeButton;
+    private Button returnToMenuButton;
+    private TMP_Text saveStatusText;
     private Transform settingsContentRoot;
     private readonly List<Image> categoryButtonImages = new List<Image>();
     private readonly Dictionary<string, bool> toggleStates =
         new Dictionary<string, bool>();
 
     private float previousTimeScale = 1f;
+    private UserSettingsStore settingsStore;
+    private float masterVolume = 1f;
+    private FullScreenMode selectedDisplayMode;
+    private bool returningToMenu;
+    public bool MotionEffectsEnabled => !toggleStates.TryGetValue("1:0", out bool reduced) || !reduced;
     private bool hasStoredTimeScale;
     private bool uiBuilt;
+    private bool IsBattleScene => gameObject.scene.name == "Battle";
 
     public Button SettingsButton => settingsButton;
     public GameObject SettingsPanel => settingsPanel;
@@ -112,7 +89,44 @@ public sealed class BattleSettingsUI : MonoBehaviour
 
     private void Awake()
     {
+        LoadPreferences();
         EnsureUiBuilt();
+    }
+
+    private void LoadPreferences()
+    {
+        toggleStates["1:0"] = false;
+        selectedDisplayMode = Screen.fullScreenMode;
+        try
+        {
+            settingsStore = UserSettingsStore.CreateDefault();
+            toggleStates["1:0"] = settingsStore.Read(ReduceMotionKey) == "1";
+
+            string display = settingsStore.Read(DisplayModeKey);
+            if (display == "windowed")
+                selectedDisplayMode = FullScreenMode.Windowed;
+            else if (display == "borderless")
+                selectedDisplayMode = FullScreenMode.FullScreenWindow;
+            if (display == "windowed" || display == "borderless")
+                Screen.fullScreenMode = selectedDisplayMode;
+
+            string quality = settingsStore.Read(QualityKey);
+            if (int.TryParse(quality, out int level) &&
+                level >= 0 && level < QualitySettings.names.Length)
+                QualitySettings.SetQualityLevel(level, true);
+
+            string volume = settingsStore.Read(MasterVolumeKey);
+            if (float.TryParse(volume, NumberStyles.Float, CultureInfo.InvariantCulture,
+                    out float savedVolume) && !float.IsNaN(savedVolume) &&
+                !float.IsInfinity(savedVolume))
+                masterVolume = Mathf.Clamp01(savedVolume);
+            AudioListener.volume = masterVolume;
+        }
+        catch (System.Exception exception)
+        {
+            settingsStore = null;
+            Debug.LogError("Settings gagal dimuat: " + exception.Message);
+        }
     }
 
     private void Start()
@@ -150,10 +164,14 @@ public sealed class BattleSettingsUI : MonoBehaviour
             BuildSettingsPanel(canvas.transform);
         }
 
-        if (settingsButton != null)
+        if (settingsButton != null && IsBattleScene)
         {
             settingsButton.gameObject.SetActive(true);
             settingsButton.transform.SetAsLastSibling();
+        }
+        else if (settingsButton != null)
+        {
+            settingsButton.gameObject.SetActive(false);
         }
 
         if (settingsPanel != null)
@@ -322,7 +340,7 @@ public sealed class BattleSettingsUI : MonoBehaviour
         CreateLabel(
             "SettingsSubtitle",
             cardObject.transform,
-            "BATTLE PAUSED",
+            IsBattleScene ? "BATTLE PAUSED" : "MAIN MENU",
             18f,
             new Color(0.72f, 0.58f, 0.90f, 1f),
             new Vector2(0f, 224f),
@@ -333,7 +351,7 @@ public sealed class BattleSettingsUI : MonoBehaviour
         CreateLabel(
             "SettingsHint",
             cardObject.transform,
-            "Choose a category to view its in-game options.",
+            "Choose a category. Changes are saved immediately.",
             15f,
             MutedTextColor,
             new Vector2(0f, 193f),
@@ -343,48 +361,56 @@ public sealed class BattleSettingsUI : MonoBehaviour
 
         BuildSettingsNavigation(cardObject.transform);
 
-        GameObject closeObject = CreateUiObject(
-            "ResumeBattleButton",
-            cardObject.transform,
-            typeof(Image),
-            typeof(Button),
-            typeof(Outline)
-        );
+        bool battleScene = IsBattleScene;
+        saveStatusText = CreateLabel(
+            "SettingsSaveStatus", cardObject.transform, string.Empty, 14f,
+            MutedTextColor, new Vector2(0f, -209f),
+            new Vector2(900f, 30f), TextAlignmentOptions.Center);
 
-        RectTransform closeRect = closeObject.GetComponent<RectTransform>();
-        closeRect.anchorMin = new Vector2(0.5f, 0.5f);
-        closeRect.anchorMax = new Vector2(0.5f, 0.5f);
-        closeRect.pivot = new Vector2(0.5f, 0.5f);
-        closeRect.anchoredPosition = new Vector2(0f, -267f);
-        closeRect.sizeDelta = new Vector2(250f, 56f);
-
-        Image closeImage = closeObject.GetComponent<Image>();
-        closeImage.color = ButtonColor;
-        closeImage.raycastTarget = true;
-
-        Outline closeOutline = closeObject.GetComponent<Outline>();
-        closeOutline.effectColor = BorderColor;
-        closeOutline.effectDistance = new Vector2(2f, 2f);
-        closeOutline.useGraphicAlpha = true;
-
-        closeButton = closeObject.GetComponent<Button>();
-        closeButton.targetGraphic = closeImage;
-        closeButton.transition = Selectable.Transition.ColorTint;
-        closeButton.colors = CreateButtonColors();
+        closeButton = CreateFooterButton(
+            cardObject.transform, "ResumeBattleButton",
+            battleScene ? "RESUME BATTLE" : "CLOSE SETTINGS",
+            battleScene ? -150f : 0f);
         closeButton.onClick.AddListener(CloseSettings);
 
-        CreateLabel(
-            "ResumeBattleLabel",
-            closeObject.transform,
-            "RESUME BATTLE",
-            17f,
-            TextColor,
-            Vector2.zero,
-            new Vector2(230f, 48f),
-            TextAlignmentOptions.Center
-        );
+        if (battleScene)
+        {
+            returnToMenuButton = CreateFooterButton(
+                cardObject.transform, "ReturnToMainMenuButton",
+                "SAVE & MAIN MENU", 150f);
+            returnToMenuButton.onClick.AddListener(SaveAndReturnToMainMenu);
+        }
 
         settingsPanel.SetActive(false);
+    }
+
+    private Button CreateFooterButton(Transform parent, string objectName,
+        string caption, float x)
+    {
+        GameObject buttonObject = CreateUiObject(objectName, parent,
+            typeof(Image), typeof(Button), typeof(Outline));
+        RectTransform rect = buttonObject.GetComponent<RectTransform>();
+        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = new Vector2(x, -267f);
+        rect.sizeDelta = new Vector2(250f, 56f);
+
+        Image image = buttonObject.GetComponent<Image>();
+        image.color = ButtonColor;
+        image.raycastTarget = true;
+        Outline outline = buttonObject.GetComponent<Outline>();
+        outline.effectColor = BorderColor;
+        outline.effectDistance = new Vector2(2f, 2f);
+        outline.useGraphicAlpha = true;
+
+        Button button = buttonObject.GetComponent<Button>();
+        button.targetGraphic = image;
+        button.transition = Selectable.Transition.ColorTint;
+        button.colors = CreateButtonColors();
+        CreateLabel(objectName + "Label", buttonObject.transform, caption, 16f,
+            TextColor, Vector2.zero, new Vector2(230f, 48f),
+            TextAlignmentOptions.Center);
+        return button;
     }
 
     private void BuildSettingsNavigation(Transform cardTransform)
@@ -536,8 +562,6 @@ public sealed class BattleSettingsUI : MonoBehaviour
         dividerImage.raycastTarget = false;
 
         string[] names = SettingNames[categoryIndex];
-        string[] values = SettingValues[categoryIndex];
-        bool[] toggles = SettingIsToggle[categoryIndex];
 
         for (int index = 0; index < names.Length; index++)
         {
@@ -545,9 +569,7 @@ public sealed class BattleSettingsUI : MonoBehaviour
                 settingsContentRoot,
                 categoryIndex,
                 index,
-                names[index],
-                values[index],
-                toggles[index]
+                names[index]
             );
         }
     }
@@ -556,9 +578,7 @@ public sealed class BattleSettingsUI : MonoBehaviour
         Transform parent,
         int categoryIndex,
         int rowIndex,
-        string settingName,
-        string initialValue,
-        bool isToggle
+        string settingName
     )
     {
         GameObject rowObject = CreateSettingsBox(
@@ -584,15 +604,10 @@ public sealed class BattleSettingsUI : MonoBehaviour
 
         string stateKey = $"{categoryIndex}:{rowIndex}";
 
-        if (isToggle)
+        if (categoryIndex == 1)
         {
-            bool toggleState;
-
-            if (!toggleStates.TryGetValue(stateKey, out toggleState))
-            {
-                toggleState = initialValue == "ON";
-                toggleStates[stateKey] = toggleState;
-            }
+            bool toggleState = toggleStates.TryGetValue(stateKey, out bool saved)
+                && saved;
 
             GameObject valueObject = CreateUiObject(
                 $"SettingsToggle_{categoryIndex}_{rowIndex}",
@@ -638,12 +653,11 @@ public sealed class BattleSettingsUI : MonoBehaviour
 
             valueButton.onClick.AddListener(() =>
             {
-                toggleState = !toggleState;
-                toggleStates[stateKey] = toggleState;
-                valueLabel.text = toggleState ? "ON" : "OFF";
-                valueImage.color = toggleState
-                    ? EnabledValueColor
-                    : ButtonColor;
+                bool next = !toggleStates[stateKey];
+                if (!TryStoreSetting(ReduceMotionKey, next ? "1" : "0")) return;
+                toggleStates[stateKey] = next;
+                valueLabel.text = next ? "ON" : "OFF";
+                valueImage.color = next ? EnabledValueColor : ButtonColor;
             });
         }
         else
@@ -661,13 +675,99 @@ public sealed class BattleSettingsUI : MonoBehaviour
             CreateLabel(
                 $"SettingsValueLabel_{categoryIndex}_{rowIndex}",
                 valueObject.transform,
-                initialValue,
+                GetSettingValue(categoryIndex, rowIndex),
                 13f,
                 MutedTextColor,
                 Vector2.zero,
                 new Vector2(120f, 28f),
                 TextAlignmentOptions.Center
             );
+
+            if (categoryIndex >= 2)
+            {
+                Button valueButton = valueObject.AddComponent<Button>();
+                valueButton.targetGraphic = valueObject.GetComponent<Image>();
+                valueButton.transition = Selectable.Transition.ColorTint;
+                valueButton.colors = CreateButtonColors();
+                TMP_Text valueLabel = valueObject.GetComponentInChildren<TMP_Text>();
+                valueButton.onClick.AddListener(() =>
+                {
+                    if (TryCycleSetting(categoryIndex, rowIndex))
+                        valueLabel.text = GetSettingValue(categoryIndex, rowIndex);
+                });
+            }
+        }
+    }
+
+    private string GetSettingValue(int categoryIndex, int rowIndex)
+    {
+        if (categoryIndex == 0)
+            return rowIndex == 0 ? "AFTER NODE" : "ANALYZE ONLY";
+        if (categoryIndex == 2 && rowIndex == 0)
+            return selectedDisplayMode == FullScreenMode.Windowed
+                ? "WINDOWED" : "BORDERLESS";
+        if (categoryIndex == 2)
+        {
+            string[] names = QualitySettings.names;
+            int level = QualitySettings.GetQualityLevel();
+            return level >= 0 && level < names.Length
+                ? names[level].ToUpperInvariant() : "DEFAULT";
+        }
+        return Mathf.RoundToInt(masterVolume * 100f) + "%";
+    }
+
+    private bool TryCycleSetting(int categoryIndex, int rowIndex)
+    {
+        if (categoryIndex == 2 && rowIndex == 0)
+        {
+            bool windowed = selectedDisplayMode == FullScreenMode.Windowed;
+            if (!TryStoreSetting(DisplayModeKey, windowed ? "borderless" : "windowed"))
+                return false;
+            selectedDisplayMode = windowed
+                ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+            Screen.fullScreenMode = selectedDisplayMode;
+            return true;
+        }
+        if (categoryIndex == 2 && rowIndex == 1)
+        {
+            int count = QualitySettings.names.Length;
+            if (count == 0) return false;
+            int next = (QualitySettings.GetQualityLevel() + 1) % count;
+            if (!TryStoreSetting(QualityKey, next.ToString(CultureInfo.InvariantCulture)))
+                return false;
+            QualitySettings.SetQualityLevel(next, true);
+            return true;
+        }
+        if (categoryIndex == 3 && rowIndex == 0)
+        {
+            int nextStep = (Mathf.RoundToInt(masterVolume * 4f) + 4) % 5;
+            float next = nextStep * 0.25f;
+            if (!TryStoreSetting(MasterVolumeKey,
+                    next.ToString("0.00", CultureInfo.InvariantCulture)))
+                return false;
+            masterVolume = next;
+            AudioListener.volume = masterVolume;
+            return true;
+        }
+        return false;
+    }
+
+    private bool TryStoreSetting(string key, string value)
+    {
+        try
+        {
+            if (settingsStore == null)
+                settingsStore = UserSettingsStore.CreateDefault();
+            settingsStore.Write(key, value);
+            if (saveStatusText != null) saveStatusText.text = "SETTING SAVED";
+            return true;
+        }
+        catch (System.Exception exception)
+        {
+            Debug.LogError("Settings gagal disimpan: " + exception.Message);
+            if (saveStatusText != null)
+                saveStatusText.text = "SETTING COULD NOT BE SAVED";
+            return false;
         }
     }
 
@@ -726,15 +826,31 @@ public sealed class BattleSettingsUI : MonoBehaviour
             return;
         }
 
-        previousTimeScale = Time.timeScale;
-        hasStoredTimeScale = true;
-        Time.timeScale = 0f;
+        if (IsBattleScene)
+        {
+            previousTimeScale = Time.timeScale;
+            hasStoredTimeScale = true;
+            Time.timeScale = 0f;
+        }
         settingsPanel.SetActive(true);
+        settingsPanel.transform.SetAsLastSibling();
+
+        if (saveStatusText != null)
+        {
+            BattleManager battle = IsBattleScene
+                ? Object.FindAnyObjectByType<BattleManager>() : null;
+            saveStatusText.text = battle == null ? string.Empty :
+                battle.CanSaveAtMapBoundary
+                    ? "Current map progress will be saved before leaving."
+                    : battle.HasFinishedRunSummary
+                        ? "Run results will be checked before leaving."
+                        : "Finish this node and reward before saving to Main Menu.";
+        }
 
         // Keep the toggle control readable above the dimming backdrop. The
         // Resume button remains the primary close action, while the gear also
         // stays available as a predictable toggle for mouse and gamepad users.
-        if (settingsButton != null)
+        if (settingsButton != null && IsBattleScene)
         {
             settingsButton.gameObject.SetActive(true);
             settingsButton.transform.SetAsLastSibling();
@@ -761,10 +877,40 @@ public sealed class BattleSettingsUI : MonoBehaviour
             hasStoredTimeScale = false;
         }
 
-        if (EventSystem.current != null && settingsButton != null)
+        if (EventSystem.current != null && settingsButton != null &&
+            settingsButton.gameObject.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
         }
+        else if (EventSystem.current != null)
+        {
+            Transform menuSettings = transform.Find("MenuCard/SettingsButton");
+            if (menuSettings != null)
+                EventSystem.current.SetSelectedGameObject(menuSettings.gameObject);
+        }
+    }
+
+    private void SaveAndReturnToMainMenu()
+    {
+        if (returningToMenu || !IsBattleScene) return;
+        BattleManager battle = Object.FindAnyObjectByType<BattleManager>();
+        if (battle == null)
+        {
+            if (saveStatusText != null)
+                saveStatusText.text = "RUN IS NOT READY. STAYING IN GAME.";
+            return;
+        }
+
+        if (!battle.TrySaveForMainMenu(out string feedback))
+        {
+            if (saveStatusText != null) saveStatusText.text = feedback;
+            return;
+        }
+
+        returningToMenu = true;
+        CloseSettings();
+        MainMenuFlow.Clear();
+        SceneManager.LoadScene("MainMenu");
     }
 
     private TMP_Text CreateLabel(
@@ -866,6 +1012,11 @@ public sealed class BattleSettingsUI : MonoBehaviour
         if (closeButton != null)
         {
             closeButton.onClick.RemoveListener(CloseSettings);
+        }
+
+        if (returnToMenuButton != null)
+        {
+            returnToMenuButton.onClick.RemoveListener(SaveAndReturnToMainMenu);
         }
 
         if (hasStoredTimeScale)

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-24 12:55:21Z" end-time="2026-09-24 12:55:22Z" duration="1.2534605">
+  <test-suite type="TestSuite" id="1135" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="123" result="Passed" start-time="2026-09-24 12:55:21Z" end-time="2026-09-24 12:55:22Z" duration="1.253461" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1266" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-1355af9476f947b48a2e1a7235bdf5af/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="123" result="Passed" start-time="2026-09-24 12:55:21Z" end-time="2026-09-24 12:55:22Z" duration="1.242624" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="20676" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1136" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="123" result="Passed" start-time="2026-09-24 12:55:21Z" end-time="2026-09-24 12:55:22Z" duration="1.239183" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1144" name="TC_MENU_001_MainMenuActionsAndIdentityFitBothResolutions" fullname="BattleSnapshotTests.TC_MENU_001_MainMenuActionsAndIdentityFitBothResolutions" methodname="TC_MENU_001_MainMenuActionsAndIdentityFitBothResolutions" classname="BattleSnapshotTests" runstate="Runnable" seed="1242765252" result="Passed" start-time="2026-09-24 12:55:21Z" end-time="2026-09-24 12:55:22Z" duration="1.215473" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-1355af9476f947b48a2e1a7235bdf5af/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-1355af9476f947b48a2e1a7235bdf5af/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

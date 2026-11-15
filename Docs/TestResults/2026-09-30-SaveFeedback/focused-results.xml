@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-30 15:42:14Z" end-time="2026-09-30 15:42:16Z" duration="1.6261102">
+  <test-suite type="TestSuite" id="1152" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-09-30 15:42:14Z" end-time="2026-09-30 15:42:16Z" duration="1.626110" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1300" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-09-30 15:42:14Z" end-time="2026-09-30 15:42:16Z" duration="1.611820" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="17852" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1153" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-09-30 15:42:14Z" end-time="2026-09-30 15:42:16Z" duration="1.607224" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1228" name="TC_SAVE_005_CheckpointFailureIsVisibleAndCanBeRetried" fullname="BattleSnapshotTests.TC_SAVE_005_CheckpointFailureIsVisibleAndCanBeRetried" methodname="TC_SAVE_005_CheckpointFailureIsVisibleAndCanBeRetried" classname="BattleSnapshotTests" runstate="Runnable" seed="1113104692" result="Passed" start-time="2026-09-30 15:42:14Z" end-time="2026-09-30 15:42:16Z" duration="1.583173" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Active Run checkpoint gagal disimpan (test blocked path): Cannot create 'C:\Users\AKMALM~1\AppData\Local\Temp\syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee\SYNGRAVA_BattleTests\syngrava-checkpoint-blocked-8c0b754844924f02b220c6652a8c2516' because a file or directory with the same name already exists.
+Active Run checkpoint gagal disimpan (test blocked path): Cannot create 'C:\Users\AKMALM~1\AppData\Local\Temp\syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee\SYNGRAVA_BattleTests\syngrava-checkpoint-blocked-8c0b754844924f02b220c6652a8c2516' because a file or directory with the same name already exists.
+Active Run checkpoint gagal disimpan (player retry): Cannot create 'C:\Users\AKMALM~1\AppData\Local\Temp\syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee\SYNGRAVA_BattleTests\syngrava-checkpoint-blocked-8c0b754844924f02b220c6652a8c2516' because a file or directory with the same name already exists.
+Active Run checkpoint gagal disimpan (player retry): Cannot create 'C:\Users\AKMALM~1\AppData\Local\Temp\syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee\SYNGRAVA_BattleTests\syngrava-checkpoint-blocked-8c0b754844924f02b220c6652a8c2516' because a file or directory with the same name already exists.
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-3c2c4959f8e44df1aa947a6ade3aaeee/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

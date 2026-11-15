@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-26 22:00:57Z" end-time="2026-09-26 22:01:29Z" duration="32.8198308">
+  <test-suite type="TestSuite" id="1148" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="136" result="Passed" start-time="2026-09-26 22:00:57Z" end-time="2026-09-26 22:01:29Z" duration="32.819831" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1292" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-dd062977a18945bda2010b56d9625914/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="136" result="Passed" start-time="2026-09-26 22:00:57Z" end-time="2026-09-26 22:01:29Z" duration="32.802260" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="23380" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1149" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="136" result="Passed" start-time="2026-09-26 22:00:57Z" end-time="2026-09-26 22:01:29Z" duration="32.797985" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1163" name="TC_E2E_003_ThreeExpeditionsUseRealCombatAndCommitTerminalResults" fullname="BattleSnapshotTests.TC_E2E_003_ThreeExpeditionsUseRealCombatAndCommitTerminalResults" methodname="TC_E2E_003_ThreeExpeditionsUseRealCombatAndCommitTerminalResults" classname="BattleSnapshotTests" runstate="Runnable" seed="1663119235" result="Passed" start-time="2026-09-26 22:00:57Z" end-time="2026-09-26 22:01:29Z" duration="32.767544" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 2 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 2 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai node 3 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai node 3 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+The character with Unicode value \u25C9 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C9 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2726 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2726 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C7 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C7 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+Black Sun Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  First Convergence uses two actions
+<color=#FF879D>CONSEQUENCE</color>  Maximum HP -15.
+Black Sun Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  First Convergence uses two actions
+<color=#FF879D>CONSEQUENCE</color>  Maximum HP -15.
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 9 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 9 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+VITAL CORE Tier 2 dipilih. Max HP +23 | HP +23.
+VITAL CORE Tier 2 dipilih. Max HP +23 | HP +23.
+Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+NATURAL_COMBAT expedition=1 seed=1019079324 cleared=True depth=10 actions=18 hp=65
+NATURAL_COMBAT expedition=1 seed=1019079324 cleared=True depth=10 actions=18 hp=65
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 3 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 3 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai node 5 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai node 5 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 6 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 6 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 2 dipilih. Max HP +23 | HP +23.
+VITAL CORE Tier 2 dipilih. Max HP +23 | HP +23.
+Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+The character with Unicode value \u2726 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2726 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C9 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C9 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2744 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2744 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+Collapsed Star Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  Skill damage +30%
+<color=#FF879D>CONSEQUENCE</color>  All Skills cost +1 Mana.
+Collapsed Star Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  Skill damage +30%
+<color=#FF879D>CONSEQUENCE</color>  All Skills cost +1 Mana.
+Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +68 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+NATURAL_COMBAT expedition=2 seed=-1253390837 cleared=True depth=10 actions=19 hp=94
+NATURAL_COMBAT expedition=2 seed=-1253390837 cleared=True depth=10 actions=19 hp=94
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 2 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Memulai node 2 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +15 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai node 4 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Memulai node 4 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +30 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 5 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Memulai node 5 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +45 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+VITAL CORE Tier 1 dipilih. Max HP +15 | HP +15.
+Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+The character with Unicode value \u2726 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2726 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C7 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u25C7 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2744 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+The character with Unicode value \u2744 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [RewardGlyph].
+Collapsed Star Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  Skill damage +30%
+<color=#FF879D>CONSEQUENCE</color>  All Skills cost +1 Mana.
+Collapsed Star Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  Skill damage +30%
+<color=#FF879D>CONSEQUENCE</color>  All Skills cost +1 Mana.
+Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Memulai node 9 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Memulai node 9 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +60 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+VITAL CORE Tier 2 dipilih. Max HP +23 | HP +23.
+VITAL CORE Tier 2 dipilih. Max HP +23 | HP +23.
+Run Stats: Max HP +83 | Basic Attack +0% | Guard Strength +0%
+Run Stats: Max HP +83 | Basic Attack +0% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +83 | Basic Attack +0% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +83 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+Convergence aktif: EVENT HORIZON | Skill ketiga mendapatkan tambahan 30% damage.
+NATURAL_COMBAT expedition=3 seed=-1568431451 cleared=True depth=10 actions=24 hp=69
+NATURAL_COMBAT expedition=3 seed=-1568431451 cleared=True depth=10 actions=24 hp=69
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-dd062977a18945bda2010b56d9625914/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-dd062977a18945bda2010b56d9625914/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

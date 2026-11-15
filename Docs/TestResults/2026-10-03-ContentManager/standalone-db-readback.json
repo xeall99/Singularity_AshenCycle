@@ -1,0 +1,20 @@
+{
+  "profile": "CodexGateTests/SYNGRAVA_ContentManagerGate_20261003",
+  "captured_utc": "2026-10-03T03:37:58.112412+00:00",
+  "rows": [
+    {
+      "id": 1,
+      "code": "SKL_SHADOW_STRIKE",
+      "name": "Shadow Strike",
+      "mana_cost": 2,
+      "power": 20
+    },
+    {
+      "id": 2,
+      "code": "SKL_CUSTOM_A229614D48504CDDAFB4A853CBC5DE67",
+      "name": "UKK Test Ember",
+      "mana_cost": 3,
+      "power": 27
+    }
+  ]
+}

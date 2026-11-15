@@ -11,7 +11,8 @@ public enum StandardRunNodeType
     RandomEvent,
     Rest,
     Merchant,
-    Boss
+    Boss,
+    Relic
 }
 
 /// <summary>
@@ -25,6 +26,9 @@ public sealed class StandardRunNode
     public StandardRunNodeType Type;
     public string Code;
     public bool IsFinal;
+    public int Lane = 1;
+    public string[] NextNodeCodes = new string[0];
+    public string ReplacesNodeCode;
 
     public StandardRunNode()
     {
@@ -67,13 +71,14 @@ public sealed class StandardRunNode
 /// object or an Inspector dependency to the current battle prototype.
 /// </summary>
 [Serializable]
-public sealed class StandardRunNodeMap
+public sealed partial class StandardRunNodeMap
 {
     public const int MinimumNodeCount = 8;
     public const int MaximumNodeCount = 10;
     public const int DefaultNodeCount = 10;
 
     public int RunSeed;
+    public int RouteVersion = 1;
     public StandardRunNode[] Nodes;
 
     public int Count
@@ -96,6 +101,25 @@ public sealed class StandardRunNodeMap
     )
     {
         return StandardRunNodeGenerator.Generate(runSeed, nodeCount);
+    }
+
+    public static StandardRunNodeMap GenerateLegacy(int seed, int count)
+    {
+        StandardRunNodeMap map = Generate(seed, count);
+        var retained = new List<StandardRunNode>();
+        foreach (StandardRunNode node in map.Alternatives)
+            if (node.Type != StandardRunNodeType.Relic) retained.Add(node);
+        map.Alternatives = retained.ToArray();
+        foreach (StandardRunNode node in map.AllNodes)
+        {
+            var links = new List<string>();
+            foreach (string code in node.NextNodeCodes)
+                if (map.FindNode(code) != null) links.Add(code);
+            node.NextNodeCodes = links.ToArray();
+        }
+        map.RouteVersion = 0;
+        map.Validate();
+        return map;
     }
 
     public StandardRunNode GetNodeAtDepth(int depth)
@@ -320,6 +344,8 @@ public sealed class StandardRunNodeMap
                 "Rest harus tersedia sebelum Boss."
             );
         }
+
+        ValidateBranches();
     }
 }
 
@@ -470,6 +496,7 @@ public static class StandardRunNodeGenerator
             );
         }
 
+        map.BuildBranches();
         map.Validate();
         return map;
     }

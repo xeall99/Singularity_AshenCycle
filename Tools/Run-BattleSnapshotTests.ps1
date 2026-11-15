@@ -1,5 +1,6 @@
 param(
-    [string]$UnityEditor = 'C:\Program Files\Unity\Hub\Editor\6000.6.0f1\Editor\Unity.exe'
+    [string]$UnityEditor = 'C:\Program Files\Unity\Hub\Editor\6000.6.0f1\Editor\Unity.exe',
+    [string]$TestFilter = 'BattleSnapshotTests'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -7,6 +8,8 @@ $projectRoot = Split-Path $PSScriptRoot -Parent
 if (-not (Test-Path -LiteralPath $UnityEditor)) { throw "Unity Editor missing: $UnityEditor" }
 $runRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('syngrava-battle-tests-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $runRoot | Out-Null
+$env:UPM_CACHE_ROOT = Join-Path $runRoot 'upm-cache'
+New-Item -ItemType Directory -Path $env:UPM_CACHE_ROOT | Out-Null
 
 # Unity cannot open the same project twice. Copy inputs, never the user's live Library.
 # A distinct product name isolates Application.persistentDataPath from the user's save.
@@ -39,7 +42,7 @@ Write-Output "Isolated project: $runRoot"
 Write-Output "Results: $results"
 Write-Output "Unity log: $log"
 $unityArgs = @('-batchmode', '-projectPath', ('"' + $runRoot + '"'),
-    '-runTests', '-testPlatform', 'PlayMode', '-testFilter', 'BattleSnapshotTests',
+    '-runTests', '-testPlatform', 'PlayMode', '-testFilter', $TestFilter,
     '-testResults', ('"' + $results + '"'), '-logFile', ('"' + $log + '"'))
 $process = Start-Process -FilePath $UnityEditor -ArgumentList $unityArgs -WindowStyle Hidden -PassThru
 $process.WaitForExit()

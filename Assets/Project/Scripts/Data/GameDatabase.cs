@@ -58,17 +58,6 @@ public class GameDatabase : MonoBehaviour
 
             Directory.CreateDirectory(runtimeDatabaseFolder);
 
-#if UNITY_EDITOR
-            File.Copy(
-                seedDatabasePath,
-                runtimeDatabasePath,
-                true
-            );
-
-            Debug.Log(
-                "Database runtime diperbarui dari seed."
-            );
-#else
             if (!File.Exists(runtimeDatabasePath))
             {
                 File.Copy(
@@ -80,7 +69,6 @@ public class GameDatabase : MonoBehaviour
                     "Database seed berhasil disalin."
                 );
             }
-#endif
 
             connection = new SQLiteConnection(
                 runtimeDatabasePath
@@ -109,10 +97,14 @@ public class GameDatabase : MonoBehaviour
             return null;
         }
 
-        return connection
+        SkillData stored = connection
             .Table<SkillData>()
             .Where(skill => skill.Code == skillCode)
             .FirstOrDefault();
+        if (stored != null) return stored;
+
+        SkillDefinition curated = SkillCatalog.Get(skillCode);
+        return curated == null ? null : curated.Data;
     }
 
     public EnemyData GetEnemyByBattleIndex(int battleIndex)

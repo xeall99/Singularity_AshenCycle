@@ -1,8 +1,97 @@
 # SYNGRAVA Project Context
 
-Version 0.4
-Updated 19 September 2026
+Version 0.5
+Updated 15 November 2026
 Owner Akmal Maulana Ghani
+
+## Guided Tutorial and Field Guide — 14 November 2026
+
+- The Main Menu now provides an optional **FIELD GUIDE**. It opens a six-page in-game reference for the Standard Run, turn actions, hidden intent/Analyze, Singularity Orbit/Convergence, route nodes/rewards, and checkpoint/history/Echo.
+- The Field Guide is on-demand and replayable; the separate **guided first-run tutorial** automatically appears on an untouched Stage 1 map for a profile that has not completed or skipped it. The tutorial spotlights the actual reachable map node and game buttons, advances after real player actions, adapts to unavailable Mana actions and enemy-first turns, and provides **SKIP TUTORIAL** plus Escape. It does not pause time or grant resources. Completion is stored through `UserSettingsStore` without changing the SQLite schema.
+- Previous/Next boundaries, Escape, Close, focus restoration, and page counter for the Field Guide are implemented in `Assets/Project/Scripts/UI/TutorialUI.cs`; `MainMenuUI` creates its utility entry in both generated and serialized-scene layouts. Guided overlay is built at runtime by `Assets/Project/Scripts/UI/GuidedTutorialController.cs` and connected to existing map/combat actions. No Inspector assignment, scene migration, package, or save-schema change is required.
+- Design and acceptance plan: `Docs/Tutorial_DesignPlan.md`. It records the research, behavior, boundaries, and test plan for both the guided flow and replayable Field Guide.
+- Historical Field Guide verification remains recorded in `Docs/TestResults/2026-11-14-Tutorial/REPORT.md`. Guided tutorial verification is separate: baseline 152/152 before implementation, then 158/158 in each of three consecutive Unity 6000.6.0f1 `BattleSnapshotTests` Play Mode runs (0 failed/skipped). XML and Unity logs are retained in `Docs/TestResults/2026-11-14-GuidedTutorial/REPORT.md` and its evidence files.
+- Tests include first-run real-action progression, Skip/Escape persistence, early clear and defeat handling, low-Mana Skill/Analyze guidance, enemy-first turn handling, and layout containment. Two seed-sensitive existing combat assertions now calculate their expected critical damage from the active run seed. This is automated Play Mode evidence, not a human visual/readability review or player-learning study. Custom artwork and evaluation of learning outcomes remain future work; do not claim measured learning effectiveness.
+
+## Skill collection and loadout — 15 November 2026
+
+- Runtime contains 30 curated official skills. The player starts with Shadow Strike and can persist up to three unique owned skills in the local Skill Archive. Skill Archive opens from Echo Archive in Main Menu; changes apply to the next Expedition, while an active Run keeps its saved loadout snapshot.
+- A Standard Run that has resolved at least one node offers one permanent skill after Clear or Defeat. The offer presents up to three unowned skills, is stable per RunId/milestone, can be deferred, and remains claimable from Skill Archive. Abandoned or zero-node Runs do not earn it. The reward does not spend Echo or increase Base Stats.
+- Profile data lives in `Application.persistentDataPath/Database/player_progress.db`; custom Content Manager rows are excluded. Run snapshots now use `SeededRunState` schema 4. Schema 3 checkpoints migrate with Shadow Strike in slot 1 and two empty slots.
+- On 15 November, the passive hooks were audited against the 30 authored descriptions and corrected where runtime outcomes differed. Burn/Ember, Burn/Curse, Guard-conditioned follow-ups, status duration extension, and hit/kill triggers now have explicit regression coverage. Unequipped passives do not consume their once-per-battle trigger.
+- Every catalog row has a distinct non-empty `ActiveEffect`, `PassiveEffect`, and passive description; Echo Script intentionally repeats whenever immediately preceded by Guard. This validates unique identity, not final balance.
+- Design, researched roster, and Infinite Run's next-feature plan: `Docs/Skill_Collection_Loadout_DesignPlan.md` and `Docs/Infinite_Run_DesignPlan.md`. The 15 November Unity result and logs will be recorded at `Docs/TestResults/2026-11-15-SkillSystem/REPORT.md` after all three final runs pass.
+- Automated coverage includes catalog/passive identity, profile persistence, retry-safe claims, locked/duplicate loadout rejection, snapshot restore, duration extension, Burn/Ember, Burn/Curse, Guard-conditioned effects, and the full battle/run regression suite. Skill numbers remain provisional pending owner playtest and balance review; automated passes do not certify visual quality or balance.
+
+## Owner clarification — player skill progression, 3 October 2026
+
+- The intended player feature is a curated, game-authored skill collection and loadout. At each 10-wave reward point in Infinite, Legend, or special runs, present three authored skill choices; the player selects one for their skill inventory, then configures which owned skills to bring in a loadout before starting a run. This is horizontal progression and must not increase locked Warden Base Stats.
+- This is separate from the SQLite CRUD demonstration. The owner explicitly directed that Custom Skill CRUD not be exposed from the player-facing Main Menu, so players cannot author arbitrary skill values. Keep the repository and demo UI available for internal UKK/regression use only unless the owner changes this decision. Freeform custom rows must never enter combat, player collection, loadout, or wave rewards.
+- As of 3 October, combat loaded only `SKL_SHADOW_STRIKE`; that historical status was superseded by the skill collection/loadout implementation recorded above. The Content Manager's `0–999` Power validation ceiling is a technical/demo limit only, not an approved gameplay balance rule.
+- The first authored roster is a 15-skill draft in `Docs/Skill_Design_Catalog_Draft.md`. It includes provisional damage/Mana/passive values and external gameplay-pattern inspirations; it is not yet approved balance or runtime data.
+
+## Work resumed — 26 October 2026
+
+- **Custom Skill is removed from the player-facing Main Menu.** `MainMenuUI` no longer creates the Content Manager menu button or automatically attaches `ContentManagerUI`. The `MainMenu.unity` scene has no serialized Content Manager component or button reference. The content repository and panel remain available only for UKK/internal regression use; custom rows remain disconnected from combat and player progression.
+- Regression source now verifies the boundary: `TC_MENU_001` expects no Content Manager button or component, and `TC_CRUD_001` attaches the panel explicitly inside the test before exercising SQLite CRUD. Both updated assemblies compile in an isolated .NET check: production source **0 errors / 60 warnings**, Play Mode test source **0 errors / 0 warnings**. This check used temporary copies of Unity-generated project files with only the unavailable VS Tools analyzer reference omitted; it is not a Unity Editor compile result.
+- The initial 26 October isolated Play Mode attempt did not produce a result XML: Unity could not move temporary Library files inside the sandbox, Licensing Client startup failed, and Burst reported a missing compiler pipe. A successful isolated Play Mode retry, fresh Windows build, and standalone Main Menu visual smoke followed on 8 November; see `Docs/TestResults/2026-11-08-UnityRunnerRetry/REPORT.md`. Formal exact-build human Standard Run acceptance remains pending.
+- The 15-skill catalog described at that time was a design draft. The current runtime has a 30-skill catalog, collection, loadout, and Standard Run Skill Memory; values still need balance review.
+- **Next verification:** the Main Menu removal is covered by 151/151 Play Mode tests and a successful Windows build plus standalone visual smoke in the 8 November report. The next release-gate step is owner-run exact-build human acceptance. After the skill catalog is approved, define fixed loadout slots and duplicate-offer behavior before implementing authored catalog data and combat hooks.
+
+## Verification update — 8 November 2026
+
+- After the owner signed in to Unity Hub, the official isolated runner was retried outside the sandbox. Unity compiled scripts and completed **151/151 Play Mode tests**, with 0 failures and 0 skipped tests. The Main Menu separation test and internal CRUD regression test passed. XML, report, and source-copy hashes are recorded in `Docs/TestResults/2026-11-08-UnityRunnerRetry/`.
+- The final log still contains entitlement lookup 404 and package/compiler warnings, but these did not prevent script compilation or the successful test result. Earlier sandboxed attempts remain recorded as failed-to-start diagnostics and are not counted as test runs.
+- A fresh isolated Windows x86_64 Development build completed in Unity `6000.6.0f1`: **0 errors / 513 warnings**, 332,458,125 bytes, BuildPipeline 306.83 seconds. The executable is `Builds/Verification-2026-11-08-MenuRemoval/SYNGRAVA.exe`, with isolated identity `CodexGateTests/SYNGRAVA_MenuRemovalGate_20261108`; executable SHA-256 is `718444F6A718FA668DA96EB0A58445B009673310E6129152A63DBF7A92B8DE00`, gameplay assembly SHA-256 is `1878C94E5221CAC5073728047FC97D1FDB5904619C76DBA6EF1701E5B7B34AFE`. Full build log is in the same folder.
+- Standalone Main Menu smoke at 1920×1080 confirmed the expected menu renders and has no Content Manager/Custom Skill entry; Continue correctly shows `NO SAVE`. The isolated player log contains no exception, missing-script, or crash entry, with one Direct3D diagnostic (`d3d12: failed to query info queue interface (0x80004002)`). Visual/build evidence and scope are in `Docs/TestResults/2026-11-08-UnityRunnerRetry/REPORT.md`.
+- The exact-build human Standard Run acceptance remains pending. The latest Play Mode and Main Menu startup checks do not count as the required manual Standard Runs and transaction checks. Infinite Casual remains gated by the outstanding items in `Docs/StandardRun_ReleaseGate_Checklist.md`; a design plan alone does not open that gate.
+
+## Manual acceptance follow-up — 13 November 2026
+
+- The owner accepted Run 2 in the three-run Standard Run count even though Begin New Journey was selected from the preceding Summary; the owner played the complete run to Clear. Four Clear 10/10 results are now visible in Run History and Top Runs on the 8 November Windows candidate; scores, depth, boss count, and durations match the supplied Summary screens.
+- After the fourth Clear, the candidate profile contains a checksum-valid fresh active checkpoint at Stage 1/10 with base HP/Mana, zero Embers, and no modifiers; Echo balance remains 513. This confirms the observed Clear-to-new-run reset and saved boundary. The owner left this checkpoint active.
+- Manual cold Continue restoration, Recovery, Defeat, Abandon, and failed-save retry have not been rechecked on this exact candidate. The Standard Run clear-count acceptance is owner-accepted; keep these transaction checks visible before closing the wider Windows gate.
+
+## Run Summary navigation build — 13 November 2026
+
+- `RunSummaryUI` now creates **BEGIN NEW JOURNEY**, **MAIN MENU**, and **EXIT GAME** in its runtime footer. Main Menu loads the existing MainMenu scene and is unavailable until Echo and History writes succeed; Exit calls the appropriate player/editor quit API.
+- A new Windows x86_64 Development build was produced in `Builds/Verification-2026-11-13-RunSummaryNavigation/` using the same isolated save identity as the 8 November candidate. Build result: **0 errors / 513 warnings**, 563.32 seconds. The gameplay assembly hash is `D56A7CC663442CC3945C1489E30E383B730A99762455CD11FEE133352953EF0A`.
+- The old 8 November executable does not include these actions. The new build has compiled, but the Run Summary UI and Main Menu/Exit interactions still need inspection in a clear run. No Play Mode tests or manual UI tests were run for this change. See `Docs/TestResults/2026-11-13-RunSummaryNavigation/REPORT.md`.
+## Implementation baseline — 3 October 2026 (historical)
+
+- **SQLite CRUD demonstration remains internal, not player-facing.** The 3 October report's 151/151 pass predates the removal of the menu entry. The 8 November isolated regression verifies the updated state: `TC_MENU_001` asserts the player menu does not contain or initialize the panel, and `TC_CRUD_001` opens it only when explicitly attached inside the test. The content repository and demo panel remain available for UKK/internal regression, while custom rows remain disconnected from combat. At the time of this 3 October baseline the post-removal Windows build and visual review were pending; both were completed on 8 November as recorded above.
+- Final Windows x86_64 Development build: `Builds/Verification-2026-10-03-ContentManagerFinal/SYNGRAVA.exe`, **0 errors / 515 warnings**, 332,458,390-byte player, BuildPipeline 818.39 seconds, isolated profile `CodexGateTests/SYNGRAVA_ContentManagerGate_20261003`. Gameplay assembly SHA-256 `4F5AAA632720F5CE3F5946546C93A9BF847FBB3BC5A1F58481A596D31809CBAB`. `source-hashes.csv` confirms all seven touched source/meta files match workspace, test copy, and build copy. Standalone UI created `UKK Test Ember` (Mana 3 / Power 24), updated it to Power 27 after confirmation, then on a full close/relaunch displayed Power 27 again. Read-only SQLite evidence is `Docs/TestResults/2026-10-03-ContentManager/standalone-db-readback.json`; final Player.log has no missing-script, exception, or crash entries.
+- Settings is now functional in Main Menu and Battle. Gameplay rows state the locked rules (checkpoint after resolved node, enemy intent through Analyze); Accessibility toggles Reduce Motion for encounter/combat/Orbit presentation; Graphics cycles Windowed/Borderless and Unity quality presets; Audio cycles Master Volume in 25% steps. Preferences apply immediately and persist in a separate SQLite `Database/user_settings.db` under `Application.persistentDataPath`, independent of the content database. Main Menu Settings does not pause time or show the Battle gear.
+- Battle Settings offers **SAVE & MAIN MENU**. At an open map boundary it writes and verifies the active checkpoint before loading Main Menu; failed writes keep the player in Battle with an explicit retry message. An entered node, battle, or unresolved reward cannot exit through this action, preserving the GDD safe-save boundary. A completed run checks pending Echo/History completion and terminal checkpoint cleanup first. The route map now keeps the gear above its full-screen overlay, after the first Windows smoke exposed that it was hidden.
+- Final isolated Play Mode regression **149/149 PASS**, 0 failed/skipped, Unity 6000.6.0f1. A new raycast test confirms the map gear is the top click target. Fresh Windows x86_64 Development build: `Builds/Verification-2026-10-03-SettingsMenuFinal/SYNGRAVA.exe`, **0 errors / 514 warnings**, gameplay assembly SHA-256 `8EB166285794FC5EF7FE5541F1BA818384AA4742290676A32E48AC0BD24C038C`, profile `CodexGateTests/SYNGRAVA_SettingsMenuGate_20261002`. The earlier build with the covered gear is retained only as diagnostic evidence.
+- Final player smoke at 1920x1080 confirmed preference reload, visible/clickable map gear, save before Main Menu, Continue restoring the same Stage-1 RunId/HP/Mana, and unchanged checkpoint hash after Continue. Midbattle SAVE & MAIN MENU was blocked with an explanatory message and left the checkpoint hash unchanged. Final Player.log recorded 0 missing scripts and 0 exception/crash messages. Evidence and limitations: `Docs/TestResults/2026-10-02-SettingsMenu/REPORT.md`. No Inspector/scene/package/art migration or commit/push. The wider Standard Run exact-build human acceptance gate remains separate; tutorial and final character art remain future work.
+
+## Latest verified implementation — 2 October 2026
+
+- Windows closeout 1–2 Oktober pada build AnomalyGlyph: failed checkpoint dan failed Retry mempertahankan warning/hash primary; successful Retry menyimpan depth-2 boundary dan menghilangkan warning; Continue memulihkan StateJson persis; Recovery atas primary terpotong mempromosikan backup valid persis. Semua memakai profil `CodexGateTests/SYNGRAVA_AnomalyGlyphGate_20260930`, bukan save pemain asli.
+- Ekspedisi yang dilanjutkan melalui input Computer Use normal mencapai **Clear 10/10**, seed `-2134465660`, RunId `f10f2b2ba75a42f1bd60e3d9dc030d26`, Echo +138, HP 66/168, Mana 3/10, Embers 140. Setelah relaunch, History dan Top Runs menampilkan satu hasil, wallet satu klaim/saldo 138, Continue NO SAVE, primary/backup terminal hilang. New Expedition mereset base resources/modifier/statistik. Cancel Abandon mempertahankan hash; konfirmasi mengganti RunId dan menghapus Vital Core. Laporan/evidence: `Docs/TestResults/2026-10-01-StandardRunCloseout/REPORT.md`.
+- Playthrough menemukan ketidaksesuaian dengan aturan skor yang sudah disetujui: Unstable Pulse ikut memperoleh bonus Named Convergence. **Model skor 2** kini hanya menghitung Event Horizon/Reversal Orbit, +50 dengan cap tiga per battle selesai. Fallback tetap memberi mana dan masuk statistik total, tanpa poin atau memakai cap. Hasil model-1 2.950 pada run di atas dipertahankan sebagai arsip asli; ekuivalen aturan model 2 adalah 2.750, bukan hasil baru yang dimainkan atau ditulis ke History.
+- Riwayat model 1 tetap terbaca dengan versi aslinya dan tidak ikut Top Runs model 2. Checkpoint schema 3 memiliki field opsional `ScoreModelVersion`; restore model terkini menjaga cap persis, restore legacy menjaga identitas/jalur/resource/modifier/statistik tetapi mengosongkan bonus lama yang tidak dapat dipisahkan Named/fallback per battle. Node points tetap berasal dari jalur committed; Named berikutnya memberi bonus model 2. Future model/counter melebihi total Named ditolak sebelum mutasi runtime. Save envelope, schema/ruleset, SQLite, scene, paket dan Inspector tidak berubah. Penjelasan: `Docs/Score_Model.md`.
+- Regresi terbaru **144/144 PASS**, 0 failed/skipped, 145.5732346 detik, Unity 6000.6.0f1 pada salinan proyek terisolasi. Tiga tes baru mencakup fallback/cap, legacy restore dan History model lama. Manifest setelah koreksi **52/52 SHA-256 cocok** dengan proyek tes. Percobaan awal sandbox tertahan Licensing Client dan retry bertabrakan dengan proses itu; hanya proses tes milik sesi ini yang dihentikan setelah verifikasi command line. Percobaan peluncuran itu bukan hasil tes. XML/log ada di folder closeout.
+- Kandidat Windows setelah koreksi: `Builds/Verification-2026-10-02-NamedScore/SYNGRAVA.exe`, identitas `CodexGateTests/SYNGRAVA_NamedScoreGate_20261002`. **Build final PASS, 0 error / 514 warning**, Windows x86_64 Development, 1.091,26 detik, 332.422.990 byte. Fresh import terisolasi menghilangkan 16 missing-script message yang muncul pada percobaan build dari Library tes; log/hash percobaan itu tetap diarsipkan dan penyebab cache hanya inferensi. Gameplay assembly final SHA-256 `287ACD680FF796B40594E98A5DD95CF428A03329EB917C8129F26B359A1CE076`; bootstrap exe identik dengan build lama sehingga hash exe saja tidak cukup. Manifest input build dan pemeriksaan workspace akhir **52/52 cocok**. Tidak ada edit `.meta`/scene untuk rebuild.
+- **Smoke final Windows PASS**, 1920×1080, seed `-1957354374`, RunId `fd3e623b77b74d4f8528ff3902ffd916`: legacy Continue Stage 1, History model 1 tetap terbaca, Top Runs 0 ranked, saldo Echo 138. Empat Attack memicu satu Unstable Pulse dengan 0 bonus; reward Vital Core I menyimpan model 2. Battle terhubung `NormalBattle_02_L0` dengan Attack/Attack/Skill/Attack memicu Event Horizon (+6 damage), lalu Vital Core I kedua menyimpan Stage 3, HP 52/130, Mana 9, Embers 28, satu bonus eligible. Alt+F4 → relaunch → Continue kembali ke map Stage 3 dengan StateJson sama persis; History/wallet payload tidak berubah. Log startup/smoke/Continue final 0 missing-script dan 0 exception/crash. Player uji ditutup, checkpoint valid disimpan. Ini smoke dua battle, bukan full Clear model 2 atau tiga run manusia. Bukti: `score-build-smoke-check.json` dan laporan closeout.
+- Pemilik telah melaporkan tiga run manusia, Continue, Defeat, resolusi/input dan exit sebagai selesai (**USER-REPORTED PASS**). Seed/RunId/tanggal/executable sesi tersebut belum diberikan. Ini tidak dianggap tiga run tool atau bukti manusia memainkan kandidat setelah koreksi. Transaksi teknis sudah dilengkapi; gerbang rilis formal untuk build skor baru masih memerlukan penerimaan manusia yang menyebut executable. `Docs/StandardRun_ReleaseGate_Checklist.md` mencatat perbedaan tingkat bukti ini. Infinite Casual tetap menunggu gerbang rilis; Settings lengkap, tutorial, CRUD demonstrasi SQLite dan art final tetap pekerjaan berikutnya sesuai cakupan.
+- Catatan September di bawah adalah sejarah, bukan status terbaru. Tidak ada commit/push, assignment Inspector, perubahan art, atau penggantian pekerjaan lokal pengguna dalam closeout ini. GDD tidak diubah karena koreksi mengembalikan aturan Named-only yang sudah disetujui.
+
+## Historical verification — 30 September 2026
+
+- Regresi terbaru **141/141 PASS**, 0 failed/skipped. Satu ekspedisi penuh melalui Computer Use pada Windows build SaveFeedback mencapai **Clear 10/10**, seed `1690253357`, RunId `a50e539d82164327a4eef13151786bde`, score 2.650, Echo +124. Summary, History, wallet dan Top Runs cocok setelah relaunch; checkpoint terminal dihapus. Alt+F4 setelah Summary dan Quit Game setelah relaunch menutup proses dengan normal pada sesi tool ini. Ini **bukan run manusia** dan belum menutup gate. Laporan: `Docs/TestResults/2026-09-30-StandaloneContinuation/REPORT.md`.
+- Playthrough menemukan glyph Anomaly tidak didukung LiberationSans SDF, menghasilkan kotak pengganti. Catalog memakai monogram C/B/F/I seperti portrait huruf reward/relic yang sudah ada; efek dan save schema tetap sama. Tes render mencakup keempat Anomaly pada 1920x1080 dan 1280x1024. Fixture tes integrasi juga mengosongkan History profil tes sebelum skenario yang mengasumsikan run pertama masuk Top Ten, sehingga pengulangan suite tidak dipengaruhi arsip tes lama; logika ranking produk tidak berubah.
+- Build terbaru setelah perbaikan glyph: `Builds/Verification-2026-09-30-AnomalyGlyph/SYNGRAVA.exe`, Windows x86_64 Development, **0 error, 498 warning**, profil `CodexGateTests/SYNGRAVA_AnomalyGlyphGate_20260930`. Smoke interaktif 1920x1080 membuktikan Main Menu → New Expedition → checkpoint awal → Alt+F4 → relaunch → Continue → map dengan StateJson identik dan save uji terpisah. Bukti full Clear di atas berasal dari SaveFeedback, bukan ekspedisi penuh pada build glyph terbaru.
+- Regresi sebelumnya: **140/140 PASS**, 0 failed/skipped. Kegagalan checkpoint kini menampilkan peringatan **PROGRESS NOT SAVED** dan tombol **RETRY SAVE** pada footer map; retry hanya menulis boundary map yang sudah committed. Tes membuktikan failed retry mempertahankan peringatan, successful retry menghilangkannya, dan klik stale pada tombol tersembunyi tidak menulis checkpoint. Summary menampilkan seed dan RunId; layout/render pada 1920x1080 serta 1280x1024 diperiksa. Cleanup pause Settings yang sudah ada juga mendapat tes teardown. Bukti: `Docs/TestResults/2026-09-30-SaveFeedback/REPORT.md`.
+- Windows x86_64 Development Build SaveFeedback `Builds/Verification-2026-09-30-SaveFeedback/SYNGRAVA.exe` berhasil dengan **0 error, 498 warning**. Identitas `CodexGateTests/SYNGRAVA_QualityGate_20260930` dikonfirmasi melalui `app.info`, dan lokasi save terpisah dibuktikan melalui New Expedition pada playthrough Windows. Bukti interaktif sebelumnya tetap berlaku pada build RecoveryFix: Continue, Recovery, Abandon, dan Quit Game tercatat di `Docs/TestResults/2026-09-30-WindowsGate/REPORT.md`. Enam ekspedisi dengan combat normal serta kekalahan alami tetap tercakup dalam suite otomatis; hasil tersebut bukan run manusia.
+- Gerbang produk masih terbuka: tiga Standard Run lengkap berturut-turut yang dikendalikan manusia, validasi akhir Clear/Defeat dan History/Top Runs, pemeriksaan resolusi/input di executable, dan cek Alt+F4 manual. Satu percobaan Alt+F4 melalui automasi mencatat crash native pada build sebelumnya; penyebab belum dipastikan. Infinite Casual tetap menunggu daftar gerbang manual. Opsi kategori Settings masih merupakan shell/prototype sesuai catatan historis; jangan menganggap audio/graphics/accessibility lengkap dari tampilan menu saja.
+
+- Main Menu, Run History, Standard Run ScoreCalculator, dan Local Leaderboard top 10 tersedia. Tombol **TOP RUNS** membuka **FATE LEDGER** dari Main Menu.
+- Tes integrasi Main Menu → Continue → Clear → Summary/History/Top Runs → New Expedition serta Abandon/temporary-build reset: **2/2 PASS**. Regresi Unity Play Mode: **135/135 PASS**, 0 failed, 0 skipped. Laporan: `Docs/TestResults/2026-09-26-StandardRunGate/REPORT.md`.
+- Windows x86_64 Development Build **berhasil**, 0 error, 514 warning, di `Builds/Verification-2026-09-26/SYNGRAVA.exe`. Startup batchmode mencapai inisialisasi engine tanpa exception yang tercatat, tetapi tampilan dan input belum diverifikasi secara interaktif.
+- Gerbang produk **belum selesai**: masih perlu tiga Standard Run manual berturut-turut tanpa blocker serta pemeriksaan interaktif Continue/Recovery, Clear/Defeat/Abandon pada build. Ikuti `Docs/StandardRun_ReleaseGate_Checklist.md` sebelum Infinite Casual.
+- Pernyataan milestone lama di bagian historis adalah rekam progres, bukan status terbaru. Riwayat keputusan tetap dipertahankan.
 
 ## Purpose
 
@@ -1224,3 +1313,710 @@ Visual acceptance requirements:
 - Encounter routing reuses the three current database prototypes. Dedicated seeded encounter pools, enemy variants, and node-specific rewards are not part of this milestone.
 - The current Run Map uses procedural placeholder visuals and has no authored route-map textures, icons, zoom controls, travel animation, or branching animation yet. The visual-production brief above is the approved preparation target.
 - Following the established feature order, the next technical milestone is **Checkpoint and Save Active Run**, using `SeededRunState` schema 2 and the current node code/depth as the restore boundary. Authored Run Map visuals can proceed in parallel after the required original assets are available and approved.
+
+## Fractured Fate Web Visual Selection and Asset Pack 19 September 2026
+
+### Approved Direction
+
+- The user selected visual concept 2, **Fractured Fate Web**, as the official target for the Standard Run Map.
+- The approved full-design reference is stored at `Assets/Project/Art/UI/RunMap/FracturedFate/Reference/RunMap_FracturedFate_ApprovedReference.png`.
+- The target composition is an asymmetric branching web inside torn black-paper planes, with rough white ripped edges, deep-purple fractures and scratches, separate node plaques, a prominent current-position eye, and a right-side node-detail frame.
+- Palette priority is black first, deep purple second, and off-white third. White is reserved for readable symbols and active route information; purple communicates selection, reachability, and Singularity energy.
+- The reference is an original SYNGRAVA design direction. It does not authorize copying the supplied inspiration game's skull art, exact layout, logo, typography, or other game-specific artwork.
+
+### Created Asset Package
+
+All authored PNG assets live under `Assets/Project/Art/UI/RunMap/FracturedFate/` and have stable Unity `.meta` files.
+
+- `Backgrounds/RunMap_FracturedBackdrop.png`: low-contrast matte black/purple map backing.
+- `Frames/RunMap_FracturedOuterFrame.png`: transparent full-map torn-paper frame overlay.
+- `Frames/RunMap_FracturedDetailFrame.png`: transparent portrait frame for selected-node details and its action footer.
+- `Nodes/RunMap_NodePlaque.png`: reusable empty node plaque for separately layered icons.
+- `Nodes/RunMap_IconBattle.png`: Normal Battle symbol.
+- `Nodes/RunMap_IconElite.png`: Elite Battle symbol.
+- `Nodes/RunMap_IconEvent.png`: Random Event symbol.
+- `Nodes/RunMap_IconRest.png`: Rest symbol.
+- `Nodes/RunMap_IconMerchant.png`: Merchant symbol.
+- `Nodes/RunMap_IconBoss.png`: Boss symbol.
+- `Nodes/RunMap_IconCurrent.png`: current-position and Start marker.
+- `Markers/RunMap_StateRing.png`: reusable selection/reachability/current halo.
+- `Connectors/RunMap_ConnectorStroke.png`: reusable transparent route stroke that can be rotated, stretched, and tinted for route states.
+- `Ornaments/RunMap_FracturedOrnaments.png`: optional torn-paper, shard, scratch, and eye accents.
+
+Transparent assets were checked for a real alpha channel. Their importer mode is explicitly set to one sprite per file, preventing Unity's automatic alpha-island slicing from turning one icon into several separate sprites.
+
+### Visual State Plan
+
+- Locked, completed, reachable, selected, and current states should reuse the same plaque, icon, connector, and state-ring sprites with controlled tint, alpha, scale, outline, and pulse. Do not duplicate a full texture set for every state.
+- Connectors render behind nodes. Inactive routes use low-alpha gray-violet, reachable routes use clear violet, travelled routes use off-white with subdued violet, and the current selection may use a restrained pulse.
+- Node icons remain separate from plaques so their visual centers can be tuned independently and icon colors can change without recoloring the frame.
+- The detail frame should contain runtime TextMesh Pro labels and buttons; no text is baked into the raster asset.
+
+### Remaining Work Before the Approved Design Is Playable
+
+1. Replace the functional placeholder rectangles in `StandardRunMapUI` with the authored backdrop, frame, plaque, icon, marker, and connector sprites.
+2. Add a true deterministic branching-connectivity model. The current run model is still an ordered route, so the visual must not pretend that multiple branches are selectable until data and validation support them.
+3. Implement responsive node layout, connector rotation/stretching, safe-area handling, and selected-node detail binding.
+4. Implement locked, reachable, completed, selected, and current visual states plus hover/focus feedback.
+5. Add the map opening/reveal animation, route reveal, node pulse, and travelling marker after selection rules are stable.
+6. Add optional close and zoom controls only if navigation testing shows that the full 8-10-node graph needs them.
+7. Run Unity import, compile, Play Mode route-selection regression, and multi-resolution visual checks after integration. Asset creation alone does not count as a playable Run Map implementation.
+
+### Scope Boundary
+
+This milestone creates and registers the visual asset package only. It does not alter `BattleManager`, `StandardRunMapUI`, the Battle scene, route generation, node resolution, resource carryover, or Inspector references. Visual integration and branching behavior are the next separate implementation milestone.
+
+## Fractured Fate Web Runtime Integration - 20 September 2026
+
+### Implementation Status
+
+The authored **Fractured Fate Web** package is now connected to the Standard Run Map that opens at run start and after each completed non-final battle reward. This section supersedes the earlier asset-only scope boundary while preserving its art direction and branching limitation.
+
+Implemented behavior:
+
+- `StandardRunMapUI` loads one `StandardRunMapVisualAssets` catalog from `Resources/RunMap/FracturedFate/StandardRunMapVisualAssets` at runtime.
+- The Battle scene and `BattleManager` require no new serialized fields or Inspector references. The existing runtime attachment to the Battle Canvas remains unchanged.
+- The map uses the authored fractured backdrop, torn outer frame, detail frame, reusable node plaque, six node-type icons, current-position eye, state ring, connector stroke, and ornament overlay.
+- The former two-row placeholder grid is replaced with a deterministic asymmetric 8-10-node route composition. It still represents the single ordered route owned by `StandardRunNodeMap`; it does not display fake selectable branches.
+- Completed, current, and locked nodes use distinct tint and alpha. Only the current depth remains interactable.
+- The current node uses a pulsing state ring and eye marker driven by `Time.unscaledTime`, so the animation continues correctly while battle time is paused by the modal map.
+- The map card enters with a short unscaled fade, lift, and scale animation. The full-screen overlay continues to block battle input.
+- The selected node's authored icon, type, depth, route code, description, and context-specific action label are shown in the right detail panel.
+- The icon legend is now sprite-based and matches the same runtime catalog used by route nodes.
+- If the visual catalog is absent, the existing procedural colors and text glyphs remain a defensive fallback. The committed catalog is complete and verified by Play Mode test.
+
+### Files Added
+
+- `Assets/Project/Scripts/UI/StandardRunMapVisualAssets.cs`: typed ScriptableObject catalog and node-type icon resolver.
+- `Assets/Project/Resources/RunMap/FracturedFate/StandardRunMapVisualAssets.asset`: runtime sprite references for the approved art package.
+- Unity `.meta` files for the new script, Resources folders, and catalog asset.
+
+### Files Updated
+
+- `Assets/Project/Scripts/UI/StandardRunMapUI.cs`: authored visuals, asymmetric layout, visual states, detail icon, legend, current-node pulse, and opening animation.
+- `Assets/Tests/PlayMode/BattleSnapshotTests.cs`: `TC_MAP_004_AuthoredFracturedFateVisualsAreBound` verifies the catalog, frame, plaques, type icons, connectors, and selected detail icon.
+- The generated Run Map texture importer `.meta` files remain configured as one full-rect sprite per PNG so each complete authored element is addressable as a single Unity Sprite.
+
+No Battle scene serialized reference, existing BattleManager API, reward flow, run-state schema, or user-authored `BattleVisual.cs`/TMP font change was replaced by this integration.
+
+### Verification
+
+Compile verification:
+
+- `Assembly-CSharp.csproj`: PASS, 0 errors. One existing `FindFirstObjectByType` deprecation warning remains in `BattleManager.cs` and is unrelated to this milestone.
+- `Syngrava.Battle.PlayModeTests.csproj`: PASS, 0 warnings, 0 errors.
+
+Official isolated Unity Play Mode run through `Tools/Run-BattleSnapshotTests.ps1`:
+
+- Total: **65 PASS, 0 FAIL, 0 SKIPPED**.
+- `TC_MAP_001_NewRunShowsOnlyCurrentRouteNodeAsReachable`: PASS.
+- `TC_MAP_002_SelectionDispatchesOnceAndRejectsStaleCallback`: PASS.
+- `TC_MAP_003_PlaceholderPreservesResourcesAndAdvancesOnce`: PASS.
+- `TC_MAP_004_AuthoredFracturedFateVisualsAreBound`: PASS.
+- No `NullReferenceException`, duplicate callback, compiler error, or run-resource regression was reported.
+
+### Known Limitation and Next Milestone
+
+- The visual route is intentionally a single deterministic path because `StandardRunNodeMap` still stores one ordered node sequence. True multi-branch connectivity, multiple reachable choices, and branch-aware checkpoint validation remain planned; the UI must not imply those choices before the model supports them.
+- Zoom, pan, close, travel-line drawing animation, and marker travel between nodes remain optional polish after branch rules are stable.
+- The next feature-order milestone remains **Checkpoint and Save Active Run**, using `SeededRunState` schema 2 and the current node code/depth as the restore boundary. A later branching-map milestone should extend the saved state with selected branch identity before enabling multiple choices.
+
+## Fractured Fate Map Composition Correction - 20 September 2026
+
+### User-approved correction
+
+The live screenshot exposed an art-composition regression in the earlier integration: the complete ornament atlas was drawn over the route, the full outer frame covered the header, and the locked-node tint was multiplied by Button's disabled tint. Passing sprite-reference tests did not establish visual fidelity.
+
+The user requested removal of that atlas background and placement of its separate elements according to the approved Fractured Fate Web concept. The approved reference remains `Art/UI/RunMap/FracturedFate/Reference/RunMap_FracturedFate_ApprovedReference.png` under `Assets/Project/`.
+
+### Current composition
+
+- The complete ornament sheet and full-frame composite are no longer rendered over the map. The original PNGs and GUIDs are retained as source art.
+- `StandardRunMapUI` makes individually named Sprite slices from the source atlas, without changing its pixels or requiring readable texture import. These are independent runtime Image objects: header tear, left paper spine, footer tear, upper/lower corner crystals, left eye accent, and detail-panel edge accents. Sprite slices are released with the UI component.
+- Source slice regions use normalized top-left coordinates in `BuildSeparatedFrame`. Position, size and rotation are controlled per element; never restore the full sheet as a background Image.
+- All perimeter decorations live under `RunMapOuterFrame`, below the title, route panel and detail content. They ignore raycasts.
+- The map card has a solid near-black backing. Only a quiet central crop of the existing paper texture appears inside the route area; the large purple veil has been removed.
+- The route remains center-left, with a narrow decorative spine to its left, title above, icon legend below, and an independently readable right detail panel. The eye position marker sits beside the current plaque instead of on top of its action-type symbol.
+- Route-stroke transparent padding is cropped through a separate Sprite view. Locked nodes retain readable symbols and receive their state tint only once.
+- A separate fit transform scales the whole card to the Canvas while preserving the opening animation and its internal proportions.
+
+### Verification
+
+The correction is verified together with the branching-map milestone below: 70/70 isolated Unity Play Mode cases passed, including a real first-battle victory, automatic reward selection, and rendered return to the map at three resolutions. The user also accepted the separated-element composition before requesting real branch choices. The earlier 65-test report remains historical.
+
+### Scope and setup
+
+No manual Inspector assignment is required. Changes are limited to map presentation, its regression tests and documentation. Battle/reward routing, run state, scene references, source PNG pixels, and unrelated user edits are preserved.
+
+At the time of the composition correction the route was still ordered. The branching milestone below supersedes that limitation. A matching node-detail environment illustration remains outstanding.
+
+## Deterministic Branching Run Map - 20 September 2026
+
+### Approved contract and implemented behavior
+
+The user approved the corrected Fractured Fate composition, then requested a connected web with several actual choices. Standard Run still visits **8-10 stages**, with one chosen encounter per stage. The complete graph contains **16, 19 or 22 nodes** for 8, 9 or 10 stages respectively; unchosen alternatives do not count as completed encounters.
+
+- `StandardRunNodeMap.Nodes` and `Count` preserve the canonical depth-based contract. `Alternatives`, `AllNodes`, `Lane` and each node's `NextNodeCodes` expose the complete directed graph. The partial class in `StandardRunBranchGraph.cs` extends the existing model; it is not a duplicate map type.
+- The opening node is a single Normal Battle. Choice rows have three lanes. Compatible paths can cross or merge; all paths converge through the shared Elite and Rest stages and end at one Boss.
+- Lane content and connectivity are deterministic from the run seed and stage count. Alternate lanes shuffle the same encounter pool. Cross-lane connections are permitted only when encounter-prefix counts agree, so every complete path retains the GDD composition: 3-5 Normal Battles, 2-3 Events, exactly one Elite and Boss, at least one Rest before Boss, and at most one Merchant.
+- Validation checks unique identities and row lanes, forward edges, no missing/duplicate destinations, no dead ends, reachability and encounter quotas for every possible path. Lines are created from actual graph edges only.
+- `RunManager.TryEnterNode` accepts only a connected choice at the current depth, then locks its identity until resolution. Repeated entry, stale codes and foreign/unconnected nodes are rejected. `TryResolveCurrentNode` commits the chosen code once, records history, then advances one stage.
+- `CurrentNode` retains a deterministic reachable default for existing depth-based APIs. The map UI does not commit that default when multiple choices exist: it displays `CHOOSE YOUR PATH` and requires an explicit click followed by confirmation.
+- `BattleManager` dispatches the chosen node through the existing battle or placeholder handler. Non-final victories still open one reward selection and return to the map after the reward is committed. Carried HP/Mana and temporary modifiers remain owned by the same active run.
+- The UI displays three lanes from bottom to top. Its masked viewport supports mouse-wheel scrolling and dragging, and opening the map frames the previous position and current choices. Decorations, title, legend and details remain fixed outside the scroll content.
+- Connected choices have equal purple pulse feedback. The eye marks the last visited node; cleared, available, selected, skipped and future nodes have distinct text/state treatment. Available connections are solid violet, travelled connections off-white, and future connections dashed. Only connected choices are interactable.
+- The existing three prototype enemy records are reused. Alternate Normal Battle lanes can select the other non-boss prototype; no enemy stat, reward value, database row or encounter content was added.
+
+### Branch-aware snapshot
+
+`SeededRunState` now uses schema **3**, adding copied `VisitedNodeCodes`, `SelectedNodeCode` and `NodeEntered` fields. Restore regenerates the same graph and validates the exact path and pending/entered choice before mutating resources or modifiers. A corrupt path cannot partially restore a run.
+
+Schema 2 is explicitly rejected rather than silently guessing a branch. No disk-based Active Run save or Continue flow existed in this slice, so this is snapshot support, not a completed save/resume feature. Future checkpoint work must persist schema 3 and the branch identity.
+
+### Verification and retained evidence
+
+Two complete isolated Unity 6000.6.0f1 runs were performed: the first passed 69/69; the final run after clearer dashed paths, equal choice pulses and added corruption coverage passed **70/70**, with **0 failures, 0 skipped**, duration **43.153 seconds**, Unity exit **0**. All seven changed production/test source files match the passing isolated copy byte-for-byte.
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Unity import and runtime/test compilation | PASS | The final isolated Play Mode suite compiled and executed successfully |
+| TC_BRANCH_001 | PASS | 300 seed/stage combinations generate identical graphs for identical inputs, validate every route's quotas, reject double entry/resolution, preserve HP/Mana and finish at Boss |
+| TC_BRANCH_002 | PASS | Entered and post-resolution snapshots restore the chosen branch and next choices; foreign history/selection is rejected without partial mutation; cloned history is independent |
+| TC_BRANCH_003 | PASS | Three connected choices appear; preview does not advance the run; locked-node callbacks cannot change selection; confirmation dispatches the chosen encounter |
+| TC_BRANCH_004 | PASS | Backward, foreign, duplicate and dead-end edges, invalid path quotas and null alternatives are rejected |
+| TC_MAP_001 through TC_MAP_004 | PASS | Initial state, routing/callback guards, placeholder carryover and complete visual bindings remain correct |
+| TC_MAP_005 | PASS | Actual first-battle victory and reward return to a three-choice map; sliced decorations stay behind content; card, viewport and details fit at 1920x1080, 1280x720 and 1280x1024 |
+| TC_ANL_001 through TC_ANL_007 and existing battle/reward/run tests | PASS | All earlier regression cases are included in the 70 passing tests |
+| Offscreen Unity render inspection | PASS | All three captured layouts were visually inspected; paths and three choice highlights are visible and detail content stays inside its frame |
+| Human-controlled standalone playthrough / new Windows build | NOT RUN | This milestone verifies Editor Play Mode and rendered captures, not a standalone release |
+
+Retained report: `Docs/TestResults/BranchingRunMap-v0.4-PlayMode.xml`.
+Retained Unity renders: `Docs/TestResults/BranchingRunMap-1920x1080.png`, `BranchingRunMap-1280x720.png`, and `BranchingRunMap-1280x1024.png`.
+
+### Files and setup
+
+- Added: `Assets/Project/Scripts/Battle/StandardRunBranchGraph.cs` and its `.meta`, the retained XML report and three render captures.
+- Updated: `StandardRunNodeMap.cs`, `RunManager.cs`, `SeededRunState.cs`, `BattleManager.cs`, `StandardRunMapUI.cs`, `Assets/Tests/PlayMode/BattleSnapshotTests.cs`, and this context.
+- No new Inspector assignments or scene edits are needed. The existing Battle Canvas receives the runtime map as before.
+- The user's staged `BattleVisual.cs` edit, TMP fallback-font changes and `ProjectSettings.asset` define-symbol change were preserved. Existing map art, GUIDs and catalog references were retained; no commit or reset was performed.
+
+### Remaining work
+
+Checkpoint and Save Active Run is the next smallest technical milestone, now using schema 3. Rest, Random Event and Merchant still use the previously documented no-effect placeholders. Dedicated Elite/Boss behavior, richer encounter pools and node-detail environment illustrations remain separate work. The map now supports real branch choices; it does not claim those unimplemented encounter systems are complete.
+
+## Checkpoint and Save Active Run Milestone - 20 September 2026
+
+### Implemented contract
+
+`ActiveRunCheckpointStore.cs` now persists one committed Standard Run checkpoint under `Application.persistentDataPath/Saves/syngrava-active-run-v0.4.json`. The persisted state is the existing `SeededRunState` schema 3; no second run-state DTO or competing branch model was introduced.
+
+- The file uses a versioned envelope containing the serialized schema 3 state, an ISO UTC save timestamp, and a SHA-256 integrity value over the exact state JSON.
+- Writes go to a `.tmp` file first, flush through the file stream, then atomically replace the previous checkpoint. A platform fallback keeps the previous file available for rollback if the replacement move fails.
+- The store refuses inactive, completed, or `NodeEntered` states. This deliberately prevents a mid-battle, half-reward or half-node transaction from replacing the last safe map-boundary checkpoint.
+- Loading verifies envelope version and SHA-256 before deserializing the run state. Restore delegates to `RunManager.RestoreState`, retaining its schema, ruleset, resource, modifier and branch-path validation. Rejected/corrupt data cannot partially mutate the target run.
+- A new run writes an initial safe checkpoint. Non-final battle checkpoints are written only after reward application and `TryResolveCurrentNode` succeed. Placeholder nodes save after resolution. Defeat and final boss completion remove the active checkpoint.
+- Closing during an encounter therefore returns to the last committed map boundary when Continue is wired later; unfinished battle damage, Embers and reward changes are not committed.
+
+### Runtime integration
+
+`BattleManager` owns one runtime `ActiveRunCheckpointStore` without adding serialized fields or Inspector dependencies. Existing scene references, button callbacks, map routing, Orbit, reward, user-edited `BattleVisual.cs`, TMP fallback font and ProjectSettings changes remain intact.
+
+The persistence layer intentionally includes `LoadActiveRun` and `RestoreActiveRun` so the next milestone can wire Continue without changing the file contract. No Main Menu or Continue button was added in this milestone.
+
+### Verification
+
+Three complete isolated Unity 6000.6.0f1 Play Mode runs passed after implementation and the final stale-save guard review. Each run executed **74/74 tests**, with **0 failures and 0 skipped**. The final run duration was **47.747288 seconds** and Unity exited with code **0**.
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Production and test assembly compilation | PASS | Unity imported the new store and executed the complete suite |
+| TC_SAVE_001 | PASS | A committed branched run saves, loads and restores to byte-equivalent state JSON |
+| TC_SAVE_002 | PASS | Entered, defeated and otherwise unsafe boundaries are rejected without overwriting the last safe file |
+| TC_SAVE_003 | PASS | Tampered/corrupt checkpoint data fails integrity validation and cannot mutate the target RunManager |
+| TC_SAVE_004 | PASS | Restart creates a checkpoint, reward resolution advances and replaces it, and defeat deletes it |
+| Existing battle, Analyze, reward, resource, map and branch regressions | PASS | All preceding tests remain included in the 74 passing cases |
+| Restart stale-save guard | PASS | Restart deletes the previous checkpoint after the new run is constructed, then writes and verifies the new run state |
+
+Retained report: `Docs/TestResults/ActiveRunCheckpoint-v0.4-PlayMode.xml`.
+
+### Files and setup
+
+- Added: `Assets/Project/Scripts/Battle/ActiveRunCheckpointStore.cs`, its `.meta`, and the retained Play Mode XML report.
+- Updated: `BattleManager.cs`, `BattleSnapshotTests.cs`, this context, and the GDD implementation-status appendix.
+- No Inspector assignment, scene edit, package change, database migration or manual folder setup is required.
+
+### Remaining work and next milestone
+
+This milestone stores and validates the active run but does not expose a player-facing Continue flow. The next milestone is **Continue and Corrupt Save Recovery**: inspect checkpoint availability on startup/Main Menu, restore it with current effective stat limits, present a clear incompatible/corrupt-save message, and provide a deliberate discard/start-new decision. A backup-generation recovery policy remains separate from the current integrity rejection. Rest, Random Event, Merchant, dedicated Elite/Boss content and node-detail illustrations remain unchanged placeholders or future content.
+
+## Continue and Recovery UI Plan - 20 September 2026
+
+### Placement decision
+
+`MainMenu.unity` currently contains only a camera and is not the playable entry used by the Battle Play Mode suite. The first implementation therefore uses a runtime startup modal on the existing Battle Canvas. No manual scene edit or Inspector assignment is required. A future authored Main Menu can reuse the same checkpoint inspection contract and visual states.
+
+### UI state matrix
+
+| Checkpoint state | Title | Primary action | Secondary action | Runtime behavior |
+| --- | --- | --- | --- | --- |
+| No checkpoint | No modal | Start automatically | None | Preserve the current first-run flow |
+| Valid primary | CONTINUE RUN | Continue Run | Start New Run | Restore the exact schema 3 branch state or deliberately discard it |
+| Invalid primary, valid backup | RECOVERY AVAILABLE | Recover Run | Discard and New Run | Restore the last verified backup boundary, then promote it to the active checkpoint |
+| Invalid primary and backup | SAVE DATA DAMAGED | Recheck Save | Discard and New Run | Never mutate RunManager until a valid state exists or the player deliberately discards the files |
+
+### Layout and interaction contract
+
+- Full-screen charcoal backdrop blocks raycasts and prevents battle input before a decision.
+- A centered black-purple card uses a high-contrast violet outline, white title, subdued explanatory copy and a small state label.
+- The summary presents Seed, current Node/total Nodes, HP, Mana, Embers and last visited route code. It contains no technical JSON or filesystem detail.
+- Primary action is visually brighter than the destructive/new-run action. Destructive wording is explicit; recovery is never performed silently.
+- Opening uses a short unscaled fade and scale animation so Time.timeScale cannot strand the modal.
+- The modal scales through the existing Battle Canvas and remains inside the target 1920x1080, 1280x720 and 1280x1024 layouts.
+
+### Storage and safety plan
+
+- Every successful replacement retains the previous verified checkpoint as a `.bak` recovery boundary.
+- Inspection validates primary and backup independently through the same envelope, SHA-256, schema, ruleset, resource, modifier and branch checks used by RunManager restore.
+- Preview inspection never mutates the live run. Only a confirmed Continue or Recover action replaces live state.
+- Successful recovery promotes the backup to the primary checkpoint. Discard removes primary, backup, temporary and rollback files before starting a clean run.
+
+## Continue / Recovery and Route Readability Revision - 20 September 2026
+
+User direction: finish and test Continue/Recovery first, then replace its generic box styling with the approved SYNGRAVA Fractured Fate language. Use Higgsfield for an original visual asset if available. Keep black dominant, purple secondary, and white for legibility. Roughness belongs on decorative edges; navigation lines and text must stay orderly.
+
+Plan before presentation edits:
+
+1. Verify real scene reload, modifiers above base HP, backup recovery, damaged files, discard, and repeated callbacks. Recovery writes a verified replacement before changing the live run.
+2. Save panel: restrained torn-paper frame, eye emblem, left-aligned title, concise journey summary, clearly dominant Continue/Recover action and quieter New Journey action. Hide underlying battle placeholders behind an opaque charcoal backdrop. Keep text and hit areas as separate runtime UI elements.
+3. Map: align the three lane centers and stage rows, trim connectors before node plaques, use continuous thin paths instead of many fragmented dash sprites, and highlight immediate choices. Preserve the deterministic graph and saved branch identities; do not change the generator merely to make lines look simpler.
+4. Remove internal route IDs and enum-style names from player-facing details. Show Battle / Elite / Unknown Encounter / Rest / Merchant / Boss with short useful descriptions. Keep unfinished encounter types honest about their current lack of rewards or healing.
+5. Inspect actual Unity renders at 1920x1080, 1280x720 and 1280x1024. Re-run the full regression after presentation changes. Record results separately from pending visual approval.
+
+Primary files: ActiveRunCheckpointStore.cs, BattleManager.cs, ActiveRunRecoveryUI.cs, StandardRunMapUI.cs, BattleSnapshotTests.cs. Existing package and project-setting edits are user changes and remain outside this task.
+
+### Implementation evidence - 21 September 2026 (visual acceptance pending)
+
+Continue/Recovery and the readability revision are implemented. This supersedes the earlier proposed save summary: the current UI shows Stage, HP, Mana and Embers, with no raw seed or route code. Continue restores to the map; Recovery promotes a validated backup before replacing live state. A locked recovery write leaves both the live state and valid backup intact. Stale button callbacks cannot rewind an already resumed battle.
+
+The first functional suite passed 78/78. The full suite after presentation edits and extra safety cases passed 81/81, with zero failures or skips. Actual Unity renders were captured at 1920x1080, 1280x720 and 1280x1024. Evidence and implementation details are in `Docs/TestResults/2026-09-21-ContinueRecovery/REPORT.md` and `final-results.xml`. Testing used an isolated product identity to protect the player's saves.
+
+Higgsfield generation was attempted with the supplied reference but returned `Requires basic plan or higher`. No new generated art is claimed. The implementation uses the existing approved Fractured Fate assets as separate decorative elements. Lines are continuous and nodes align to lanes; connections may still cross where the actual saved graph branches.
+
+No Inspector or Hierarchy setup is required. Standalone Windows build validation, a manual full run, and owner approval of the revised visuals remain outstanding. Do not mark final visual design accepted in the GDD until that review. Rest, event and merchant gameplay interactions remain their existing future milestones.
+
+Double-check: a separate rerun of all seven Continue/Recovery tests passed 7/7 with no failures. Hash comparisons confirmed the isolated test project used exactly the same five changed source/test files as the working project. See `recheck-results.xml` beside the full report.
+
+## Progressive route reveal and Rest choices - 21 September 2026
+
+User direction: hide later nodes and their connections until the current node has been completed, remove the overlapping decorative spine text, and implement a choice of 50% HP or 50% Mana recovery at Rest.
+
+UI plan and rules:
+
+- A new run displays only its starting node. After resolving it (including the battle reward step), show the connected second-stage choices. Third-stage nodes remain hidden until the second stage resolves, and so on.
+- Keep completed nodes as a route history. Hide unchosen branches after advancing. Only travelled links and links to the immediate choices are visible. Increase vertical stage spacing from 132 to 190 UI units.
+- The deterministic graph is generated from the run seed once. Reveal does not reroll it: Continue/Recovery reconstructs exactly the same next choices. This is staged discovery of the seeded route, not a new random roll every time the map opens.
+- Remove `FATE / FRACTURES / ALL PATHS` from the decorative spine.
+- Selecting Rest shows two separate actions in the existing detail panel: RESTORE 50% HP and RESTORE 50% MANA. The interpretation of the requested HP option is healing by half of effective maximum HP, not a heal to full health. Fractions round up; both resources are capped at their effective maximum.
+- Choose exactly one recovery. The choice resolves the Rest node, saves the resulting map boundary, then reveals the next choices. A repeated callback for the resolved Rest cannot heal again. Recovery is available even if the chosen resource is already full; it then restores zero without exceeding the cap.
+- No new sprite, package, scene or Inspector assignment is needed. Existing event/merchant placeholder behavior remains separate.
+
+Implementation files: StandardRunMapUI.cs, BattleManager.cs, BattleSnapshotTests.cs.
+
+Verification complete: two full isolated Unity PlayMode runs passed 85/85 each. After hiding the tiny node captions as well as the spine text, all nine focused map/Rest cases passed again (9/9). The tested script hashes match the working project. Wide and narrow Unity renders were inspected, including the Rest choices at 1280x1024; text overflow and panel bounds checks passed. No manual Inspector setup is required.
+
+Evidence: `Docs/TestResults/2026-09-21-ProgressiveRest/REPORT.md`, the full/focused XML reports and the map/Rest screenshots beside it. This implements the requested reveal and Rest behavior; standalone Windows build validation and owner visual acceptance are not claimed. Random Event and Merchant remain future gameplay work.
+
+## Random Event implementation - 21 September 2026
+
+Milestone selection follows the GDD's newer ordered integration plan (Checkpoint, Continue/Recovery, Rest and Random Event, Merchant, dedicated Elite/Boss, then Relic/Anomaly/Status). This is the next part after the completed Rest request; it does not claim the earlier 31-item backlog is entirely complete.
+
+Design before UI: reuse the existing map detail panel with two vertically separated action buttons. Display a short encounter story and the exact cost/outcome of both options. Disable unaffordable options. Keep this as a resource-choice milestone; no new art, combat status system or database migration.
+
+`RunEventService` owns an immutable three-event catalog, stable seed-plus-node-code selection, affordability and the one-time resource transaction. `StandardRunMapUI` presents the selected event; `BattleManager` saves only after the chosen event is resolved, then returns to the progressively revealed map. UI buttons share the existing alternative-action layout with Rest; Rest public accessors remain compatible with existing callers/tests.
+
+Provisional content/balance:
+
+| Event | First choice | Second choice |
+| --- | --- | --- |
+| The Ember Altar | Pay 10 HP, gain 15 Embers; must retain at least 1 HP | Gain 3 Embers without HP cost |
+| The Silent Well | Pay 3 Mana, heal 25% of effective maximum HP | Restore 2 Mana |
+| The Ashen Cache | Gain 10 Embers | Heal 15% of effective maximum HP |
+
+Healing rounds upward and all recovery is capped. Costs are checked before entry or mutation. Invalid choice indices, foreign/nonreachable nodes and repeats after resolution are rejected. The existing checkpoint records resulting HP, Mana, Embers and visited node history. Reopening an uncommitted event produces the same encounter; Continue restores the committed outcome without granting it twice. No separate event-choice journal has been added.
+
+Validation completed with two final runs on unchanged code, as requested: **89/89 passed** (50.89 seconds) and **89/89 passed** (50.10 seconds), zero failures/skips. Dedicated tests cover 60 seeds, all three encounters, unaffordable costs, invalid/repeated choices, actual UI selection, disk save/Continue, and wide/narrow renders for each event. Legacy battle-only navigation fixtures now bypass optional noncombat effects explicitly; event/Rest effects are tested independently through their real UI and transaction paths.
+
+Evidence: `Docs/TestResults/2026-09-21-RandomEvent/REPORT.md`, first-results.xml, second-results.xml, and six Unity screenshots. All six captures were visually inspected; text overflow and detail-panel bounds checks passed at 1920x1080 and 1280x1024. Source hashes match the working project. No Inspector assignment is required. Standalone Windows build, manual complete-run verification and final content/balance acceptance are not claimed. The next integration milestone is Merchant and resource economy.
+
+## Merchant and unified map layout - 21 September 2026
+
+User direction: continue the next milestone, keep token use focused, run exactly two final Unity test passes after programming, and use Canva/Figma for future in-game UI/UX/HUD design. Preserve SYNGRAVA's black, violet, white and torn-paper/crystal art direction. Do not claim final art acceptance before the owner reviews the result.
+
+Design plan and reference: https://www.figma.com/design/cFuAmGd1jgxacnD53crytC (frame 2:2). The Figma layout uses a continuous map/sidebar body with zero gutter, a thin shared seam, and aligned top/bottom edges. It is a layout specification, not a replacement for the existing authored sprites. Canva searches returned no SYNGRAVA designs or available brand templates; no Canva-generated asset is claimed. Figma uses Roboto as a documented layout substitute because Liberation Sans/Arial were unavailable in the font query; Unity retains its current Liberation Sans. The Figma preview was inspected. A subsequent programmatic Figma check was not executed because automatic approval review encountered a usage limit.
+
+Implementation:
+
+- Expand the route panel by 57 UI units into the former empty gutter while preserving node/viewport coordinates. The right edge now meets the detail panel's left edge exactly. Reuse continuous top and bottom paper ornaments instead of separate disconnected detail strips.
+- Merchant offers one supply per visit: Healing Balm costs 12 Embers and restores 50% of effective maximum HP; Focus Tonic costs 8 Embers and restores 50% of effective maximum Mana. These prices are provisional balance values. Recovery rounds upward and is capped. Full resources and unaffordable purchases are disabled.
+- Leave Merchant always permits progression without spending or healing. Buying or leaving resolves the node once and saves the resulting map boundary. Revisiting an already resolved transaction is rejected. Continue restores the resulting resources and visited path; no new save schema is necessary.
+- RunMerchantService owns the merchant rules; RunManager owns spending; StandardRunMapUI displays balance, prices and three choices; BattleManager dispatches and checkpoints. No Inspector setup or new sprite import is required.
+- This is the first resource-trading milestone, not a full shop inventory, relic vendor, reroll system or permanent economy. Dedicated Elite/Boss encounters remain the next integration milestone.
+
+Verification results are recorded in `Docs/TestResults/2026-09-21-Merchant/REPORT.md` after the two requested final runs. Standalone Windows build and manual complete-run validation are separate outstanding checks.
+
+Actual verification: first run 93/93 passed; second run 92/93 passed, with one legacy branch-navigation fixture failure when a randomly chosen Merchant could not be purchased by a fresh run. All dedicated Merchant cases and layout captures passed in both runs. The fixture now chooses Leave Merchant for branch-navigation coverage; this test-only correction has not been rerun because the requested two-run limit was reached. Production code remained unchanged across/after both runs and matched the isolated source hashes. Do not describe this milestone as two green full regressions. The corrected fixture needs verification before that claim is made. Merchant wide/narrow and Ashen Cache seam screenshots were visually inspected and are included with the report.
+
+Follow-up verification (supersedes the pending status above): the user explicitly authorized one additional full Unity test run. It passed **93/93**, zero failures/skips, in **52.20 seconds**, including the corrected TC_BRANCH_003 navigation fixture. All four changed production files and the test file match the successful isolated run by hash. No further code edits were needed. Evidence: `Docs/TestResults/2026-09-21-Merchant/third-results.xml` and the updated REPORT.md. Merchant implementation and automated regression verification are complete; manual full-run, standalone build and owner visual/balance acceptance remain separate.
+
+## Elite / Boss combat and sliding introductions - 21 September 2026
+
+User authorized necessary testing without the earlier two-run limit. References specify a dramatic warning banner and a sideways character-introduction composition; retain SYNGRAVA's existing black/violet/white language, with crimson Boss accents. Do not import the reference game's characters or branding.
+
+Design plan: a central, slightly tilted banner enters from the left for Elite and from the right for Boss. Timing: 0.45 seconds entry, 1.15 seconds hold, 0.5 seconds exit toward the opposite side. The current enemy name and existing Elite/Boss emblem identify the encounter. Separate accent rails reinforce movement. Battle input is blocked during the cut-in. Pause freezes it; disabling Motion Effects shows the announcement without sliding. No tween package or external animation plugin is required. Figma motion/layout specification is in https://www.figma.com/design/cFuAmGd1jgxacnD53crytC (Elite frame 3:2, Boss frame 3:8).
+
+Implemented combat rules (provisional balance):
+
+- Elite alternates a base-damage attack with Ashen Crush at 135% base damage, rounded up.
+- Boss repeats Void Strike, Gathering the Abyss (zero damage), then Abyssal Rupture. Rupture deals 150% base damage before awakening. The charge log warns that a heavy strike follows.
+- When the living Boss is at or below half HP after an enemy turn, a one-time PHASE II cut-in announces awakening. Future Void Strikes deal 125% base damage and Rupture 175%. Boss HP remains database-controlled; no extra HP multiplier was introduced.
+- Prepared action objects remain immutable. Crossing the phase threshold during a player action does not secretly replace the action already prepared/revealed by Analyze. Elite/Boss prepare their next action only after the current enemy turn resolves. Normal-battle plan behavior is preserved. Analyze remains once per node and hidden intent remains the default.
+- Guard reduces damage normally. Charge causes no damage or hit/lunge effect. Existing reward, final victory and checkpoint rules are preserved. Restart/EndBattle cancel cut-ins; generation checks prevent a cancelled animation from dismissing a newer one.
+- EncounterBannerUI is attached at runtime to the battle Canvas. Existing art is loaded from StandardRunMapVisualAssets; no Inspector assignment is required. This does not provide new Boss character art, arena art, music or sound effects.
+
+Verification and actual Unity renders are recorded in `Docs/TestResults/2026-09-21-EliteBoss/REPORT.md`. The first implementation run passed 95/95. The final run includes additional slide-direction, reduced-motion and cancellation coverage after visual refinement. Final counts will be recorded in the report. Owner visual/balance acceptance and a standalone Windows build remain separate from automated verification.
+
+Final evidence: **96/96 PlayMode tests passed**, zero failures/skips, in 60.17 seconds. The new tests cover Elite/Boss cycles, charge, phase II, input locking, pause, opposite slide directions, reduced motion and cancellation. Final Unity renders at 1920x1080 and 1280x1024 were inspected; text overflow and label containment checks passed. Five changed source/test hashes match the isolated tested copies. See final-results.xml and boss-banner images in the report directory. Automated implementation verification is complete; bespoke Boss portrait/arena/audio and owner acceptance remain separate production work.
+
+## Relic System: empat jenis dan node pilihan — 22 September 2026
+
+Arahan terbaru pengguna: buat empat jenis relic terlebih dahulu, tambahkan Node Relic sebagai alternatif terhadap node lain, dan gunakan kembali pemilihan tiga kartu upgrade. Relic harus memiliki kegunaan berbeda, tanpa versi sejenis yang langsung lebih kuat. Tidak menambahkan relic ke reward Elite pada tahap ini.
+
+Alur yang diterapkan: selesaikan stage sebelumnya → baris stage 3 terbuka → pilih cabang Relic Shrine yang terhubung atau encounter lainnya → shrine menampilkan tiga relic berbeda dari katalog empat → pilih satu → efek tersimpan untuk run aktif → kembali ke peta. Satu run memiliki satu shrine. Player tetap menempuh 8–10 stage; shrine menggantikan satu encounter awal, bukan menambah panjang run. Elite, Rest menjelang akhir, dan Boss tetap ada.
+
+| Relic | Efek | Batas agar tidak bertambah tanpa kendali |
+| --- | --- | --- |
+| Hollow Crown | Guard memulihkan tambahan 1 Mana; total pemulihan langsung menjadi 3 | Tetap dibatasi maksimum Mana efektif; tidak menaikkan stat dasar |
+| Ashen Fang | Basic Attack menambahkan 1 Burn selama 2 giliran enemy; damage 1 per stack setelah enemy bertindak | Maksimum 3 stack; aplikasi ulang menyegarkan durasi; hilang pada battle berikutnya |
+| Ember Locket | Memulihkan 6 HP saat memasuki battle | Tidak melewati maksimum HP; tidak langsung heal ketika kartu dipilih |
+| Fractured Lens | Skill pertama yang berhasil pada setiap battle memberi tambahan 6 damage | Sekali per battle; percobaan saat Mana kurang tidak menghabiskan efek |
+
+Hollow Crown dan Ashen Fang berasal dari contoh GDD. Ember Locket dan Fractured Lens merupakan tambahan konten sementara untuk memenuhi permintaan empat jenis tanpa menunggu sistem Speed, Curse, atau Critical. Angka di atas adalah balance awal: flat, terbatas, dan bergantung pada kebutuhan build. Pengujian otomatis membuktikan aturan efek berjalan, bukan membuktikan seluruh relic memiliki win rate identik. Playtest ekonomi dan kombinasi jangka panjang tetap diperlukan.
+
+Keempat relic bersifat unik, tanpa tier dan tanpa duplicate stacking. Pemilihan tiga kartu mengikuti seed secara deterministik sehingga membuka ulang shrine yang belum dikomit tidak mengubah penawaran. Pilihan hanya dapat dikomit sekali. Save/Continue menyimpan identitas relic dan jalur yang sudah ditempuh. Nilai modifier relic yang rusak/ditumpuk tidak sah ditolak sebelum state aktif diubah. Efek hanya berlaku ketika run aktif; Restart menghapus build lama.
+
+Node Relic ditambahkan sebagai lane keempat pada stage 3. Koneksinya mengikuti node lane kiri di stage yang sama; node asli tetap ada. Artinya akses shrine mengikuti koneksi predecessor, bukan selalu tersedia dari semua jalur stage 2. Posisi empat node memakai -360, -120, 120, 360 dalam viewport 1000 unit. Progressive reveal dan pemisahan map/detail tetap dipertahankan. Quota komposisi canonical route tetap berlaku; jalur shrine secara nyata mengganti satu encounter dengan relic. Validator memeriksa kompatibilitas cabang berdasarkan encounter yang digantikan, bukan menghitung shrine sebagai battle tambahan.
+
+Kompatibilitas: RouteVersion 1 adalah graph baru. Checkpoint lama yang belum memiliki field tersebut diperlakukan sebagai versi 0 dan memulihkan graph lama tanpa shrine tambahan. Enum lama dipertahankan urutannya. Schema dan hash envelope checkpoint tidak diganti. Untuk melihat shrine baru, mulai run baru; Continue save lama sengaja mempertahankan rute lamanya.
+
+UI memakai panel tiga kartu, animasi masuk, hover dan penguncian klik lama. Label RELIC dan UNIQUE / ACTIVE RUN menggantikan tier/stack. Warna teks dibuat terang agar terbaca di panel gelap. Desain susunan dicatat di Figma yang sama, frame 5:2: https://www.figma.com/design/cFuAmGd1jgxacnD53crytC?node-id=5-2 . Font Figma Roboto adalah substitusi; Unity tetap Liberation Sans. Belum ada asset Canva baru. Ikon shrine memakai eye marker yang sudah ada, dan kartu memakai glyph sementara; ilustrasi empat relic yang khusus masih pekerjaan art berikutnya.
+
+Bukti dan detail pengujian: `Docs/TestResults/2026-09-22-Relic/REPORT.md`. Dua regresi awal lulus 102/102 (62.56 dan 62.41 detik). Pemeriksaan gambar menemukan teks kartu terlalu gelap meskipun pemeriksaan overflow lulus; kontras diperbaiki dan tes keterbacaan ditambahkan. Hasil verifikasi sesudah perbaikan dicatat dalam laporan tersebut. Tidak ada assignment Inspector baru. Build Windows dan manual full-run belum diklaim.
+
+Pekerjaan berikutnya: perluasan Anomaly dan Status Effect System sesuai GDD; Burn pada Ashen Fang saat ini merupakan efek battle khusus, belum framework status umum untuk Poison, Curse, durasi lintas sumber, dan sebagainya. Multiple shrine, katalog relic tambahan, layar koleksi relic, art khusus, serta tuning berdasarkan playtest belum selesai. GDD DOCX tidak ditulis ulang pada iterasi ini; dua relic sementara di atas perlu disahkan sebagai keputusan konten saat pengguna meninjau hasilnya.
+
+Hasil final sesudah perbaikan kontras: **102/102 PlayMode lulus**, tanpa kegagalan/skip, **63.94 detik**. Gambar 1920×1080 dan 1280×1024 diperiksa secara visual; teks terang terbaca dan deskripsi Ashen Fang tetap berada dalam kartu. Dua belas hash file source/test cocok dengan salinan yang diuji. Implementasi fungsional empat relic, node opsional, pemilihan kartu dan save/restore selesai diverifikasi otomatis. Bukti final: `verified-results.xml`, `source-hashes.csv`, dan dua screenshot pada folder laporan Relic di atas.
+
+## Status Effect framework dan Anomaly tahap pertama — 23 September 2026
+
+Arahan pengguna: kerjakan Status Effect/Debuff/Anomaly dengan urutan Status Effect lebih dahulu, pertahankan konsekuensi Anomaly yang benar-benar berfungsi, lalu uji perubahan sebelum menyatakan selesai.
+
+### Status Effect battle-scoped
+
+`BattleStatusController` sekarang menjadi pemilik tunggal status sementara selama battle. Status tidak masuk `RunModifierCollection` dan tidak disimpan pada checkpoint map-boundary. `StartBattle` membersihkannya sehingga efek battle lama tidak terbawa ke encounter berikutnya.
+
+| Status | Aturan yang diterapkan |
+| --- | --- |
+| Burn | Damage akhir giliran sebesar jumlah stack; durasi awal 2 giliran; maksimum 3 stack; aplikasi baru menambah stack dan menyegarkan durasi |
+| Weakness | Outgoing damage unit yang terkena dikalikan 0,75 dan dibulatkan sekali pada hasil akhir |
+| Curse | Incoming damage unit yang terkena dikalikan 1,20 dan dibulatkan sekali pada hasil akhir |
+
+Status mendukung target Player dan Enemy, snapshot read-only untuk HUD, refresh, tick tepat sekali, expiry dan reset. Ashen Fang tidak lagi memiliki perhitungan Burn sendiri: relic tersebut memanggil controller yang sama. Field `relicBurnStacks` dan `relicBurnTurns` dipertahankan sebagai mirror kompatibilitas tes/reflection lama; controller tetap source of truth.
+
+HUD HP menampilkan badge teks ringkas hanya ketika status aktif, misalnya `BURN x2 · 1 TURN`. Player damage melewati urutan outgoing Weakness lalu incoming Curse. Enemy plan execution memakai jalur yang sama sebelum Guard. Intent Rewrite Weaken tetap merupakan mekanik terpisah dan tidak disamakan dengan Weakness.
+
+### Anomaly run-scoped tahap pertama
+
+`RunAnomalyCatalog` menambahkan dua Anomaly yang seluruh benefit dan consequence-nya dapat dijalankan oleh battle model saat ini:
+
+| Anomaly | Benefit | Consequence |
+| --- | --- | --- |
+| Collapsed Star | Semua Skill damage +30% | Semua Skill cost +1 Mana |
+| Black Sun | Convergence pertama setiap battle selesai setelah dua aksi | Effective Max HP -15, minimum tetap 1 |
+
+Black Sun memakai aturan eksplisit untuk sequence dua aksi: slot pertama dianggap wildcard. Resolver mencoba prefix Attack, Guard, lalu Skill untuk menemukan Named Pattern yang valid; jika tidak ada, hasilnya Unstable Pulse. Bonus dua-slot dikonsumsi tepat sekali per battle. Collapsed Star menghitung biaya aktual sebelum transaksi Mana, memperbarui label tombol, dan menerapkan bonus sebelum Convergence menghitung bonus dari action damage.
+
+Anomaly bersifat unik, tidak dapat stack, disimpan sebagai modifier Active Run, divalidasi saat restore, dibersihkan saat New Run, dan Black Sun ikut dihitung oleh effective-stat/checkpoint cap. Setelah kemenangan Elite, reward flow menawarkan Anomaly yang belum dimiliki. Karena baru dua Anomaly yang benar-benar didukung, UI menampilkan dua kartu yang dipusatkan dan menyembunyikan kartu ketiga. Jika seluruh Anomaly tahap ini sudah dimiliki, Elite kembali ke reward biasa.
+
+Frozen Orbit dan Inverted Pulse belum ditawarkan. Frozen Orbit membutuhkan initiative/Speed yang berfungsi, sedangkan consequence Inverted Pulse membutuhkan Critical yang benar-benar aktif. Menampilkannya sekarang akan menghasilkan drawback palsu. Target akhir GDD tetap empat Anomaly dan tiga pilihan berbeda; tahap berikutnya harus membangun fondasi Speed/Critical atau menyepakati pengganti yang tidak bertentangan dengan GDD.
+
+### Verifikasi aktual dan batas klaim
+
+- Unity 6000.6 mengimpor source dan berhasil reload assembly tanpa compiler error. Percobaan sandbox awal tertahan pada IPC Unity Licensing Client; final run dijalankan di luar sandbox pada salinan project terisolasi sehingga save/database pengguna tetap tidak disentuh.
+- `dotnet restore` dan build solution dengan dua source baru dimasukkan sementara ke `.csproj` generated menghasilkan **0 error** dan 4 warning API obsolete yang sudah ada pada UI lama. File `.csproj` dipulihkan setelah build.
+- Dua smoke-runtime terisolasi terhadap source yang sama lulus dua kali. Pemeriksaan meliputi Burn cap/refresh/tick/expiry, Weakness 25%, Curse 20%, dua pilihan Anomaly deterministik dan unik, larangan duplicate stack, serta Black Sun Effective Max HP 85 dari base 100.
+- Full Unity Play Mode final: **107/107 PASS**, 0 failure, 0 skipped, durasi **67.6479246 detik**. Run pertama mencapai 106/107; satu helper tes lama menunggu tombol ketiga yang sengaja disembunyikan pada pilihan dua Anomaly. Helper diperbaiki agar hanya menunggu kartu aktif, lalu seluruh suite lulus tanpa perubahan production code tambahan.
+- Coverage baru `TC_STATUS_001`–`002` dan `TC_ANO_001`–`003` memeriksa damage pipeline, Collapsed Star benefit+cost, Black Sun dua-slot sekali per battle, persistence dan reset. `TC_RELIC_006` sekarang membuktikan Ashen Fang memakai controller status bersama.
+- Tidak ada scene, Inspector assignment, package, SQLite schema atau asset visual baru yang diperlukan.
+
+Laporan dan hasil final: `Docs/TestResults/2026-09-23-StatusAnomaly/REPORT.md` serta `final-results.xml`.
+
+Pekerjaan berikutnya pada catatan tahap pertama di atas telah diselesaikan pada tahap penyelesaian berikut. Gunakan bagian terbaru di bawah sebagai status yang berlaku.
+
+## Penyelesaian Status Effect / Debuff / Anomaly — 23 September 2026
+
+Arahan pengguna: lanjutkan pekerjaan Status Effect, Debuff dan Anomaly yang tersisa. Implementasi harus mempertahankan konsekuensi Anomaly yang benar-benar berfungsi, memakai alur kode yang rapi, diuji, dan baru dinyatakan selesai setelah hasil final diperiksa.
+
+### Empat Anomaly aktif
+
+Katalog sekarang berisi empat Anomaly sesuai ruang lingkup GDD. Pilihan Elite menampilkan maksimum tiga Anomaly unik yang belum dimiliki. Seed yang sama dan state yang sama menghasilkan pilihan yang sama.
+
+| Anomaly | Benefit | Consequence | Aturan runtime |
+| --- | --- | --- | --- |
+| Collapsed Star | Skill damage +30% | Skill Mana cost +1 | Cost aktual divalidasi sebelum Mana dikurangi; bonus damage masuk ke jalur Convergence lama |
+| Black Sun | Convergence pertama setiap battle selesai setelah 2 aksi | Effective Max HP -15 | Hanya sekali per battle; sequence dua aksi mencoba Named Pattern yang valid lalu fallback ke Unstable Pulse |
+| Frozen Orbit | Guard menahan 2 serangan enemy yang menghasilkan damage | Player Speed -2 | Base Speed 10 menjadi 8; enemy baseline 9 membuka setiap round selama Anomaly aktif |
+| Inverted Pulse | Basic Attack yang berhasil memulihkan 2 HP | Basic Attack tidak dapat Critical | Heal dibatasi Effective Max HP; Skill masih dapat Critical |
+
+Semua Anomaly memakai `RunModifierCollection`, bersifat unik, tidak dapat stack dengan dirinya sendiri, ikut disimpan oleh payload checkpoint yang sudah ada, dipulihkan oleh Continue, dan dibersihkan oleh New Run. Dua nilai enum baru ditambahkan pada akhir enum agar nilai lama tidak bergeser. Tidak diperlukan kenaikan checkpoint schema.
+
+### Fondasi Speed, initiative dan Critical
+
+`BattleTurnRules` menjadi tempat aturan deterministik lintas battle:
+
+- Player Base Speed 10 dan minimum Effective Speed 1.
+- Enemy baseline Speed sementara 9 karena model `EnemyData`/SQLite saat ini belum memiliki kolom Speed.
+- Jika Speed sama, Player bertindak lebih dahulu.
+- Battle start dan setiap round baru membandingkan Speed. Jika enemy membuka round, enemy tidak mendapat giliran kedua setelah aksi Player pada round yang sama.
+- Base Critical chance 5%; Critical multiplier 1,5 dan dibulatkan sekali setelah pipeline damage/status.
+- Critical roll berasal dari run seed, route depth dan strike index pada battle. Continue atau replay terhadap sequence aksi yang sama menghasilkan hasil yang sama.
+- Inverted Pulse hanya memblokir Critical Basic Attack. Skill tetap mengikuti Critical normal.
+
+`playerStrikeIndex`, state initiative, dan hit Guard Frozen Orbit direset pada batas battle. Guard Frozen Orbit hanya mengonsumsi hit saat action benar-benar menghasilkan damage; action charge Boss dengan zero damage tidak menghabiskan proteksi.
+
+Fondasi ini cukup untuk model duel satu Player melawan satu Enemy sekarang. Jika game nanti mendukung beberapa enemy/ally, baseline Speed enemy harus dipindah ke data content dan sistem ini perlu diubah menjadi initiative queue yang mengurutkan seluruh unit.
+
+### Sumber nyata Weakness dan Curse
+
+Status runtime sebelumnya sudah benar tetapi Weakness/Curse belum bisa muncul dari content. `EnemyActionPlan` sekarang membawa optional `AppliedStatus` dan `StatusDuration` sehingga intent, Analyze dan eksekusi memakai deskripsi action yang sama.
+
+| Status | Sumber | Durasi | Waktu aplikasi |
+| --- | --- | --- | --- |
+| Burn | Ashen Fang setelah Basic Attack | 2 enemy turns, max 3 stack | Sesudah Basic Attack berhasil |
+| Weakness | Elite: Ashen Crush | 2 turns | Setelah hit Ashen Crush dan Player masih hidup |
+| Curse | Boss: Abyssal Rupture | 2 turns | Setelah hit Rupture dan Player masih hidup |
+
+Status dari serangan tidak mengubah damage hit yang menyebabkannya; status mulai memengaruhi aksi setelah hit tersebut. Analyze menampilkan efek status dari prepared plan. Intent Rewrite Weaken tetap mekanik tersendiri dan tidak disamakan dengan status Weakness.
+
+### Kompatibilitas dan integrasi
+
+- Tidak ada scene, Inspector assignment, package, sprite atau perubahan schema SQLite baru.
+- Reward switch menerima Frozen Orbit dan Inverted Pulse.
+- Save lama tetap memakai graph/checkpoint compatibility sebelumnya. Modifier Anomaly yang valid dipulihkan melalui array modifier yang sudah ada.
+- HP selalu diklem setelah perubahan Effective Max HP dan heal Inverted Pulse tidak dapat melewati cap.
+- Sistem Elite/Boss lama, fase Boss, Guard, reward, map progression dan checkpoint tetap memakai jalur yang sama.
+
+### Verifikasi final
+
+- `dotnet restore` dan `dotnet build --no-restore`: **0 error**, dengan 4 warning obsolete API lama pada UI/lookup yang tidak berasal dari milestone ini.
+- Full Unity Play Mode pada salinan project terisolasi: **110/110 PASS**, **0 failed**, **0 skipped**, durasi **67.3795565 detik**.
+- Test baru:
+  - `TC_STATUS_003` membuktikan Elite Ashen Crush memberi Weakness dan Boss Abyssal Rupture memberi Curse dengan plan/deskripsi yang sesuai.
+  - `TC_ANO_004` membuktikan Frozen Orbit menurunkan Speed, membuat enemy membuka round dan memperpanjang Guard menjadi dua damaging hits.
+  - `TC_ANO_005` memakai seed/index yang seharusnya Critical untuk membuktikan Basic Attack Inverted Pulse tetap non-critical dan memulihkan tepat 2 HP.
+- Katalog diuji berisi empat Anomaly dan menghasilkan tiga pilihan seeded yang berbeda.
+- Delapan SHA-256 file inti workspace cocok dengan salinan yang menghasilkan hasil final; mismatch 0.
+
+Bukti lengkap: `Docs/TestResults/2026-09-23-StatusAnomaly/REPORT.md`, `final-results.xml`, dan `source-hashes.csv`.
+
+Status milestone: **selesai secara fungsional dan lulus regresi otomatis**. Batas klaim: belum ada standalone Windows build, telemetry playtest panjang atau persetujuan final angka balance dari pemilik. Speed 10/9, Critical 5%, multiplier 1,5, heal 2 dan angka Frozen Orbit adalah baseline tuning yang dapat disesuaikan setelah playtest.
+
+Pekerjaan gameplay berikutnya yang direkomendasikan: **Run Summary**. Layar tersebut sebaiknya menampilkan rute yang ditempuh, alasan run berakhir, relic dan Anomaly aktif, statistik penting battle, serta resource akhir. Implementasinya harus membaca state final tanpa mengubah aturan run/checkpoint yang sudah lulus verifikasi.
+
+## Run Summary dan redesign UI hasil run — 23 September 2026
+
+Arahan pengguna: lanjut ke Run Summary dan sekaligus ubah desain UI hasil run lama yang belum mengikuti kualitas visual SYNGRAVA. Perencanaan visual dibuat lebih dahulu di Figma, lalu diterapkan dan diperiksa melalui render Unity aktual.
+
+Desain acuan internal: [Figma Run Summary frame 9:14](https://www.figma.com/design/cFuAmGd1jgxacnD53crytC?node-id=9-14), ukuran desain 1660×930. Desain memakai struktur hitam/violet/putih, rail rute, Final Resources, Combat Record, Build Archive, seed, dan satu CTA. Unity membangun tampilan ini saat runtime serta memakai sprite torn-paper, crystal, eye dan ikon node yang sudah tersedia. Tidak ada scene edit atau Inspector assignment baru.
+
+### Tampilan dan alur
+
+- Clear menampilkan `THREAD OF FATE SECURED` / `RUN CLEARED` dengan accent violet.
+- Defeat menampilkan `THREAD SEVERED` / `RUN DEFEATED` dengan accent crimson.
+- Ringkasan memuat alasan berakhir, jumlah node, rail node yang benar-benar ditempuh, HP/Mana/Embers akhir, statistik combat, Relic, Anomaly, modifier, seed dan tombol `BEGIN NEW JOURNEY`.
+- Route copy memakai label pemain seperti `BATTLE`, `EVENT`, `REST`, `ELITE`, `RELIC`, `MERCHANT`, dan `BOSS`. Kode internal seperti `BATTLE_01` tidak ditampilkan.
+- Tombol New Journey memakai reset lama yang sudah teruji. Overlay segera disembunyikan ketika reset atau map dibuka kembali.
+- Result panel scene lama tetap diisi di belakang overlay untuk menjaga serialized reference dan kompatibilitas regression lama. Pemain hanya melihat Run Summary baru.
+
+### Statistik dan save
+
+`RunManager` sekarang menyimpan Elapsed Time, Battles Won, actual Damage Dealt, actual Damage Taken, actual Healing, Critical Hits, Player Actions, total Convergences, serta jumlah Event Horizon, Reversal Orbit dan Unstable Pulse. Damage/healing memakai nilai yang benar-benar masuk setelah cap sehingga overkill dan overheal tidak membesarkan angka.
+
+Statistik ikut `SeededRunState` schema 3 dan checkpoint JSON. Field tambahan bersifat optional bagi JSON save lama dan default ke nol, jadi tidak ada schema bump. Validator menolak angka negatif/non-finite, Critical melebihi jumlah action, battle count tidak masuk akal, atau total Convergence yang tidak sama dengan jumlah ketiga polanya. Restore yang invalid berhenti sebelum live run berubah. New Run mengembalikan seluruh statistik ke nol.
+
+Elapsed time dihitung memakai unscaled delta selama run aktif, termasuk waktu keputusan di map, dan berhenti ketika Settings membuat `Time.timeScale` nol. Continue mempertahankan durasi/counter dari checkpoint boundary terakhir.
+
+### Verifikasi
+
+- Full isolated Unity Play Mode final: **111/111 PASS**, **0 failed**, **0 skipped**, **65.2219161 detik**.
+- `TC_SUM_001` membuktikan round trip JSON seluruh counter, penolakan state counter yang korup tanpa partial mutation, dan reset New Run.
+- Regression Clear/Defeat memeriksa title/status baru, route tanpa kode internal, kompatibilitas tombol lama, serta CTA Run Summary.
+- Render 1920×1080 dan 1280×1024 menjalankan containment dan TextMesh Pro overflow assertion untuk semua label/button.
+- Kedua screenshot final diperiksa visual. Ornamen mata/judul dan Build Archive/route yang sempat terlalu dekat telah dirapikan sebelum final run.
+- Enam hash source/test workspace cocok dengan salinan isolated yang menghasilkan hasil final.
+
+Bukti: `Docs/TestResults/2026-09-23-RunSummary/REPORT.md`, `final-results.xml`, `source-hashes.csv`, `run-summary-1920x1080.png`, dan `run-summary-1280x1024.png`.
+
+Batas klaim: Echo Fragments, ScoreCalculator, persistent Run History dan Local Leaderboard belum mempunyai sumber data authoritative. Run Summary saat ini sengaja tidak menampilkan angka palsu untuk fitur tersebut. Belum ada standalone Windows build, audio khusus, telemetry playtest panjang atau owner acceptance final.
+
+Milestone berikutnya menurut urutan yang telah disepakati adalah **Echo Fragments**. Definisikan kontrak permanent currency dan sumber reward lebih dahulu; setelah itu jumlah fragment yang benar dapat ditambahkan ke Run Summary tanpa mencampur permanent progression dengan temporary modifier.
+
+## Echo Fragments — 23 September 2026
+
+Echo Fragment kini memiliki ikon kristal retak ungu/putih transparan asli SYNGRAVA di `Assets/Project/Resources/UI/EchoFragment.png`. Run Summary menampilkan ikon, jumlah yang berhasil disimpan, total saldo, dan rincian sumbernya. Pada kegagalan penulisan saldo, layar memberi pesan yang jelas dan tombol hasil run mencoba menyimpan ulang sebelum New Journey.
+
+### Aturan ekonomi
+
+- Battle biasa memberi **8–12** fragment. Nilai dipilih secara deterministik dari seed dan kode node; melanjutkan checkpoint tidak mengocok ulang hasilnya.
+- Battle Elite memberi **20** dan Boss yang dikalahkan memberi **50**. Node nonbattle tidak memberi fragment.
+- Run Clear menyimpan semua fragment yang ditemukan dan mendapat **bonus clear 20**. Nilai 20 masih baseline sementara karena GDD menyebut bonus clear tanpa menentukan angkanya.
+- Run Defeated menyimpan **60%** fragment yang telah ditemukan dari node battle yang selesai, dibulatkan ke bawah. Contoh: 9 ditemukan → 5 disimpan.
+- Fragment dihitung dari riwayat node yang benar-benar diselesaikan. Penyaluran ke dompet permanen dilakukan pada akhir run. Embers dan Temporary Run Stats tetap milik run saja. Fragment belum dapat dibelanjakan; Horizontal Unlock adalah milestone berikutnya.
+
+### Penyimpanan dan pemulihan
+
+`EchoFragmentWallet` menyimpan saldo dan ledger klaim di `Application.persistentDataPath/Saves/syngrava-echo-fragments-v1.json`, terpisah dari checkpoint Active Run. File memakai hash, tulis ke file sementara, dan salinan generasi sebelumnya (`.bak`). File yang rusak ditolak; backup yang valid bisa dibaca. Kegagalan menulis fragment tidak menghapus checkpoint.
+
+Setiap New Run mendapat `RunId` acak yang ikut ke checkpoint schema 3. Klaim untuk ID yang sama hanya berlaku sekali, termasuk bila terminal run diputar ulang setelah recovery. Checkpoint schema 3 lama tanpa `RunId` diberi identitas legacy stabil dari seed dan route version; schema tetap 3 agar save lama dapat dilanjutkan. Identitas ini tidak mengubah seed, graph, reward, atau statistik run.
+
+Verifikasi final Unity Play Mode pada salinan proyek terisolasi: **114/114 PASS, 0 failed, 0 skipped**, durasi 64,2978296 detik. Tes baru mencakup idempotensi, persistensi antarrun, kompatibilitas save lama, bonus Clear/Boss; regression UI membuktikan sprite termuat. Screenshot 1920×1080 dan 1280×1024 diperiksa visual serta lolos assertion overflow/containment. Laporan dan bukti: `Docs/TestResults/2026-09-23-EchoFragments/REPORT.md`.
+
+Batas klaim: belum ada Windows standalone build atau playtest ekonomi panjang. Horizontal Unlock yang memakai saldo ini masih milestone berikutnya.
+
+## Run Summary polish dan Horizontal Unlock pertama — 24 September 2026
+
+Arahan terakhir: perbaiki visual Run Summary yang keluar panel, tingkatkan kontras ikon riwayat node, dan hilangkan informasi footer yang berulang; kemudian lanjutkan pekerjaan milestone berikutnya. Rancangan Run Summary diperbarui pada [Figma frame 9:14](https://www.figma.com/design/cFuAmGd1jgxacnD53crytC?node-id=9-14). Rancangan struktur Echo Archive dibuat pada [Figma frame 15:14](https://www.figma.com/design/cFuAmGd1jgxacnD53crytC?node-id=15-14). Preview tambahan di Figma dibatasi kuota akun; keputusan akhir dicek lewat render Unity yang tersimpan pada laporan tes.
+
+### Perubahan visual yang diterima ke implementasi
+
+- Headings Final Resources, Combat Record dan Build Archive sekarang masuk ke area panel; rincian Echo dan baris terakhir Combat diberi jarak aman. Assertion containment dan overflow memeriksanya pada 1920×1080 dan 1280×1024.
+- Rail riwayat tetap berisi ikon node yang benar-benar ditempuh. Ikon menjadi putih di atas penanda gelap berbingkai violet agar setiap node terbaca, bukan menyatu dengan garis.
+- Footer yang mengulang label rute dan menampilkan seed tidak terlihat lagi. Snapshot tetap menyimpan seed/rute untuk save dan tes. Tombol Begin New Journey dipusatkan.
+- Echo Archive memakai kartu gelap-violet/putih SYNGRAVA yang terpusat pada menu, dengan teks harga dan status yang tetap berada dalam panel pada kedua resolusi render.
+
+### Aturan Horizontal Unlock v1
+
+1. Echo Fragment adalah satu-satunya currency permanen yang dapat dibelanjakan saat ini. Wallet versi 2 menambahkan ledger pembelian pada ledger klaim run lama. Saldo selalu sama dengan total fragment yang diklaim dikurangi biaya pembelian. Wallet v1 dibaca dan dimigrasikan tanpa membatalkan klaim lama; backup/integrity check lama tetap digunakan.
+2. Unlock pertama: **Echo Prism**, ID `RELIC_ECHO_PRISM`, harga awal **120 Echo Fragments**. Pembelian hanya boleh sekali. Saldo kurang, ID tidak dikenal, atau wallet tidak valid tidak boleh menghasilkan pembelian. Harga ini baseline sementara untuk playtest ekonomi.
+3. Tombol `ECHO ARCHIVE` pada Main Menu membuka status saldo dan pembelian. Bila checkpoint Active Run masih dapat dilanjutkan, pembelian dinonaktifkan agar daftar Relic tidak berubah di tengah run. Saat Main Menu dimuat kembali setelah Battle, bootstrap UI berjalan melalui callback scene load. EventSystem menu memakai Input System UI module proyek; masalah `StandaloneInputModule` lama diperbaiki.
+4. Unlock **memperluas pool kartu Relic Shrine**; tidak memberi relic otomatis, tidak menambah Base Stats, dan tidak mengubah reward node yang telah berkomitmen. Relic yang dipilih aktif selama run seperti empat Relic lama. Echo Prism unik dan memberi +4 damage pada Basic Attack pertama setiap battle, lalu reset saat battle berikutnya. Tidak boleh stack dengan dirinya sendiri.
+5. `RunRelicCatalog.GetDefinitions()` tetap mengembalikan empat Relic dasar agar API/test lama stabil; `GetAllDefinitions()` mencakup Echo Prism untuk nama di archive/summary. `CreateChoices` memeriksa ledger unlock, sedangkan `CreateChoicesForUnlockState` memungkinkan tes seeded yang bebas filesystem.
+
+### Bukti dan batas klaim
+
+Full isolated Unity Play Mode final: **118/118 PASS**, **0 failed**, **0 skipped**, 65,9695361 detik. Tes baru memeriksa purchase persistence/idempotence, pool locked/unlocked, damage hanya pada Basic Attack pertama, menu setelah scene load, modul input UI, dan containment/render Echo Archive. Kompatibilitas format wallet v1 diperiksa pada implementasi, tetapi belum mempunyai kasus migrasi v1 tersendiri. Sembilan source/test hash workspace sama dengan salinan proyek yang lulus. Dua pasang screenshot aktual Run Summary dan Echo Archive telah diperiksa pada 1920×1080 dan 1280×1024.
+
+Bukti: `Docs/TestResults/2026-09-24-HorizontalUnlock/REPORT.md`, `final-results.xml`, `source-hashes.csv`, dan empat PNG render. Tidak ada scene/Inspector assignment baru, SQLite schema baru, atau package baru. Belum ada Windows standalone build, sesi playtest panjang, ataupun validasi balance akhir oleh pemilik. Run History dan Leaderboard belum diimplementasikan.
+
+Milestone berikutnya yang disarankan: **Run History lokal** dari snapshot terminal yang final dan idempotent. Setelah struktur simpan/baca dan UI riwayat teruji, ScoreCalculator dapat dirancang terpisah sebelum Local Leaderboard sehingga tidak ada skor semu.
+
+## Run History lokal — 24 September 2026
+
+Arahan pengguna: langsung membuat Run History lokal sebagai langkah berikutnya. Implementasi ini memakai data Run Summary terminal yang sudah ada, tanpa mengubah desain rute node, aturan combat, base stat, atau bentuk checkpoint Active Run.
+
+**Perilaku yang sudah dipasang:**
+
+1. `RunHistoryStore` menyimpan hasil Standard Run Cleared/Defeated pada file lokal `Application.persistentDataPath/Saves/syngrava-run-history-v1.json`. Rekaman memuat `RunId`, waktu UTC, outcome, seed, node terselesaikan, resource akhir, Echo yang diperoleh, durasi, statistik pertempuran, rute, Relic, Anomaly, dan modifier. Urutan baca terbaru dulu; maksimum 10.000 entri. Rekaman berulang dengan `RunId` yang sama tidak ditulis lagi.
+2. Arsip memakai JSON dengan pemeriksaan SHA-256, temporary write, dan backup. Bila primary rusak, pembacaan mencoba backup. Data rusak ditolak. UI membaca salinan data sehingga pemilihan entri tidak mengubah file save.
+3. `BattleManager` mencatat run terminal **setelah klaim Echo sukses dan sebelum checkpoint Active Run dihapus**. Jika penulisan riwayat gagal, Run Summary menampilkan pesan dan tombol untuk mencoba lagi; checkpoint tetap tersedia selama percobaan. Saat New Journey dipilih setelah retry berhasil, reset berjalan seperti sebelumnya. Active Run, Echo wallet, dan History tetap file terpisah.
+4. Main Menu mempunyai tombol `RUN HISTORY`, membuka panel `THREAD ARCHIVE` read-only. Daftar enam hasil per halaman; detail memperlihatkan tanggal, seed, durasi, resource, battle, build dan rute. Panel gelap/violet/putih dengan aksen merah untuk Defeat. Rute panjang dibagi menjadi dua baris agar tidak ada separator yang tertinggal sendiri. UI dibuat runtime; tidak ada Inspector assignment atau scene migration.
+
+**Verifikasi:** run final seluruh `BattleSnapshotTests` pada proyek Unity terisolasi **122/122 PASS**, 0 gagal, 0 skipped. Tes baru memeriksa persistensi, idempotensi, backup, penolakan write path yang tidak dapat ditulis, integrasi akhir battle/checkpoint, menu, pagination, batas teks, dan render 1920×1080 serta 1280×1024. Kedua render terakhir diperiksa secara visual. Dua kegagalan antara berasal dari asersi tes combat lama yang mengabaikan peluang critical hit acak; tesnya diperbaiki tanpa mengubah aturan damage, dan run final hijau. Sembilan source/test hash workspace identik dengan salinan tes. Bukti lengkap: `Docs/TestResults/2026-09-24-RunHistory/REPORT.md`, `final-results.xml`, `source-hashes.csv`, dan dua screenshot.
+
+**Batas:** belum diuji pada Windows standalone atau sesi main manual lengkap. Pemulihan backup dapat kehilangan paling banyak commit terbaru bila primary rusak tepat setelah commit itu. Fitur ini belum mempunyai score, filter, penghapusan, cloud sync, atau leaderboard. Milestone berikutnya yang disarankan: definisikan `ScoreCalculator` yang adil dan deterministik dari hasil run yang sudah tercatat; tampilkan score pada riwayat setelah formula disepakati, baru buat Local Leaderboard. Jangan menyebut Run History sebagai leaderboard saat ini.
+
+## Main Menu dua area — 24 September 2026
+
+Setelah Run History, pengguna meminta beralih ke Main Menu. Prioritas rinci belum diberikan pada awal implementasi; perbaikan dilakukan pada hierarki visual dan kejelasan alur tombol, sambil mempertahankan perilaku save, unlock, history, dan settings yang sudah teruji. Rencana desain ada di `Docs/MainMenu_DesignPlan.md`.
+
+- Panel runtime sekarang berukuran 1450×820 dan terbagi menjadi identitas di kiri serta navigasi di kanan. Kiri menampilkan judul SYNGRAVA, ASHEN CYCLE, tagline, dan sprite mata transparan `StandardRunMapVisualAssets.CurrentMarker`; tepi memakai ornamen retak yang sudah tersedia. Kanan menempatkan Continue Journey dan New Expedition sebagai dua tindakan utama, kemudian Echo Archive, Run History, Settings, dan Quit Game dalam dua baris ringkas.
+- Continue tetap membaca `ActiveRunCheckpointStore`: tanpa checkpoint tombol tidak aktif dan memberi status jelas; dengan checkpoint tombol aktif dan merangkum stage, HP, Mana, serta Embers. New Expedition tetap meminta konfirmasi bila akan mengganti Active Run. Semua handler lama dipertahankan. Tidak ada scene, prefab, aset, package, atau Inspector assignment baru.
+- Render Unity pada 1920×1080 dan 1280×1024 diperiksa. Crop mata atlas yang memperlihatkan batas kotak diganti dengan sprite CurrentMarker resmi. Tes baru memeriksa containment teks/tombol, dua render, state Continue tanpa/dengan checkpoint, dan pembatalan konfirmasi New Run.
+- Verifikasi final seluruh suite `BattleSnapshotTests` pada salinan proyek terisolasi: **124/124 PASS**, 0 gagal, 0 skipped. Source dan test yang berubah cocok dengan salinan Unity berdasarkan SHA-256. Bukti: `Docs/TestResults/2026-09-24-MainMenu/REPORT.md`, `final-results.xml`, dua PNG, dan `source-hashes.csv`.
+- Keterbatasan desain: file Figma SYNGRAVA belum mempunyai frame Main Menu, dan pembacaan detail lanjutan diblokir kuota panggilan MCP paket Starter. Pencarian Canva untuk desain SYNGRAVA milik pengguna tidak menemukan hasil. Implementasi mengikuti visual yang sudah tersedia di proyek; render Unity adalah bukti utama, bukan persetujuan desain final dari pemilik.
+
+Langkah berikutnya setelah pemilik meninjau Main Menu: terapkan koreksi visual/teks yang diminta, lalu kembali ke `ScoreCalculator` dan Local Leaderboard bila Main Menu sudah diterima. Belum ada Windows standalone build atau tes manual pada aspek rasio ekstrem.
+
+## Standard Run ScoreCalculator — 25 September 2026
+
+Arahan pengguna berikutnya adalah melanjutkan progres sesudah Main Menu. Implementasi dilanjutkan ke `ScoreCalculator`, milestone yang sudah tercatat setelah Run History. Rencana dan batas skor ditulis sebelum coding di `Docs/Score_Model.md`; rumus dasar diambil dari GDD dan dipakai dengan multiplier 1 untuk Standard Run. Ini belum merupakan persetujuan balance final.
+
+1. Skor model 1 memakai node yang diselesaikan: Normal Battle +100, Random Event +75, Elite +500, Boss +1.500. Named Convergence +50 hanya untuk tiga pemicu pertama **pada setiap battle yang akhirnya selesai**. Rest, Merchant, Relic, damage, healing, waktu, Embers, Echo, dan turn yang dipanjangkan tidak memberi poin. Battle yang kalah tidak mengunci poin node atau Convergence-nya. `ScoreCalculator` murni menghasilkan `ScoreResult` dengan total dan lima komponen, tanpa akses UI, randomizer, disk, atau save service.
+2. `RunManager` melacak `ScoreableConvergences` yang sudah committed dan `CurrentBattleConvergences` yang dibatasi tiga. Dua field ini ikut tersimpan pada `SeededRunState` schema 3 dan divalidasi saat restore. Checkpoint schema 3 lama tetap dapat dibaca; karena tidak memuat breakdown per battle lama, field skor baru mulai dari nol, bukan diisi tebakan.
+3. `RunSummarySnapshot` membawa hasil kalkulasi; `RunSummaryUI` menampilkan total di header kanan. `RunHistoryRecord` baru menyimpan versi model, total, dan breakdown; `RunHistoryUI` menunjukkan semuanya. Arsip v1 lama tetap terbaca dan menampilkan `UNSCORED` tanpa rekonstruksi palsu. Tidak ada scene, prefab, Inspector assignment, paket, ataupun skema SQLite baru.
+4. Bukti: `Docs/TestResults/2026-09-25-ScoreCalculator/REPORT.md`, dua XML Play Mode dan empat PNG render. Dua full run terakhir **127/127 PASS** masing-masing; final source/test hash cocok dengan salinan Unity yang diuji. Kompilasi kode game 0 error dan kompilasi assembly tes 0 error. Render Run Summary dan Run History pada 1920×1080 dan 1280×1024 diperiksa secara visual.
+
+Batas klaim: tidak ada Windows standalone build atau playtest manual penuh; angka skor masih baseline GDD yang dapat dituning setelah permainan nyata. Infinite Casual/Ranked, difficulty multiplier, dan Local Leaderboard belum ada. Milestone berikutnya adalah Local Leaderboard top 10 yang mengambil data final dari Run History dan memakai tie-break depth, boss count, lalu durasi; jangan menyebut Run History saat ini sebagai leaderboard.
+
+## Local Leaderboard dan integrasi Main Menu — 25 September 2026
+
+Pengguna meminta melanjutkan progres yang tertunda. Setelah ScoreCalculator selesai, implementasi berlanjut ke Local Leaderboard yang sudah tercatat sebagai milestone berikutnya. Rencana dibuat di `Docs/LocalLeaderboard_DesignPlan.md` sebelum UI diprogram.
+
+### Perilaku yang sudah berjalan
+
+1. Main Menu mempunyai tombol **TOP RUNS**, di bawah empat tombol utility. Tombol ini membuka **FATE LEDGER**, tabel sepuluh Standard Run terbaik dari Run History lokal. Kolom terpisah memuat rank, Cleared/Defeated, score, depth, boss count, dan duration. Memilih atau memfokuskan baris menampilkan seed, tanggal selesai, ruleset dan breakdown poin pada bagian bawah. Teks tidak disusun dengan spasi manual untuk meniru tabel.
+2. `LocalLeaderboardService` membaca seluruh arsip (batas store 10.000), memfilter model skor saat ini/Standard Run, menolak RunId ganda, lalu mengambil sepuluh terbaik. Tie-break adalah score menurun, node selesai menurun, boss count menurun, durasi menaik, tanggal selesai menaik, lalu RunId ordinal. Hasil peringkat berupa salinan nilai yang tidak ikut berubah bila record asal diubah. Standard Run saat ini cycle 1; cycle disimpan sebagai metadata untuk penggunaan berikutnya.
+3. `RunHistoryRecord` menambah metadata optional `RulesetVersion`, `Mode`, dan `Cycle` tanpa mengganti format arsip v1. Riwayat sebelum skor tetap UNSCORED dan tidak masuk peringkat; riwayat Standard yang sudah mempunyai skor tetapi belum memiliki metadata baru tetap masuk dengan skor aslinya. Ruleset lama yang tidak tercatat ditampilkan UNKNOWN, tidak ditebak.
+4. Leaderboard hanya membaca. Membuka, memilih, atau menutupnya tidak menulis hasil, checkpoint atau wallet. Arsip kosong memberi pesan NO SCORED RUNS YET; kegagalan membaca memberi ARCHIVE UNAVAILABLE tanpa menghapus file. Fokus keyboard berwarna violet gelap, navigasi berada dalam panel, dan Cancel/Close mengembalikan fokus ke tombol pembuka.
+
+### Bug yang ditemukan dan verifikasi
+
+Run pertama menghasilkan **128/129 PASS**. Tes penyimpanan hasil terminal menemukan bug kompatibilitas: `JsonUtility` mengubah field mode legacy yang belum ada menjadi string kosong ketika arsip ditulis bersama hasil baru. Validator awal menolak bentuk kosong sehingga pembacaan kembali ke backup dan hasil terakhir tidak terlihat. Validator dan filter sekarang menerima null/kosong sebagai mode legacy Standard; mode nonkosong selain STANDARD tetap ditolak/difilter sesuai tanggung jawabnya.
+
+Setelah perbaikan, full Unity Play Mode final menghasilkan **130/130 PASS**, 0 failed, 0 skipped, **70.4795756 detik**. `TC_LDB_001` memeriksa pengurutan/tie-break, duplicate identity, filter mode/model dan salinan data. `TC_LDB_002` memeriksa UI, daftar kosong/rusak, fokus/Cancel, containment dan overflow pada dua resolusi, serta kesamaan byte file sebelum/sesudah dibaca. `TC_LDB_003` memastikan arsip tanpa metadata leaderboard dapat ditambah dua hasil baru dan dibuka kembali tanpa kehilangan entri atau mengubah skor lama. Tes integrasi terminal yang sempat gagal kini lulus.
+
+Keempat render Main Menu/Leaderboard pada 1920×1080 dan 1280×1024 diperiksa visual. Warna fokus yang awalnya putih dan menyamarkan teks sudah diganti. Sebelas hash script sumber/tes cocok dengan salinan isolated Unity. Tidak ada error kompilasi C#; empat warning CS0618 lama untuk FindFirstObjectByType masih tercatat. Bukti lengkap: `Docs/TestResults/2026-09-25-LocalLeaderboard/REPORT.md`, dua XML, empat PNG, `compilation-warnings.txt`, dan `source-hashes.csv`. Angka pada screenshot leaderboard adalah fixture tes, bukan playthrough manual.
+
+Tidak diperlukan Inspector assignment, scene/prefab migration, package, SQLite schema, atau aset gambar baru. Tidak ada desain Figma/Canva baru pada kelanjutan ini; layout mengikuti rencana dan visual proyek yang sudah tersedia. Tidak ada commit/push.
+
+### Batas dan pekerjaan selanjutnya
+
+Local Leaderboard saat ini hanya Standard Run lokal. Tidak ada Infinite, online ranking, anti-cheat, filter mode tambahan, atau klaim balance akhir. Belum ada Windows standalone build maupun tiga Standard Run manual berturut-turut. Pekerjaan selanjutnya adalah memverifikasi alur Main Menu → run → terminal summary/history/leaderboard, Continue/Recovery, serta reset build saat Clear/Defeat/Abandon pada Windows. Penuhi gerbang Standard Run yang sudah ditulis sebelum memulai Infinite Casual.
+
+## Premium Main Menu dan Loading Screen di scene — 25 September 2026
+
+Arahan terbaru: melanjutkan desain Figma premium dan memasukkan Main Menu ke scene `MainMenu` yang sudah dibuat pengguna. Rencana visual, palet, komposisi, prompt gambar, tautan Figma/Canva, serta batas penggunaan aset tercatat di `Docs/MainMenu_Loading_Premium_DesignBrief.md`. Figma memuat dua frame 1920×1080 (Main Menu dan Loading Screen). Dua gambar orisinal tanpa teks berada di `Assets/Project/Resources/UI/MainMenuThreshold.png` dan `LoadingVoid.png`.
+
+- `MainMenu.unity` sekarang benar-benar menyimpan Canvas, EventSystem Input System, latar, panel, judul, teks, dan tujuh tombol navigasi sebagai hierarki scene yang terlihat di Editor. `MainMenuUI` memakai objek scene ini ketika Play Mode, menghubungkan handler tombol, dan mengisi status checkpoint/Echo secara dinamis. Dialog konfirmasi, Archive, History, Leaderboard, Settings, dan loading overlay tetap diinisialisasi saat runtime sesuai kebutuhannya.
+- Continue hanya aktif bila `ActiveRunCheckpointStore` menemukan state yang valid. Tombol itu menampilkan loading dan membawa pemain kembali ke batas map dari checkpoint. New Expedition menampilkan konfirmasi bila ada save aktif, lalu loading dan run baru. Echo Archive, Run History, Top Runs, Settings, dan Quit menuju fungsi yang sudah ada. `EditorBuildSettings.asset` mencantumkan MainMenu dan Battle sehingga `LoadSceneAsync("Battle")` benar-benar dapat dijalankan; entri SampleScene yang tidak ada telah dibuang.
+- Loading screen memakai gambar gelap, segel mata, judul, serta progress bar dari `AsyncOperation.progress`; scene Battle diaktifkan sesudah siap dan jeda visual singkat. Jika loading tidak bisa dimulai, ada pesan gagal, Retry, dan Back to Menu. Kesalahan `RectTransform` pada wadah tombol gagal ditemukan lewat tes Play Mode dan diperbaiki sebelum regresi akhir.
+- Verifikasi akhir pada salinan Unity terisolasi: **133/133 Play Mode PASS**, 0 failed, 0 skipped. Lima tes fokus menu mencakup dua resolusi, containment/overflow, Continue, New Expedition lewat loading, konfirmasi save, dan Settings. Dua screenshot Unity pada 1920×1080 dan 1280×1024 diperiksa secara visual. Tujuh hash scene/source/aset workspace identik dengan salinan yang diuji. Bukti: `Docs/TestResults/2026-09-25-PremiumMainMenu/REPORT.md`, XML, PNG, dan CSV hash.
+
+Batas klaim: belum ada Windows standalone build atau sesi manual penuh, dan gambar final/motion belum disetujui pemilik. Figma adalah wireframe komposisi, bukan ekspor art produksi. Setelah penerimaan visual, lanjutkan uji end-to-end menu → run → summary/history/leaderboard serta gerbang Standard Run sebelum fitur Infinite.
+
+## Penggantian visual tombol Main Menu — 25 September 2026
+
+Permintaan terbaru adalah mengganti gambar/desain tombol pada Main Menu yang sudah berada di scene, sambil mempertahankan fungsi masing-masing. Satu gambar orisinal transparan `Assets/Project/Resources/UI/MenuButtonFracturedFrame.png` dibuat dengan tema obsidian retak, aksen ungu tipis, dan pusat gelap yang tetap tenang untuk teks. Sprite tersebut dipasang pada tujuh tombol scene: Continue Journey, New Expedition, Echo Archive, Run History, Settings, Quit Game, dan Top Runs. Setiap tombol masih memakai `Button` Unity serta label TextMeshPro hidup; warna interaksi normal, hover/fokus, pressed, dan disabled kini menint gambar yang sama. Kode pembangun UI cadangan di `MainMenuUI.cs` memakai sprite dan tata letak yang sama.
+
+QA visual pertama menemukan helper copy terlalu dekat dengan garis bawah frame. Posisi label/subteks kemudian digeser ke bagian dalam pada scene dan pembangun UI cadangan; helper copy pada tombol Top Runs yang pendek dihapus. Render Unity final pada **1920×1080** dan **1280×1024** diperiksa kembali: tujuh tombol tetap berada dalam panel, teks tidak lagi menumpuk frame, dan artwork latar tetap menjadi fokus sisi kanan.
+
+Tes fokus menu setelah perbaikan: **5/5 PASS**. Full Unity Play Mode pada salinan proyek terisolasi: **133/133 PASS**, 0 gagal, 0 skip. Kode UI, PNG sprite, metadata sprite, dan tes sama persis secara SHA-256 antara workspace dan salinan uji. Scene sama setelah normalisasi akhir baris/spasi; perbedaan hash mentah hanya karena pembersihan whitespace pada salinan workspace setelah scene disimpan oleh Unity. Bukti XML, dua screenshot, hash, dan laporan ada di `Docs/TestResults/2026-09-25-MainMenuButtons/`. Tidak ada Windows standalone build atau playtest manual menyeluruh pada iterasi visual ini. Aset tombol adalah satu plate dengan tint state, bukan empat gambar state terpisah atau 9-slice. Tidak ada commit/push dan perubahan pengguna yang sudah ada tidak direset.
+
+## Integrasi Standard Run dan Windows build — 26 September 2026
+
+Setelah Main Menu diterima untuk dilanjutkan, pekerjaan berikutnya adalah gerbang Standard Run yang tercantum pada bagian **Infinite Run and Leaderboards**. Tidak ada gameplay baru atau perubahan balance pada iterasi ini. Dua tes Play Mode baru memeriksa alur antarscene dan transaksi state yang sebelumnya belum terbukti secara menyeluruh.
+
+1. `TC_E2E_001` memulai New Expedition dari Main Menu, memilih tombol node pada route yang terhubung sampai boss, memuat ulang Main Menu setelah dua node, lalu Continue. RunId, depth, dan panjang jalur kembali identik. Setelah Clear, Summary terbuka, Echo tersimpan, satu History record tercatat, checkpoint terhapus, hasil masuk Top Runs, dan Continue tidak aktif. Run baru memperoleh RunId lain pada depth 1 tanpa modifier lama.
+2. `TC_E2E_002` memeriksa New Expedition ketika checkpoint aktif dan temporary modifier telah diperoleh. Konfirmasi mengganti checkpoint; run baru tidak mewarisi modifier atau jalur run lama.
+3. Tes fokus **2/2 PASS**; seluruh `BattleSnapshotTests` **135/135 PASS**, 0 gagal, 0 skip, 80,130 detik. Tes berjalan pada salinan Unity terisolasi dengan identitas produk terpisah. Enam hash scene/source/build-setting sama antara workspace, salinan tes, dan salinan build pada saat diuji. Detail dan XML: `Docs/TestResults/2026-09-26-StandardRunGate/REPORT.md`.
+4. Windows x86_64 Development Build pada Unity `6000.6.0f1` **berhasil**, ukuran laporan BuildPipeline 332.420.599 byte, 736,97 detik, **0 error**, **514 warning**. Empat lokasi kode memakai API `FindFirstObjectByType` yang deprecated; mayoritas warning lain berasal dari varian shader/compute paket AI. Executable berada di `Builds/Verification-2026-09-26/SYNGRAVA.exe`; log lengkap ada dalam folder yang sama. Build lama di `Builds/Windows` tidak ditimpa.
+5. Startup tersembunyi batchmode selama 55 detik melewati inisialisasi engine, Direct3D 12, dan reload assembly tanpa exception/error pada log. Karena log tidak memastikan scene Main Menu selesai muncul dan tidak ada inspeksi layar/input, startup visual/interaksi tetap **belum terverifikasi**.
+
+**Batas klaim:** tes integrasi mempercepat penyelesaian encounter dengan `EndBattle(true)` supaya fokus pada map, scene, dan transaksi save. Itu bukan tiga playthrough combat manual. Tes Defeat/Recovery terpisah sudah ada di regresi, tetapi perlu pembuktian ulang pada executable interaktif. Gerbang Infinite Casual tetap tertutup sampai tiga Standard Run berturut-turut tanpa blocker, reset temp build setelah kemenangan/kekalahan/abandon, resume state yang sama, dan skor deterministik diverifikasi sesuai `Docs/StandardRun_ReleaseGate_Checklist.md`. Jangan menandai tahap ini selesai hanya dari build atau XML. Tidak ada commit/push; seluruh perubahan pengguna yang sudah ada dipertahankan.
+
+## Audit Skill Archive dan rancangan Infinite Run — 15 November 2026
+
+Roster runtime telah diaudit ulang: **30 skill memiliki active, passive, dan deskripsi passive yang masing-masing unik**. Perbaikan menyesuaikan efek runtime dengan tooltip, termasuk Cinder Key, Abyssal Verdict, Gravity Thread, Paper Crown, dan Rift Siphon pada kill tidak langsung. Nilai damage/Mana masih baseline; belum disahkan lewat playtest balance pemilik.
+
+Regresi Play Mode pada salinan terisolasi lulus tiga kali berurutan: **168/168 PASS, 0 failed, 0 skipped pada setiap pass**. Source workspace sama dengan source yang diuji pada delapan SHA-256. Laporan, profil, XML, log, dan hash berada di `Docs/TestResults/2026-11-15-SkillSystem/REPORT.md`. Ketiga pass adalah uji regresi otomatis, bukan tiga playthrough manual.
+
+Rancangan riset untuk milestone sesudah gerbang Standard Run ditulis di `Docs/Infinite_Run_DesignPlan.md`. Desain mengadaptasi prinsip cycle yang makin menantang, pilihan reward yang berarti, boss interval, dan pemeriksaan anti-softlock dari [catatan developer Risk of Rain 2: Simulacrum](https://store.steampowered.com/news/app/632360/view/3114807061130869250) dan [patch resminya](https://store.steampowered.com/news/posts/?appids=632360&enddate=1671555817&feed=steam_community_announcements); nilai, struktur wave, dan konten tidak disalin. Infinite belum diimplementasikan. Gerbang rilis Standard Run pada `Docs/StandardRun_ReleaseGate_Checklist.md` tetap prasyarat.

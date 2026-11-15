@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-25 19:00:06Z" end-time="2026-09-25 19:00:11Z" duration="5.2858378">
+  <test-suite type="TestSuite" id="1147" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="135" result="Passed" start-time="2026-09-25 19:00:06Z" end-time="2026-09-25 19:00:11Z" duration="5.285838" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1290" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Akmal Maulana Ghani/AppData/Local/Temp/syngrava-battle-tests-24614d6bb72d420abb53a24f266bf102/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="135" result="Passed" start-time="2026-09-25 19:00:06Z" end-time="2026-09-25 19:00:11Z" duration="5.272231" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="28856" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1148" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="135" result="Passed" start-time="2026-09-25 19:00:06Z" end-time="2026-09-25 19:00:11Z" duration="5.268711" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1161" name="TC_E2E_001_MenuContinueClearHistoryLeaderboardAndFreshRun" fullname="BattleSnapshotTests.TC_E2E_001_MenuContinueClearHistoryLeaderboardAndFreshRun" methodname="TC_E2E_001_MenuContinueClearHistoryLeaderboardAndFreshRun" classname="BattleSnapshotTests" runstate="Runnable" seed="1204581038" result="Passed" start-time="2026-09-25 19:00:06Z" end-time="2026-09-25 19:00:10Z" duration="4.157966" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 3 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Memulai node 3 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +20% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +20% | Guard Strength +0%
+Memulai node 6 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +20% | Guard Strength +0%
+Memulai node 6 (NormalBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +20% | Guard Strength +0%
+ATTACK SURGE Tier 2 dipilih. Basic Attack +15%.
+ATTACK SURGE Tier 2 dipilih. Basic Attack +15%.
+Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Memulai node 7 (EliteBattle): Veil Knight | Encounter DB: 2 | HP: 50 | Damage: 14 | Reward: 18 | Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Black Sun Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  First Convergence uses two actions
+<color=#FF879D>CONSEQUENCE</color>  Maximum HP -15.
+Black Sun Tier 1 dipilih. <color=#AEEBFF>BENEFIT</color>  First Convergence uses two actions
+<color=#FF879D>CONSEQUENCE</color>  Maximum HP -15.
+Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Memulai node 9 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+Memulai node 9 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +35% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +45% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +45% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +0 | Basic Attack +45% | Guard Strength +0%
+Memulai node 10 (Boss): Abyss Herald | Encounter DB: 3 | HP: 60 | Damage: 17 | Reward: 30 | Run Stats: Max HP +0 | Basic Attack +45% | Guard Strength +0%
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+]]></output>
+        </test-case>
+        <test-case id="1162" name="TC_E2E_002_ConfirmAbandonReplacesCheckpointAndTemporaryBuild" fullname="BattleSnapshotTests.TC_E2E_002_ConfirmAbandonReplacesCheckpointAndTemporaryBuild" methodname="TC_E2E_002_ConfirmAbandonReplacesCheckpointAndTemporaryBuild" classname="BattleSnapshotTests" runstate="Runnable" seed="1437585968" result="Passed" start-time="2026-09-25 19:00:10Z" end-time="2026-09-25 19:00:11Z" duration="1.084673" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Database runtime diperbarui dari seed.
+Database runtime diperbarui dari seed.
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+ATTACK SURGE Tier 1 dipilih. Basic Attack +10%.
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+Run Stats: Max HP +0 | Basic Attack +10% | Guard Strength +0%
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-24614d6bb72d420abb53a24f266bf102/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Akmal Maulana Ghani/AppData/LocalLow/syngrava-battle-tests-24614d6bb72d420abb53a24f266bf102/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,36 @@
+{
+  "Build": "Verification-2026-10-02-NamedScore",
+  "Profile": "CodexGateTests/SYNGRAVA_NamedScoreGate_20261002",
+  "Resolution": "1920x1080",
+  "RunSeed": -1957354374,
+  "RunId": "fd3e623b77b74d4f8528ff3902ffd916",
+  "FallbackCheckpoint": {
+    "Eligible": 0,
+    "Depth": 2,
+    "Model": 2,
+    "UnstablePulse": 1,
+    "Pass": true
+  },
+  "NamedCheckpoint": {
+    "HP": 52,
+    "Depth": 3,
+    "Mana": 9,
+    "Model": 2,
+    "Embers": 28,
+    "Eligible": 1,
+    "UnstablePulse": 1,
+    "EventHorizon": 1,
+    "Pass": true
+  },
+  "ContinueMapStage3Observed": true,
+  "StateJsonUnchangedAfterContinue": true,
+  "HistoryPayloadUnchanged": true,
+  "WalletPayloadUnchanged": true,
+  "HistoryModel1VisibleObserved": true,
+  "TopRunsZeroRankedObserved": true,
+  "SmokeMissingScriptMessages": 0,
+  "SmokeExceptionOrCrashMessages": 0,
+  "ContinueMissingScriptMessages": 0,
+  "ContinueExceptionOrCrashMessages": 0,
+  "RemainingOwnedPlayers": 0
+}

@@ -16,6 +16,9 @@
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
 
+# Unity AI Assistant preferences are local editor settings, not project data.
+/ProjectSettings/Packages/com.unity.ai.assistant/Settings.json
+
 # Recordings can get excessive in size
 /[Rr]ecordings/
 

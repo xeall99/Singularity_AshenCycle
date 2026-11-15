@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-14 12:18:11Z" end-time="2026-11-14 12:18:13Z" duration="1.8207787">
+  <test-suite type="TestSuite" id="1170" name="SYNGRAVA_BattleTests" fullname="SYNGRAVA_BattleTests" runstate="Runnable" testcasecount="158" result="Passed" start-time="2026-11-14 12:18:11Z" end-time="2026-11-14 12:18:13Z" duration="1.820779" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1336" name="Syngrava.Battle.PlayModeTests.dll" fullname="C:/Users/Iyan/AppData/Local/Temp/syngrava-battle-tests-294b63f0cf1a4ac8abf06cac225eb6ce/Library/ScriptAssemblies/Syngrava.Battle.PlayModeTests.dll" runstate="Runnable" testcasecount="158" result="Passed" start-time="2026-11-14 12:18:11Z" end-time="2026-11-14 12:18:13Z" duration="1.803904" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="5620" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1171" name="BattleSnapshotTests" fullname="BattleSnapshotTests" classname="BattleSnapshotTests" runstate="Runnable" testcasecount="158" result="Passed" start-time="2026-11-14 12:18:11Z" end-time="2026-11-14 12:18:13Z" duration="1.796409" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1301" name="TC_RELIC_006_BurnTicksExpiresCapsAndClearsBetweenBattles" fullname="BattleSnapshotTests.TC_RELIC_006_BurnTicksExpiresCapsAndClearsBetweenBattles" methodname="TC_RELIC_006_BurnTicksExpiresCapsAndClearsBetweenBattles" classname="BattleSnapshotTests" runstate="Runnable" seed="85272175" result="Passed" start-time="2026-11-14 12:18:11Z" end-time="2026-11-14 12:18:13Z" duration="1.762057" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca skill! Nama: Shadow Strike | Mana: 2 | Power: 20
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+SQLite berhasil membaca enemy! Nama: Ashen Wretch | HP: 40 | Damage: 12
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+BattleManager menerima skill: Shadow Strike | Mana: 2 | Power: 20
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Convergence aktif: UNSTABLE PULSE | Memulihkan 1 Mana.
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Memulai node 1 (NormalBattle): Ashen Wretch | Encounter DB: 1 | HP: 40 | Damage: 12 | Reward: 10 | Run Stats: Max HP +0 | Basic Attack +0% | Guard Strength +0%
+Saving results to: C:/Users/Iyan/AppData/LocalLow/syngrava-battle-tests-294b63f0cf1a4ac8abf06cac225eb6ce/SYNGRAVA_BattleTests\TestResults.xml
+Saving results to: C:/Users/Iyan/AppData/LocalLow/syngrava-battle-tests-294b63f0cf1a4ac8abf06cac225eb6ce/SYNGRAVA_BattleTests\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

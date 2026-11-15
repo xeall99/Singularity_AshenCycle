@@ -92,6 +92,16 @@ public class OrbitUIAnimator : MonoBehaviour
     private Color originalPreviewColour;
     private int previousFilledSlotCount;
     private bool detectionEnabled;
+    private BattleSettingsUI settingsUI;
+    private bool ReducedMotion
+    {
+        get
+        {
+            if (settingsUI == null)
+                settingsUI = FindAnyObjectByType<BattleSettingsUI>();
+            return settingsUI != null && !settingsUI.MotionEffectsEnabled;
+        }
+    }
 
     private void Awake()
     {
@@ -399,6 +409,14 @@ public class OrbitUIAnimator : MonoBehaviour
         }
 
         ResetSlotTransform(slotIndex);
+        if (ReducedMotion)
+        {
+            slotIcon.color = Color.white;
+            if (slotCanvasGroups[slotIndex] != null)
+                slotCanvasGroups[slotIndex].alpha = 1f;
+            slotCoroutines[slotIndex] = null;
+            return;
+        }
         slotCoroutines[slotIndex] = StartCoroutine(AnimateSlot(slotIndex));
     }
 
@@ -415,6 +433,11 @@ public class OrbitUIAnimator : MonoBehaviour
         }
 
         orbitPanel.localScale = originalPanelScale;
+        if (ReducedMotion)
+        {
+            convergenceCoroutine = null;
+            return;
+        }
         convergenceCoroutine = StartCoroutine(AnimateConvergence());
     }
 
@@ -431,6 +454,11 @@ public class OrbitUIAnimator : MonoBehaviour
         }
 
         ResetStageEntrancePresentation();
+        if (ReducedMotion)
+        {
+            stageEntranceCoroutine = null;
+            return;
+        }
         stageEntranceCoroutine = StartCoroutine(AnimateStageEntrance());
     }
 

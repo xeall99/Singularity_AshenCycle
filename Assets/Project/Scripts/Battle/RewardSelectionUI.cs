@@ -23,6 +23,7 @@ public sealed class RewardSelectionUI : MonoBehaviour
     private RewardCardView[] cardViews;
     private Coroutine entranceSequence;
     private bool initialized;
+    private int visibleCardCount = 3;
 
     public bool IsInitialized => initialized;
     public bool IsAnimating { get; private set; }
@@ -88,6 +89,7 @@ public sealed class RewardSelectionUI : MonoBehaviour
                 label.fontSizeMax = 23f;
                 label.alignment = TextAlignmentOptions.Center;
                 label.richText = true;
+                label.color = new Color(0.94f, 0.91f, 1f, 1f);
                 label.raycastTarget = false;
                 label.transform.SetAsLastSibling();
             }
@@ -142,15 +144,59 @@ public sealed class RewardSelectionUI : MonoBehaviour
 
         Color accent = GetTierAccent(reward.Tier);
         string accentHex = ColorUtility.ToHtmlStringRGB(accent);
+        bool relic = RunRelicCatalog.IsRelic(reward.EffectType);
+        bool anomaly = RunAnomalyCatalog.IsAnomaly(reward.EffectType);
+        string heading = relic
+            ? "RELIC"
+            : anomaly ? "ANOMALY" : $"TIER {ToRoman(reward.Tier)}";
+        string footer = relic || anomaly
+            ? "UNIQUE • ACTIVE RUN"
+            : $"STACK {currentStack} → {currentStack + 1}";
         string cardText =
-            $"<size=14><color=#{accentHex}>TIER {ToRoman(reward.Tier)}</color></size>\n" +
+            $"<size=14><color=#{accentHex}>{heading}</color></size>\n" +
             $"<b>{reward.DisplayName}</b>\n" +
             $"<size=17>{reward.ExactEffectText}</size>\n" +
             $"<size=12>{reward.Description}</size>\n" +
-            $"<size=14>STACK {currentStack} → {currentStack + 1}</size>";
+            $"<size=14>{footer}</size>";
+        if (relic)
+            cardText = $"<size=12><color=#{accentHex}>RELIC</color></size>\n" +
+                $"<size=18><b>{reward.DisplayName}</b></size>\n" +
+                $"<size=14>{reward.ExactEffectText}</size>\n" +
+                "<size=11>UNIQUE • ACTIVE RUN</size>";
+        else if (anomaly)
+            cardText = $"<size=12><color=#{accentHex}>ANOMALY</color></size>\n" +
+                $"<size=18><b>{reward.DisplayName}</b></size>\n" +
+                $"<size=14>{reward.ExactEffectText}</size>\n" +
+                "<size=11>UNIQUE • ACTIVE RUN</size>";
 
         cardViews[cardIndex].SetPresentation(accent, reward.Glyph);
         cardViews[cardIndex].SetLabel(cardText);
+    }
+
+    public void SetVisibleCardCount(int count)
+    {
+        if (!initialized)
+        {
+            return;
+        }
+
+        visibleCardCount = Mathf.Clamp(count, 1, rewardButtons.Length);
+        const float spacing = 320f;
+        float start = -(visibleCardCount - 1) * spacing * 0.5f;
+
+        for (int index = 0; index < rewardButtons.Length; index++)
+        {
+            bool visible = index < visibleCardCount;
+            rewardButtons[index].gameObject.SetActive(visible);
+
+            if (visible)
+            {
+                cardViews[index].SetRestingLayout(
+                    new Vector2(start + index * spacing, -25f),
+                    cardSize
+                );
+            }
+        }
     }
 
     public void ShowAnimated()
@@ -173,7 +219,7 @@ public sealed class RewardSelectionUI : MonoBehaviour
             StopCoroutine(entranceSequence);
         }
 
-        for (int index = 0; index < cardViews.Length; index++)
+        for (int index = 0; index < visibleCardCount; index++)
         {
             cardViews[index].PrepareEntrance(EntranceOffset);
             cardViews[index].PlayEntrance(
@@ -192,7 +238,7 @@ public sealed class RewardSelectionUI : MonoBehaviour
             return;
         }
 
-        for (int index = 0; index < cardViews.Length; index++)
+        for (int index = 0; index < visibleCardCount; index++)
         {
             cardViews[index].SetSelectionEnabled(false);
         }
@@ -231,10 +277,10 @@ public sealed class RewardSelectionUI : MonoBehaviour
         IsAnimating = true;
 
         yield return new WaitForSecondsRealtime(
-            EntranceDuration + StaggerDelay * (cardViews.Length - 1)
+            EntranceDuration + StaggerDelay * (visibleCardCount - 1)
         );
 
-        for (int index = 0; index < cardViews.Length; index++)
+        for (int index = 0; index < visibleCardCount; index++)
         {
             cardViews[index].SetSelectionEnabled(true);
         }

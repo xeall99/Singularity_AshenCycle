@@ -67,6 +67,50 @@ public sealed class OrbitResolver
         return Resolve(previewPattern);
     }
 
+    /// <summary>
+    /// Black Sun treats its missing first slot as a wildcard. A Named Pattern
+    /// is preferred when one legal prefix completes the two recorded actions;
+    /// otherwise the pair resolves as Unstable Pulse.
+    /// </summary>
+    public ConvergenceResult ResolveWithWildcardPrefix(
+        IReadOnlyList<PlayerActionType> recordedActions
+    )
+    {
+        if (recordedActions == null || recordedActions.Count != 2)
+        {
+            return ConvergenceResult.None();
+        }
+
+        PlayerActionType[] legalPrefixes =
+        {
+            PlayerActionType.Attack,
+            PlayerActionType.Guard,
+            PlayerActionType.Skill
+        };
+
+        for (int index = 0; index < legalPrefixes.Length; index++)
+        {
+            PlayerActionType[] candidate =
+            {
+                legalPrefixes[index],
+                recordedActions[0],
+                recordedActions[1]
+            };
+            ConvergenceResult result = Resolve(candidate);
+
+            if (result.Type != ConvergenceType.UnstablePulse)
+            {
+                return result;
+            }
+        }
+
+        return new ConvergenceResult(
+            ConvergenceType.UnstablePulse,
+            "UNSTABLE PULSE",
+            "Black Sun resolves the two-action sequence and restores 1 Mana."
+        );
+    }
+
     private bool Matches(
         IReadOnlyList<PlayerActionType> pattern,
         PlayerActionType first,

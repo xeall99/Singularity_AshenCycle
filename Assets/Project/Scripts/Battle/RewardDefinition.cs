@@ -4,7 +4,16 @@ public enum RewardEffectType
 {
     AttackPercent,
     MaxHPFlat,
-    GuardStrengthPercent
+    GuardStrengthPercent,
+    RelicGuardMana,
+    RelicAttackBurn,
+    RelicEntryHeal,
+    RelicFirstSkill,
+    AnomalyCollapsedStar,
+    AnomalyBlackSun,
+    AnomalyFrozenOrbit,
+    AnomalyInvertedPulse,
+    RelicFirstAttack
 }
 
 public sealed class RewardTierConfiguration

@@ -77,6 +77,13 @@ public sealed class RunModifierCollection
             out RunModifier existingModifier
         ))
         {
+            if (RunRelicCatalog.IsRelic(reward.EffectType) ||
+                RunAnomalyCatalog.IsAnomaly(reward.EffectType))
+            {
+                throw new InvalidOperationException(
+                    "A unique relic or Anomaly cannot be stacked."
+                );
+            }
             if (existingModifier.EffectType != reward.EffectType)
             {
                 throw new InvalidOperationException(
@@ -91,6 +98,8 @@ public sealed class RunModifierCollection
             return;
         }
 
+        RunRelicCatalog.Validate(reward.Code, reward.EffectType, reward.FlatValue, reward.PercentValue, 1);
+        RunAnomalyCatalog.Validate(reward.Code, reward.EffectType, reward.FlatValue, reward.PercentValue, 1);
         modifiers.Add(
             reward.Code,
             new RunModifier(
@@ -201,6 +210,14 @@ public sealed class RunModifierCollection
             }
 
             RunModifier modifier = state.ToRuntimeModifier();
+
+            RunAnomalyCatalog.Validate(
+                modifier.SourceCode,
+                modifier.EffectType,
+                modifier.FlatValue,
+                modifier.PercentValue,
+                modifier.StackCount
+            );
 
             if (restoredModifiers.ContainsKey(modifier.SourceCode))
             {

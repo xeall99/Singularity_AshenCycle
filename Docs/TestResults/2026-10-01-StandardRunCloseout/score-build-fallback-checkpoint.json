@@ -1,0 +1,6 @@
+{
+    "FileVersion": 1,
+    "SavedAtUtc": "2026-10-02T13:48:05.7833626Z",
+    "StateJson": "{\"SchemaVersion\":3,\"RulesetVersion\":\"0.4\",\"RunSeed\":-1957354374,\"RunId\":\"fd3e623b77b74d4f8528ff3902ffd916\",\"RouteVersion\":1,\"Depth\":2,\"NodeCount\":10,\"CurrentHP\":79,\"CurrentMana\":9,\"TotalEmbers\":10,\"IsActive\":true,\"IsCompleted\":false,\"Modifiers\":[{\"SourceCode\":\"REWARD_VITAL_CORE\",\"EffectType\":1,\"FlatValue\":15,\"PercentValue\":0.0,\"StackCount\":1,\"Scope\":0}],\"VisitedNodeCodes\":[\"BATTLE_01\"],\"SelectedNodeCode\":\"\",\"NodeEntered\":false,\"ElapsedSeconds\":324.34735107421875,\"BattlesWon\":1,\"DamageDealt\":40,\"DamageTaken\":36,\"HealingReceived\":15,\"CriticalHits\":0,\"ConvergencesTriggered\":1,\"ScoreModelVersion\":2,\"ScoreableConvergences\":0,\"CurrentBattleConvergences\":0,\"ActionsTaken\":4,\"EventHorizonCount\":0,\"ReversalOrbitCount\":0,\"UnstablePulseCount\":1}",
+    "StateSha256": "B47CD3956DF887E668D90EE078A4C5C4BB3839B45B03818A85A62E17783AB0A4"
+}

@@ -1,0 +1,8 @@
+"Path","Match"
+"Assets/Project/Scripts/UI/UserSettingsStore.cs","True"
+"Assets/Project/Scripts/UI/UserSettingsStore.cs.meta","True"
+"Assets/Project/Scripts/UI/BattleSettingsUI.cs","True"
+"Assets/Project/Scripts/Battle/BattleManager.cs","True"
+"Assets/Project/Scripts/Battle/BattleVisual.cs","True"
+"Assets/Project/Scripts/Battle/OrbitUIAnimator.cs","True"
+"Assets/Tests/PlayMode/BattleSnapshotTests.cs","True"

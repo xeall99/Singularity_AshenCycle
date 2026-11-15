@@ -7,7 +7,7 @@ These instructions apply to the entire repository. Read this file before changin
 Before proposing or implementing a change:
 
 1. Read `Docs/PROJECT_CONTEXT.md` completely.
-2. Treat `Docs/GDD_SYNGRAVA_UKK_v0.4.docx` as the full design and UKK planning document.
+2. Treat `Docs/GDD_SYNGRAVA_UKK_v0.5.docx` as the full design and UKK planning document.
 3. Inspect the current files involved in the requested feature. Do not reconstruct a file from an old chat snippet when a newer file exists in the repository.
 4. Run `git status` and preserve every unrelated user change.
 5. State which files will change and what behavior will be tested.
@@ -81,14 +81,14 @@ Infinite generation, save and resume, local leaderboard, Ranked mode, and global
 For each task:
 
 1. Confirm the repository root contains `Assets`, `Packages`, and `ProjectSettings`.
-2. Inspect the newest relevant scripts and search for duplicate class or enum names.
-3. Describe the smallest safe implementation and its acceptance criteria.
-4. Edit only the required files.
-5. Perform available static checks and search for broken references.
-6. Ask the user to let Unity compile, then collect the complete Console error and reproduction steps if it fails.
-7. Provide exact Inspector assignments or Hierarchy changes.
-8. Update `Docs/PROJECT_CONTEXT.md` and the GDD status only after the behavior is accepted.
-9. Recommend a small Git commit after the Unity test passes. Do not commit, push, publish, or overwrite user work unless explicitly requested.
+2. Inspect the newest relevant scripts, project context, latest design/status notes, and search for duplicate types before deciding scope.
+3. Before every feature or addition, do a focused design pass: research relevant current primary/authoritative online sources when useful or explicitly requested, inspect the repository and related implementation, identify constraints and edge cases, then write a complete feature design/acceptance plan before implementation. Cite sources in the plan. Do not treat a research claim as a project rule without reconciling it with the GDD and owner decisions.
+4. If the user asked to proceed with the feature, implement it after the plan without pausing for routine approval. Preserve all unrelated and user-owned changes.
+5. Run an available automated Unity Play Mode baseline before implementation. After implementation, run the full relevant Play Mode suite **three consecutive times**, using isolated copies/profiles and separate result logs/XML. A failed or blocked attempt does not count; fix issues and restart the consecutive pass sequence. Do not substitute manual playtesting or claim a test pass without a passing result file.
+6. If Unity automation is blocked by licensing, sandbox, or environment limits, make reasonable isolated/out-of-sandbox runner attempts where available, preserve logs, and report the blocker honestly. Continue with static verification, but mark the feature as not fully verified until all three automated passes succeed.
+7. Perform static checks and search for broken references. Provide exact Inspector/Hierarchy work only if the implementation actually requires it.
+8. Update `Docs/PROJECT_CONTEXT.md`, the design/status notes, and a focused milestone report after implementation and verification. Keep intended behavior distinct from verified behavior.
+9. Do not commit, push, publish, reset, clean, or overwrite user work unless explicitly requested.
 
 ## Completion Report
 
@@ -100,4 +100,6 @@ Every implementation response must state:
 - checks performed;
 - checks that still require Unity Editor or a Windows build;
 - known limitations and the next smallest task.
+
+The owner specifically requests a complete design before each feature, prior automated baseline checking, and three consecutive automated Unity Play Mode passes after implementation; manual owner testing is not a prerequisite when those passes can be run.
 
