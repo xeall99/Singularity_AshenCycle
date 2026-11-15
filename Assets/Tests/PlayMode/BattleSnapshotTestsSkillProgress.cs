@@ -22,6 +22,8 @@ public partial class BattleSnapshotTests
             .Select(item => RuntimeProperty<object>(item, "PassiveEffect").ToString()).ToArray();
         string[] passiveDescriptions = definitions.Cast<object>()
             .Select(item => RuntimeProperty<string>(item, "PassiveDescription")).ToArray();
+        string[] descriptions = definitions.Cast<object>()
+            .Select(item => RuntimeProperty<string>(item, "Description")).ToArray();
         Assert.That(activeEffects.Distinct(StringComparer.Ordinal).Count(), Is.EqualTo(30),
             "Each catalog skill must have its own active effect identity.");
         Assert.That(passiveEffects.Distinct(StringComparer.Ordinal).Count(), Is.EqualTo(30),
@@ -30,6 +32,19 @@ public partial class BattleSnapshotTests
         Assert.That(passiveDescriptions.All(text => !string.IsNullOrWhiteSpace(text)), Is.True);
         Assert.That(passiveDescriptions.Distinct(StringComparer.Ordinal).Count(), Is.EqualTo(30),
             "Each skill must explain its own distinct passive.");
+        Assert.That(passiveDescriptions.Count(text =>
+            text.Contains("each battle", StringComparison.OrdinalIgnoreCase) ||
+            text.Contains("once per battle", StringComparison.OrdinalIgnoreCase)), Is.EqualTo(29),
+            "Every one-shot passive must make its per-battle limit clear in the UI copy.");
+        Assert.That(passiveDescriptions.Count(text => text.Contains(
+            "repeatable", StringComparison.OrdinalIgnoreCase)), Is.EqualTo(1),
+            "Echo Script is the only passive that can repeat within a battle.");
+        Assert.That(descriptions.Count(text => text.Contains(
+            "Passive (once per battle)", StringComparison.Ordinal)), Is.EqualTo(29),
+            "Detailed descriptions must disclose the same one-shot limit.");
+        Assert.That(descriptions.Count(text => text.Contains(
+            "Passive (repeatable)", StringComparison.Ordinal)), Is.EqualTo(1),
+            "The detailed Echo Script description must preserve its repeatable rule.");
         Assert.That(InvokeRuntimeStatic("SkillCatalog", "Get", "SKL_SHADOW_STRIKE"), Is.Not.Null);
         Assert.That(InvokeRuntimeStatic("SkillCatalog", "Get", "SKL_CUSTOM_PLAYER_SKILL"), Is.Null);
     }

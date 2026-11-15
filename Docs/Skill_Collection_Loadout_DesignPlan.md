@@ -1,7 +1,7 @@
 # Rancangan Skill Archive, Loadout, dan Reward Run — SYNGRAVA
 
 **Tanggal:** 15 November 2026  
-**Status:** Implemented; 30 distinct active/passive pairs refined and verified by three consecutive 168/168 Play Mode regression passes on 15 November 2026. Balance remains provisional pending owner playtest.  
+**Status:** Implemented; 30 distinct active/passive pairs and passive-frequency UI copy audited. The hook audit and follow-up copy audit each passed three consecutive 168/168 Play Mode regression runs on 15 November 2026. Balance remains provisional pending owner playtest.
 **Cakupan dokumen:** koleksi skill permanen, pilihan skill sebelum Run, reward skill dari Run, dan rancangan roster 30 skill.
 
 ## 1. Tujuan
@@ -28,9 +28,9 @@ Game8 Chaos Zero Nightmare yang ditautkan pemilik sudah dicoba dibuka, tetapi se
 
 ### Riset passive dan active unit raritas tinggi
 
-Tautan asli yang diberikan pemilik sudah dicoba pada audit 15 November 2026. `wiki.vanguards.gg` dan `wiki.animeexpeditions.com` menolak akses dengan HTTP 403; halaman daftar unit `wiki.32x.dev` dapat dimuat tetapi tidak menyediakan isi teks. Karena itu, rincian ability dari halaman asli tersebut tidak diasumsikan. Panduan komunitas yang bisa dibaca mengelompokkan unit tingkat atas berdasarkan passive/active; misalnya, Secret di Anime Expeditions mencakup pemanggilan bantuan atau buff tim, passive yang bertumbuh dari takedown, dan payoff pada ambang tertentu. Halaman Anime Crusaders yang bisa dibaca menjelaskan bahwa Mythic/Secret yang berevolusi membuka passive baru, tetapi tidak memberi data ability terverifikasi dari tautan 32x.dev. Semua data komunitas dapat berubah mengikuti update. [Anime Expeditions: passive dan active per raritas (All Things How)](https://allthings.how/anime-expeditions-every-unit-passive-and-active-ability-by-rarity/), [Anime Expeditions: daftar ability (Pro Game Guides)](https://progameguides.com/roblox/all-anime-expeditions-unit-passives-active-abilities/), [Anime Crusaders: unit dan passive berdasarkan raritas (BloxInformer)](https://bloxinformer.com/wikis/anime-crusaders/units/)
+Tautan asli yang diberikan pemilik sudah dicoba pada audit 15 November 2026. `wiki.vanguards.gg` dan `wiki.animeexpeditions.com` menolak akses dengan HTTP 403; halaman daftar unit `wiki.32x.dev` dapat dimuat tetapi tidak menyediakan isi teks. Karena itu, rincian ability dari halaman asli tersebut tidak diasumsikan. Riset pengganti dibatasi pada unit tier tertinggi yang datanya terbaca: panduan Secret Anime Expeditions mencatat 8th Sword memperoleh scaling damage dari takedown, sementara Shadow memadukan kontrol arena, summon, dan buff satu tim. Itu memberi contoh passive yang tumbuh melalui aksi serta kit tier tinggi yang menggabungkan peran, bukan satu bonus damage generik. Riset Anime Crusaders yang dapat dibaca hanya mengonfirmasi bahwa Mythic/Secret yang berevolusi bisa memperoleh passive baru; detail kit dari wiki yang pemilik kirim tidak dapat diverifikasi. Untuk SYNGRAVA, pola tingkat tinggi diterjemahkan menjadi trigger dan payoff yang sesuai sistem turn-based—misalnya status, Guard, Orbit, HP, Analyze, dan kill—tanpa menyalin nama, karakter, teks, angka, atau urutan ability. Sumber komunitas dapat berubah mengikuti update. [Anime Expeditions: passive dan active per raritas (All Things How)](https://allthings.how/anime-expeditions-every-unit-passive-and-active-ability-by-rarity/), [Anime Expeditions: daftar ability (Pro Game Guides)](https://progameguides.com/roblox/all-anime-expeditions-unit-passives-active-abilities/), [Anime Crusaders: unit dan passive berdasarkan raritas (BloxInformer)](https://bloxinformer.com/wikis/anime-crusaders/units/)
 
-Yang dipakai sebagai pelajaran desain—tanpa menyalin nama, teks, angka, atau susunan ability—adalah tiap skill perlu punya identitas mekanik yang dapat dikenali, passive harus bereaksi pada pemicu yang jelas, dan hasil pemicu harus memberi alasan taktis untuk mengatur urutan aksi. Di SYNGRAVA, ide itu diterjemahkan ke aturan turn-based yang sudah ada: status Burn/Weakness/Curse, Analyze, Guard, resource HP/Mana/Ember, kill, dan slot Singularity Orbit. Audit runtime memastikan katalog memiliki 30 identitas active, passive, dan teks passive yang berbeda; bukan berarti semua skill sudah terbukti seimbang. Passive satu kali hanya terpakai saat syaratnya terpenuhi; pengecualian berulang seperti diskon Echo Script dinyatakan di definisi. Nilai masih provisional sampai ada playtest balance.
+Yang dipakai sebagai pelajaran desain—tanpa menyalin nama, teks, angka, atau susunan ability—adalah tiap skill perlu punya identitas mekanik yang dapat dikenali, passive harus bereaksi pada pemicu yang jelas, dan hasil pemicu harus memberi alasan taktis untuk mengatur urutan aksi. Di SYNGRAVA, ide itu diterjemahkan ke aturan turn-based yang sudah ada: status Burn/Weakness/Curse, Analyze, Guard, resource HP/Mana/Ember, kill, dan slot Singularity Orbit. Audit runtime memastikan katalog memiliki 30 identitas active, 30 identitas passive, dan 30 teks passive yang berbeda; pemicu, efek, dan peluang keputusan dibedakan per skill, bukan hanya ganti angka. Passive one-shot menjelaskan frekuensinya di UI; pengecualian Echo Script secara eksplisit repeatable. Ini memastikan identitas konten, bukan bukti bahwa semua skill sudah seimbang. Nilai masih provisional sampai ada playtest balance.
 
 Di *Hades II*, Arcana dipilih sebelum memulai Run dan dibatasi kapasitas Grasp. SYNGRAVA mengambil tahap persiapan sebelum Run, tetapi jumlah slot skill diusulkan tetap dan tidak bisa dinaikkan dengan mata uang, sesuai aturan Base Stats serta loadout MVP SYNGRAVA. [Penjelasan Grasp dan loadout Arcana Hades II](https://www.shacknews.com/article/146102/upgrade-grasp-hades-2)
 
@@ -116,6 +116,7 @@ Semua nilai damage/Mana masih **provisional** dan mengikuti aturan skala yang sa
 
 ### Aturan pemicu dan keseimbangan
 
+- **Kejelasan frekuensi passive:** `PassiveDescription` ditampilkan langsung pada Skill Archive dan kartu Skill Memory. Semua passive one-shot harus menyebut pemicu pertamanya terjadi *setiap battle* (atau “once per battle”); Echo Script harus menyebut diskon setelah Guard dapat berulang. Teks panjang di katalog harus menjelaskan aturan yang sama. Ini perubahan kejelasan teks, bukan perubahan angka atau perilaku combat.
 - Passive hanya berjalan bila skill terkait terpasang pada snapshot loadout Run. Passive sekali-pakai ditandai hanya ketika syaratnya benar-benar terpenuhi; aksi yang gagal divalidasi tidak menghabiskan passive. Pengecualian yang tertulis jelas adalah diskon Echo Script, yang berulang setiap kali skill itu langsung didahului Guard.
 - Rift Siphon memeriksa kematian musuh Cursed dari semua jalur damage dalam battle, termasuk serangan balik dan Burn tick. Gallows Bloom berbeda: syaratnya adalah skill pemain yang secara langsung mengalahkan musuh; kematian dari Basic Attack, Burn tick, parry, atau counter tidak dihitung sebagai Skill kill.
 - Semua 30 identitas active dan passive dibedakan pada enum katalog dan deskripsi. Beberapa efek memang memakai trigger status yang sama (misalnya target Burning), tetapi hasil, skill pemilik, dan timingnya berbeda serta dibatasi sekali per battle.
@@ -190,8 +191,16 @@ Penulisan reward dan unlock memakai satu SQLite transaction. Sebelum memilih, va
 2. Implementasi koleksi, loadout, reward, migrasi, UI, checkpoint dan 30-skill battle catalog selesai; lihat report sesi skill 14 November.
 3. Audit silang 30 `ActiveEffect`, 30 `PassiveEffect`, passive text, event hook, serta syarat equipped/once-per-battle. Koreksi passive yang tidak sesuai tooltip; Echo Script tetap kondisional dan boleh berulang setiap kali Guard langsung mendahuluinya.
 4. Tambahkan regression checks untuk identitas katalog, status-duration extension, Burn/Ember, Burn/Curse, dan sequencing Guard → Skill.
-5. Jalankan suite Play Mode penuh **tiga kali berturut-turut**. Lulus hanya bila total sama, 0 failed dan 0 skipped; setiap pass punya profil, XML, dan log sendiri. Bila ada satu kegagalan, perbaiki penyebab dan ulangi semua tiga pass. **Selesai:** 168/168 lulus di ketiga profil terisolasi; 0 gagal dan 0 skip.
-6. Perbarui report, konteks proyek, GDD, dan salinan context pack dengan desain maupun hasil aktual. **Selesai pada 15 November 2026.** Balance tetap provisional sampai owner playtest.
+5. Jalankan suite Play Mode penuh **tiga kali berturut-turut**. Lulus hanya bila total sama, 0 failed dan 0 skipped; setiap pass punya profil, XML, dan log sendiri. Bila ada satu kegagalan, perbaiki penyebab dan ulangi semua tiga pass. **Selesai:** 168/168 lulus pada ketiga profil terisolasi; 0 gagal dan 0 skip.
+6. Perbarui report, konteks proyek, dan salinan context pack dengan desain maupun hasil aktual. **Selesai pada 15 November 2026.** Balance tetap provisional sampai owner playtest.
+
+### Rencana koreksi keterbacaan passive — 15 November 2026
+
+1. Audit bahwa setiap skill memiliki satu `PassiveEffect` dan deskripsi yang unik; pertahankan 30 skill roster yang sudah ada.
+2. Samakan teks panjang dan pendek untuk semua passive one-shot agar batas *sekali per battle* beserta trigger dan hasilnya terlihat pada Skill Archive serta Skill Memory. Tandai Echo Script sebagai repeatable.
+3. Tambah tes katalog untuk memastikan semua deskripsi passive menyatakan frekuensinya dan tidak menambah efek runtime baru.
+4. Jalankan baseline Play Mode sebelum perubahan, lalu seluruh suite Play Mode tiga kali berturut-turut sesudah perubahan, masing-masing pada proyek dan profil terisolasi dengan XML/log tersendiri.
+5. Perbarui laporan dan konteks proyek hanya dengan hasil yang benar-benar terukur.
 
 ### Audit passive dan verifikasi — 15 November 2026
 
@@ -201,6 +210,12 @@ Penulisan reward dan unlock memakai satu SQLite transaction. Sebelum memilih, va
 - Menghapus efek lama yang bertentangan dengan desain pada Vow of Ash, Gloaming Bulwark, Requiem, Cinder Key, Nightfall Vow, Gravity Thread, Paper Crown, Mourning Bell, Abyssal Verdict, dan Umbral Execution.
 - Tambahan Play Mode tests mengunci 30 active identity, 30 passive identity, deskripsi unique, duration extension, Cinder Key, Abyssal Verdict, Guard-conditioned passives, dan Rift Siphon dari Burn tick. Ketiga pass final masing-masing **168/168 PASS, 0 gagal, 0 skip**; profil, durasi, XML, log, dan source hash ada di [`Docs/TestResults/2026-11-15-SkillSystem/REPORT.md`](TestResults/2026-11-15-SkillSystem/REPORT.md).
 - Test awal menemukan setup regresi memasang skill hanya di field HUD sehingga refresh mengembalikannya ke loadout Run; helper test telah diperbaiki agar memasang loadout ke `RunManager` seperti jalur produk. Hasil awal 165/167 itu hanya diagnostik, tidak dihitung sebagai pass final.
+
+### Audit keterbacaan frekuensi passive — 15 November 2026
+
+- Semua 29 passive one-shot kini menyatakan bahwa pemicunya hanya memberi efek sekali pada tiap battle; frasa UI dapat berbunyi “each battle” atau “once per battle”. Echo Script adalah satu-satunya passive berulang dan menyebut “repeatable” baik pada teks pendek maupun deskripsi lengkap.
+- Tes katalog menjaga 30 active identity, 30 passive identity, deskripsi passive unik, 29 batas one-shot, dan satu pengecualian repeatable. Tidak ada perubahan hook, damage, Mana, atau aturan battle dalam audit copy ini.
+- Baseline lulus **168/168**. Sesudah koreksi assertion tes agar menerima dua frasa yang sama-sama jelas, tiga pass berturut-turut masing-masing lulus **168/168, 0 gagal, 0 skip**. Profil, XML, log, diagnostik awal, dan source hash tersimpan di [`Docs/TestResults/2026-11-15-SkillFrequencyAudit/REPORT.md`](TestResults/2026-11-15-SkillFrequencyAudit/REPORT.md).
 
 ### Catatan implementasi 14 November 2026
 

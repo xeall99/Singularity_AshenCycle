@@ -22,6 +22,7 @@ Owner Akmal Maulana Ghani
 - Every catalog row has a distinct non-empty `ActiveEffect`, `PassiveEffect`, and passive description; Echo Script intentionally repeats whenever immediately preceded by Guard. This validates unique identity, not final balance.
 - Design, researched roster, and Infinite Run's next-feature plan: `Docs/Skill_Collection_Loadout_DesignPlan.md` and `Docs/Infinite_Run_DesignPlan.md`. The three final Unity Play Mode passes and their isolated profiles, XML, logs, and source hashes are recorded in `Docs/TestResults/2026-11-15-SkillSystem/REPORT.md`: each run passed 168/168 with 0 failures and 0 skips.
 - Automated coverage includes catalog/passive identity, profile persistence, retry-safe claims, locked/duplicate loadout rejection, snapshot restore, duration extension, Burn/Ember, Burn/Curse, Guard-conditioned effects, and the full battle/run regression suite. Skill numbers remain provisional pending owner playtest and balance review; automated passes do not certify visual quality or balance.
+- Follow-up UI-copy audit confirms all 29 one-shot passive tooltips say `each battle` or `once per battle`; Echo Script is the only passive marked repeatable. The catalog assertion and full Play Mode suite passed 168/168 in each of three further isolated save profiles, with baseline, three XML/log pairs, diagnostic attempt, and matching source hashes recorded in `Docs/TestResults/2026-11-15-SkillFrequencyAudit/REPORT.md`. No combat rule or value changed in that follow-up.
 
 ## Owner clarification — player skill progression, 3 October 2026
 

@@ -30,9 +30,9 @@ Mode ini memakai aturan, seed, score model, serta top-ten sendiri. Standard Run 
 
 ## 3. Hasil riset dan pelajaran desain
 
-`Risk of Rain 2: Simulacrum` memberi pilihan tiga item setelah wave dan menaruh boss setiap lima wave. Video developer **Dev Thoughts #23** dan catatan resminya menunjukkan pola hadiah dan puncak boss tersebut; patch berikutnya memperbaiki keadaan ketika director gagal spawn sehingga wave tidak maju. SYNGRAVA mengadaptasi pilihan reward, boss berkala, dan anti-soft-lock, tetapi tetap memakai satu boss tiap Cycle 10 node demi cocok dengan peta Standard yang ada. [Video Dev Thoughts #23](https://youtu.be/1EBxT0zwIVA), [catatan developer Simulacrum](https://store.steampowered.com/news/app/632360/view/3114807061130869250), [patch anti-stall](https://store.steampowered.com/news/posts/?appgroupname=Risk+of+Rain+2&appids=632360&enddate=1699296034&feed=steam_community_announcements)
+`Risk of Rain 2: Simulacrum` memberi pilihan tiga item setelah wave dan menaruh boss setiap lima wave. Video developer **Dev Thoughts #23** dan catatan patch resmi menggambarkan pola hadiah dan boss berkala; catatan patch juga menjelaskan bahwa wave dilewati setelah 60 detik tanpa spawn agar mode tidak macet. SYNGRAVA mengadaptasi pilihan reward, boss berkala, dan anti-soft-lock, tetapi tetap memakai satu boss tiap Cycle 10 node demi cocok dengan peta Standard yang ada. [Video Dev Thoughts #23](https://youtu.be/1EBxT0zwIVA), [catatan patch Simulacrum 1.2.2](https://store.steampowered.com/news/app/632360/view/3114807061149729826)
 
-`Vampire Survivors` v1.0 mengulang tahap dalam Cycle Endless dan meningkatkan tekanan pada tiap pengulangan. SYNGRAVA mengambil bentuk pengulangan yang mudah dikenali, bukan angka scaling-nya: pertarungan turn-based dan modifier yang menumpuk perlu kurva HP/damage tersendiri serta pengujian kombinasi build. [Patch notes Vampire Survivors v1.0](https://store.steampowered.com/news/posts/?enddate=1666281806&feed=steam_community_announcements)
+`Vampire Survivors` v1.0 mengulang gelombang tahap dalam Cycle Endless dan meningkatkan tekanan pada tiap pengulangan. SYNGRAVA mengambil bentuk pengulangan yang mudah dikenali, bukan angka scaling-nya: pertarungan turn-based dan modifier yang menumpuk perlu kurva HP/damage tersendiri serta pengujian kombinasi build. [Patch notes resmi Vampire Survivors v1.0](https://steamcommunity.com/games/1794680/announcements/detail/6186282400405707304)
 
 **Penerapan sebagai inferensi desain:** SYNGRAVA memakai Cycle boss, pilihan Skill Memory, dan mutator yang dipilih dari katalog valid. Besaran scaling, bobot reward, dan batas performa perlu diukur pada prototipe; sumber di atas bukan bukti bahwa angka permainan mereka cocok untuk SYNGRAVA.
 
@@ -162,9 +162,9 @@ Setelah gate lulus, implementasi bertahap: (1) model/ruleset/validator map per C
 
 ## Referensi
 
-- [Risk of Rain 2 / Hopoo Games — Dev Thoughts tentang Simulacrum](https://store.steampowered.com/news/app/632360/view/3114807061130869250) — sumber developer resmi untuk wave, interval boss, mutator, dan pilihan reward.
-- [Risk of Rain 2 / Hopoo Games — arsip pengumuman dan patch notes](https://store.steampowered.com/oldnews/?appids=632360&enddate=1672560000&feed=steam_community_announcements&l=english) — sumber resmi terkait perbaikan soft-lock, wave tanpa spawn, dan aturan batas wave.
-- [Vampire Survivors — v1.0 patch notes, Endless Mode](https://store.steampowered.com/news/posts/?enddate=1666281806&feed=steam_community_announcements) — sumber resmi untuk konsep wave cycle berulang dan peningkatan tekanan per cycle; angka mereka tidak diadopsi.
+- [Risk of Rain 2 / Hopoo Games — Dev Thoughts #23](https://youtu.be/1EBxT0zwIVA) — video developer resmi tentang Simulacrum.
+- [Risk of Rain 2 / Hopoo Games — patch Simulacrum 1.2.2](https://store.steampowered.com/news/app/632360/view/3114807061149729826) — catatan resmi untuk pilihan 3 item, boss setiap 5 wave, dan fail-safe wave tanpa spawn.
+- [Vampire Survivors / poncle — v1.0 patch notes, Endless Mode](https://steamcommunity.com/games/1794680/announcements/detail/6186282400405707304) — sumber resmi untuk pengulangan wave sebagai Cycle dan scaling antar-cycle; angka mereka tidak diadopsi.
 - [`PROJECT_CONTEXT.md`](SYNGRAVA_Codex_Context_Pack/Docs/PROJECT_CONTEXT.md) — ketentuan mode Infinite SYNGRAVA, stat sementara, gerbang, dan leaderboard.
 - [`StandardRun_ReleaseGate_Checklist.md`](StandardRun_ReleaseGate_Checklist.md) — pemeriksaan produk yang harus lulus sebelum mode Infinite dikodekan.
 - [`Skill_Collection_Loadout_DesignPlan.md`](Skill_Collection_Loadout_DesignPlan.md) — Skill Archive, snapshot loadout, Skill Memory, dan daftar roster kurasi.
