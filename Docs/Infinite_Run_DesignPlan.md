@@ -1,8 +1,8 @@
 # Rancangan Infinite Run — SYNGRAVA
 
-**Tanggal:** 15 November 2026  
-**Status:** Rancangan riset selesai; belum diimplementasikan.  
-**Mode:** Infinite Casual, offline, satu pemain.  
+**Tanggal:** 16 November 2026
+**Status:** Rancangan diperbarui dengan audit sumber primer; belum diimplementasikan. Gerbang Standard Run tetap wajib sebelum coding.
+**Mode:** Infinite Casual, offline, satu pemain.
 **Gerbang sebelum coding:** selesaikan dan tandatangani semua pemeriksaan Standard Run pada `StandardRun_ReleaseGate_Checklist.md` untuk executable kandidat yang akan menjadi dasar mode ini.
 
 ## 1. Ringkasan keputusan
@@ -35,6 +35,19 @@ Mode ini memakai aturan, seed, score model, serta top-ten sendiri. Standard Run 
 `Vampire Survivors` v1.0 mengulang gelombang tahap dalam Cycle Endless dan meningkatkan tekanan pada tiap pengulangan. SYNGRAVA mengambil bentuk pengulangan yang mudah dikenali, bukan angka scaling-nya: pertarungan turn-based dan modifier yang menumpuk perlu kurva HP/damage tersendiri serta pengujian kombinasi build. [Patch notes resmi Vampire Survivors v1.0](https://steamcommunity.com/games/1794680/announcements/detail/6186282400405707304)
 
 **Penerapan sebagai inferensi desain:** SYNGRAVA memakai Cycle boss, pilihan Skill Memory, dan mutator yang dipilih dari katalog valid. Besaran scaling, bobot reward, dan batas performa perlu diukur pada prototipe; sumber di atas bukan bukti bahwa angka permainan mereka cocok untuk SYNGRAVA.
+
+### Audit riset lanjutan — 16 November 2026
+
+Sumber primer Hopoo Games memperjelas pola Simulacrum: Endless dimainkan dalam wave dengan boss berkala, mutator pada sebagian wave, dan tiga pilihan reward sesudah wave. Catatan patch resmi kemudian menambahkan batas kredit spawn dan melewati wave bila tidak ada monster yang muncul selama 60 detik; developer menyebut edge case tersebut dapat membuat mode berhenti maju. Untuk SYNGRAVA, yang diambil adalah milestone yang mudah dibaca, reward pada batas aman, variasi terkurasi, dan jaminan state selalu bisa maju atau pulih. Timer 60 detik dan cadence boss lima wave tidak dipakai karena combat SYNGRAVA berbasis giliran dan Cycle-nya sudah ditetapkan 10 node. [Hopoo Games, Dev Thoughts #23](https://store.steampowered.com/news/posts/?appids=632360&enddate=1650380344&feed=steam_community_announcements) · [Hopoo Games, Simulacrum patch 1.2.2](https://store.steampowered.com/news/app/632360/view/3114807061149729826)
+
+Pemeriksaan ulang halaman resmi Vampire Survivors tidak mengembalikan isi patch 1.0 yang bisa dibaca melalui browser riset. Karena itu, gagasan stage yang berulang tetap dicatat sebagai referensi konseptual dari riset sebelumnya, tetapi tidak dipakai untuk menetapkan angka scaling atau aturan baru. Slay the Spire 2 juga masih berstatus Early Access pada halaman resminya; perubahan konten dan balance di sana tidak dijadikan spesifikasi SYNGRAVA. [Slay the Spire 2 — halaman resmi Steam](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/)
+
+Konsekuensi desain yang dikunci untuk prototipe:
+
+- Setiap node dan boss clear harus berakhir pada state yang tersimpan dan dapat dilanjutkan; generator tidak boleh menghasilkan Cycle tanpa boss yang dapat dicapai atau reward tanpa pilihan valid.
+- Jika encounter, offer, atau transisi Cycle tidak valid, Run mempertahankan checkpoint valid sebelumnya dan masuk ke jalur Recovery yang menjelaskan masalah. Jangan mengganti data committed secara diam-diam atau menunggu tanpa batas.
+- Kesulitan naik lewat ruleset Infinite berversi dan diuji terhadap build/loadout, bukan dengan menyalin persentase dari game real-time. Nilai scaling tetap parameter prototipe sampai simulasi menunjukkan kisaran yang aman.
+- Riset ini tidak mengubah keputusan inti: 10 node per Cycle, boss di node 10, reward Skill Memory setelah boss, dan modifier sementara yang hilang saat Run berakhir.
 
 ## 4. Alur pemain
 
@@ -157,6 +170,8 @@ Archive rute seluruh Cycle untuk score/Run History. Untuk menjaga ukuran data, t
 ## 13. Gerbang sebelum mulai implementasi
 
 Rancangan ini selesai, namun implementasi belum dimulai. Sebelum coding, ikuti checklist `StandardRun_ReleaseGate_Checklist.md`: pastikan Continue/cold resume, Recovery, Defeat, Abandon/Cancel, save retry, Clear dan transaksi History/Top Runs lolos pada executable kandidat. Catatan proyek menyebut gerbang ini masih memiliki pemeriksaan manual yang belum terbukti untuk build kandidat terkini. Jika blocker ditemukan, perbaiki Standard Run terlebih dahulu; jangan membuat mode Infinite menggandakan bug checkpoint atau score.
+
+**Pemeriksaan status 16 November 2026:** pemilik sudah menerima tiga Standard Run Clear 10/10 pada kandidat yang dicatat di checklist dan mengirim dua Clear tambahan. Namun Continue setelah cold relaunch, Recovery, Defeat, Abandon, dan retry saat save gagal belum dibuktikan semuanya pada kandidat yang sama. Status gate tetap **belum lengkap** sampai tiap transaksi itu memiliki bukti automated atau owner-accepted yang terikat pada build/profile tepat; tiga clear saja tidak membuktikan jalur pemulihan tersebut. Ini prasyarat rilis fitur, bukan pekerjaan implementasi Infinite yang sudah berjalan.
 
 Setelah gate lulus, implementasi bertahap: (1) model/ruleset/validator map per Cycle; (2) state/save/history migration; (3) cycle rewards dan Skill Memory receipts; (4) scaling/score; (5) UI mode/recovery/leaderboard; (6) automated property, migration, transaction, end-to-end tests; (7) tiga full Play Mode pass terisolasi dan Windows smoke; (8) owner playtest dan balance approval.
 

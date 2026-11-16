@@ -1,8 +1,16 @@
 # SYNGRAVA Project Context
 
 Version 0.5
-Updated 15 November 2026
+Updated 16 November 2026
 Owner Akmal Maulana Ghani
+
+## Progress continuation — skill audit and Infinite Run plan — 16 November 2026
+
+- The skill collection/loadout feature is complete in runtime and already pushed to `origin/main`. The catalog contains 30 curated skills with 30 distinct active-effect IDs, 30 distinct passive-effect IDs, and 30 distinct passive descriptions. The follow-up copy audit marks all 29 one-shot passives as once per battle and Echo Script as repeatable.
+- The skill implementation and passive-copy audit each passed three consecutive isolated Unity 6000.6.0f1 Play Mode runs, 168/168 tests per run with 0 failures and 0 skips. Evidence remains in `Docs/TestResults/2026-11-15-SkillSystem/REPORT.md` and `Docs/TestResults/2026-11-15-SkillFrequencyAudit/REPORT.md`. Numeric balance remains provisional until owner playtest.
+- The next feature design is Infinite Casual. Its research plan was rechecked against Hopoo Games' primary Simulacrum video/patch notes on 16 November and updated in `Docs/Infinite_Run_DesignPlan.md`. The design remains unimplemented and must not alter Standard Run behavior.
+- Standard Run has three owner-accepted consecutive clears on the recorded 8 November Windows candidate, plus two additional reported clears. Cold Continue, Recovery, Defeat, Abandon, and save retry are still not all evidenced on that same candidate; keep the Infinite implementation gate closed until those paths are verified and the checklist is updated.
+- The 16 November change updates design/context documentation only. No skill runtime data, save data, Unity scene, or player profile was modified.
 
 ## Guided Tutorial and Field Guide — 14 November 2026
 
